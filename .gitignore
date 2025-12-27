@@ -1,0 +1,37 @@
+# Environment variables
+.env
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Storage
+/storage/database/*.sqlite
+/storage/logs/*.log
+/storage/cache/*
+!/storage/cache/.gitkeep
+/storage/sessions/*
+!/storage/sessions/.gitkeep
+
+# Uploads
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Compiled assets
+/public/assets/css/app.css
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+storage/backups/

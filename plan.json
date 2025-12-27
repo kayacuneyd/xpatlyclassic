@@ -1,0 +1,2060 @@
+{
+  "project_metadata": {
+    "project_name": "Xpatly - Expat-Friendly Real Estate Platform",
+    "version": "2.0 (Native PHP Rebuild)",
+    "client": "Real Estate Platform for Estonia",
+    "developer": "Cüneyt Kaya - kayacuneyt.com",
+    "target_model": "Claude Opus 4.5",
+    "development_timeline": "8 weeks",
+    "budget": "500 EUR (3 milestone payments)",
+    "core_differentiator": "Expat-friendly housing platform with verified listings, blocking discriminatory content, and multi-language support"
+  },
+
+  "technical_constraints": {
+    "hosting_environment": {
+      "provider": "Hostinger Shared Hosting",
+      "php_version": "8.2+",
+      "database_initial": "SQLite",
+      "database_migration": "MySQL (when scaling needed)",
+      "storage_limit": "Optimize for shared hosting constraints",
+      "performance_target": "Fast load times despite shared environment"
+    },
+    "technology_stack": {
+      "backend": {
+        "language": "Native PHP 8.2+",
+        "architecture": "MVC Pattern (custom, lightweight)",
+        "features_required": [
+          "OOP principles",
+          "PSR-4 autoloading",
+          "Dependency injection where appropriate",
+          "No heavy frameworks (Laravel/Symfony) - custom lightweight solution"
+        ]
+      },
+      "frontend": {
+        "css_framework": "Tailwind CSS 3.x",
+        "javascript": "Alpine.js (minimal, progressive enhancement)",
+        "no_react_vue": "Keep it simple - vanilla JS + Alpine.js only",
+        "design_philosophy": "Minimal, clean, modern, mobile-first"
+      },
+      "database": {
+        "primary": "SQLite (development and initial launch)",
+        "migration_path": "Include MySQL migration scripts for scaling",
+        "optimization": [
+          "WAL mode for SQLite",
+          "Proper indexing",
+          "Query optimization",
+          "Simple file-based caching"
+        ]
+      },
+      "third_party_services": {
+        "maps": "Mapbox API (for listing locations)",
+        "email": "PHPMailer with SMTP",
+        "sms_otp": "Twilio or Vonage (phone verification)",
+        "oauth": "Google OAuth 2.0 (optional login method)",
+        "image_processing": "GD Library (built-in PHP)"
+      }
+    },
+    "mandatory_requirements": {
+      "consistency": "Frontend and backend must have consistent design philosophy",
+      "minimal_design": "Clean, uncluttered interface - no over-formatting",
+      "performance": "Must work excellently on shared Hostinger hosting",
+      "no_wordpress": "Complete rebuild from scratch - NO WordPress, NO themes, NO plugins"
+    }
+  },
+
+  "internationalization": {
+    "supported_languages": ["Estonian (et)", "English (en)", "Russian (ru)"],
+    "implementation_strategy": {
+      "method": "JSON-based translation files",
+      "file_structure": "languages/et.json, languages/en.json, languages/ru.json",
+      "url_pattern": "/{locale}/path (e.g., /et/listings, /en/listings, /ru/listings)",
+      "default_language": "English",
+      "locale_detection": [
+        "URL path has priority",
+        "Session storage",
+        "Browser language as fallback"
+      ],
+      "dynamic_content": "All user-facing text must be translatable",
+      "date_time_format": "Localized according to language (et: DD.MM.YYYY, en: MM/DD/YYYY, ru: DD.MM.YYYY)",
+      "number_format": "Localized (area in m² or ft², prices with correct separators)"
+    },
+    "translation_keys_structure": {
+      "common": "Shared UI elements (buttons, navigation, etc.)",
+      "home": "Homepage specific text",
+      "search": "Search and filter labels",
+      "listing": "Listing creation and details",
+      "auth": "Registration, login, password reset",
+      "admin": "Admin panel interface",
+      "errors": "Error messages",
+      "validation": "Form validation messages",
+      "emails": "Email templates"
+    }
+  },
+
+  "core_unique_features": {
+    "expat_friendly_pledge": {
+      "description": "Landlords can mark their listings as 'Expat-friendly' during creation",
+      "implementation": [
+        "Checkbox in listing creation form: 'I pledge this property is available for expats'",
+        "Boolean field in database: expat_friendly",
+        "Visual badge on listing cards and detail pages",
+        "Filter option in search: 'Show only expat-friendly properties'",
+        "Badge design: Green background with checkmark icon and text"
+      ],
+      "importance": "CRITICAL - This is the main differentiator from competitors"
+    },
+    "discriminatory_content_blocker": {
+      "description": "Automatically block listings containing discriminatory language",
+      "blocked_phrases": {
+        "english": [
+          "locals only",
+          "no foreigners",
+          "no expats",
+          "estonians only"
+        ],
+        "estonian": [
+          "ainult kohalikud",
+          "välismaalased ei sobi",
+          "ainult eestlased"
+        ],
+        "russian": ["только местные", "иностранцам нет", "только для граждан"]
+      },
+      "implementation": [
+        "Check title and description during listing creation",
+        "Case-insensitive matching",
+        "Return clear error message in user's language",
+        "Admin can manually review flagged content",
+        "Log all blocked attempts for monitoring"
+      ],
+      "user_experience": "Show friendly error: 'Please ensure your listing is welcoming to all residents. We noticed language that may exclude certain groups.'",
+      "importance": "CRITICAL - Core safety feature"
+    }
+  },
+
+  "user_roles_and_permissions": {
+    "roles": [
+      {
+        "role_name": "Super Admin",
+        "role_key": "super_admin",
+        "permissions": [
+          "Full system access",
+          "Manage all users (create, edit, delete, change roles)",
+          "Manage all listings (view, edit, delete, approve, reject)",
+          "View all activity logs",
+          "Access analytics and reports",
+          "Manage system settings",
+          "Handle user reports",
+          "Export data"
+        ]
+      },
+      {
+        "role_name": "Moderator",
+        "role_key": "moderator",
+        "permissions": [
+          "Edit listings (all fields)",
+          "Delete listings (with reason)",
+          "Change listing status (active, pending, paused, archived)",
+          "Edit user details (name, phone, verification status)",
+          "View activity logs (limited)",
+          "Handle user reports",
+          "Cannot delete users",
+          "Cannot change user roles"
+        ]
+      },
+      {
+        "role_name": "Owner (Property Landlord/Agent)",
+        "role_key": "owner",
+        "permissions": [
+          "Create listings (up to 40 images, 1-40 per listing)",
+          "Edit own listings",
+          "Delete own listings",
+          "View own listing statistics",
+          "Receive messages from visitors",
+          "Respond to messages",
+          "Mark listings as available/unavailable",
+          "Pause listings",
+          "Schedule viewings (via messages)"
+        ]
+      },
+      {
+        "role_name": "Visitor (Unregistered User)",
+        "role_key": "visitor",
+        "permissions": [
+          "Browse all active listings",
+          "Search and filter listings",
+          "View listing details",
+          "Switch between grid and map view",
+          "Share listings (link, email, social media)",
+          "View in multiple languages",
+          "Send message to listing owner (with email)",
+          "Cannot save searches without registration",
+          "Cannot save favorites without registration"
+        ]
+      },
+      {
+        "role_name": "Registered User (No Listings)",
+        "role_key": "user",
+        "permissions": [
+          "All visitor permissions +",
+          "Save searches",
+          "Set up email alerts (instant, daily, weekly)",
+          "Save favorite listings",
+          "View saved searches and favorites in dashboard"
+        ]
+      }
+    ]
+  },
+
+  "database_schema": {
+    "design_principles": [
+      "Optimized for SQLite initially",
+      "Easy migration path to MySQL",
+      "Proper foreign keys and constraints",
+      "JSON fields for flexible data (extras, search params)",
+      "Timestamps on all tables",
+      "Soft deletes where appropriate"
+    ],
+    "tables": [
+      {
+        "table_name": "users",
+        "purpose": "Store all user accounts (owners, admins, moderators)",
+        "fields": [
+          {
+            "name": "id",
+            "type": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "description": "Unique user ID"
+          },
+          {
+            "name": "full_name",
+            "type": "VARCHAR(100) NOT NULL",
+            "description": "User's full name"
+          },
+          {
+            "name": "email",
+            "type": "VARCHAR(100) UNIQUE NOT NULL",
+            "description": "Email address (login)"
+          },
+          {
+            "name": "phone",
+            "type": "VARCHAR(20)",
+            "description": "Phone number for verification"
+          },
+          {
+            "name": "password_hash",
+            "type": "VARCHAR(255) NOT NULL",
+            "description": "Bcrypt hashed password"
+          },
+          {
+            "name": "role",
+            "type": "ENUM('owner', 'admin', 'moderator', 'user')",
+            "description": "User role"
+          },
+          {
+            "name": "is_verified",
+            "type": "BOOLEAN DEFAULT 0",
+            "description": "Email verified"
+          },
+          {
+            "name": "phone_verified",
+            "type": "BOOLEAN DEFAULT 0",
+            "description": "Phone verified via OTP"
+          },
+          {
+            "name": "email_verified",
+            "type": "BOOLEAN DEFAULT 0",
+            "description": "Email verified via link"
+          },
+          {
+            "name": "verification_token",
+            "type": "VARCHAR(64)",
+            "description": "Email verification token"
+          },
+          {
+            "name": "google_id",
+            "type": "VARCHAR(100)",
+            "description": "Google OAuth ID (if used)"
+          },
+          {
+            "name": "locale",
+            "type": "VARCHAR(5) DEFAULT 'en'",
+            "description": "Preferred language"
+          },
+          {
+            "name": "reset_token",
+            "type": "VARCHAR(64)",
+            "description": "Password reset token"
+          },
+          {
+            "name": "reset_expires",
+            "type": "DATETIME",
+            "description": "Reset token expiration"
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME DEFAULT CURRENT_TIMESTAMP"
+          },
+          { "name": "updated_at", "type": "DATETIME DEFAULT CURRENT_TIMESTAMP" }
+        ],
+        "indexes": ["email", "phone", "google_id"],
+        "important_notes": [
+          "Password must meet requirements: 12+ chars, uppercase, lowercase, number, not leaked",
+          "Email verification required before publishing listings",
+          "Phone verification required before publishing listings"
+        ]
+      },
+      {
+        "table_name": "listings",
+        "purpose": "Store all property listings",
+        "fields": [
+          { "name": "id", "type": "INTEGER PRIMARY KEY AUTOINCREMENT" },
+          {
+            "name": "user_id",
+            "type": "INTEGER NOT NULL",
+            "foreign_key": "users(id)"
+          },
+          {
+            "name": "title",
+            "type": "VARCHAR(200) NOT NULL",
+            "description": "Listing title"
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "description": "Detailed description"
+          },
+          {
+            "name": "category",
+            "type": "ENUM('apartment', 'house', 'room') NOT NULL"
+          },
+          { "name": "deal_type", "type": "ENUM('rent', 'sell') NOT NULL" },
+
+          {
+            "name": "region",
+            "type": "VARCHAR(50)",
+            "description": "Tallinn or Tartu"
+          },
+          {
+            "name": "settlement",
+            "type": "VARCHAR(100)",
+            "description": "Lasnamäe, Kesklinn, Kristiine, Mustamäe, Nõmme, etc."
+          },
+          { "name": "address", "type": "TEXT", "description": "Full address" },
+          {
+            "name": "latitude",
+            "type": "DECIMAL(10, 8)",
+            "description": "For map pinning"
+          },
+          {
+            "name": "longitude",
+            "type": "DECIMAL(11, 8)",
+            "description": "For map pinning"
+          },
+
+          {
+            "name": "rooms",
+            "type": "INTEGER",
+            "description": "Total number of rooms (NOT separate bedroom/bathroom)"
+          },
+          {
+            "name": "area_sqm",
+            "type": "DECIMAL(8, 2)",
+            "description": "Area in square meters"
+          },
+          {
+            "name": "price",
+            "type": "DECIMAL(10, 2)",
+            "description": "Monthly price (not per night)"
+          },
+          {
+            "name": "price_per_sqm",
+            "type": "DECIMAL(8, 2)",
+            "description": "Auto-calculated: price / area_sqm"
+          },
+          {
+            "name": "condition",
+            "type": "ENUM('new_development', 'good', 'renovated', 'needs_renovation')"
+          },
+
+          {
+            "name": "extras",
+            "type": "JSON",
+            "description": "balcony, garage, sauna, elevator, fireplace, parking, storage_room"
+          },
+
+          {
+            "name": "youtube_url",
+            "type": "VARCHAR(255)",
+            "description": "Optional YouTube video link"
+          },
+
+          {
+            "name": "status",
+            "type": "ENUM('draft', 'pending', 'active', 'paused', 'archived') DEFAULT 'pending'",
+            "description": "Admin must approve before active"
+          },
+          {
+            "name": "is_available",
+            "type": "BOOLEAN DEFAULT 1",
+            "description": "Owner can toggle availability"
+          },
+          {
+            "name": "expat_friendly",
+            "type": "BOOLEAN DEFAULT 0",
+            "description": "CORE FEATURE - Expat-friendly pledge"
+          },
+
+          {
+            "name": "pets_allowed",
+            "type": "BOOLEAN DEFAULT 0",
+            "description": "Simplified: allowed or not"
+          },
+
+          {
+            "name": "created_at",
+            "type": "DATETIME DEFAULT CURRENT_TIMESTAMP"
+          },
+          { "name": "updated_at", "type": "DATETIME DEFAULT CURRENT_TIMESTAMP" }
+        ],
+        "indexes": [
+          "user_id",
+          "status",
+          "expat_friendly",
+          "region",
+          "settlement",
+          "category",
+          "deal_type"
+        ],
+        "validation_rules": [
+          "Title and description checked for discriminatory language",
+          "Minimum 1 image required",
+          "Maximum 40 images allowed",
+          "Duplicate check by address + user_id",
+          "Area max 500 sqm (as per client request)",
+          "Price and area cannot have up/down buttons in UI"
+        ]
+      },
+      {
+        "table_name": "listing_images",
+        "purpose": "Store all images for listings (1 to 40 per listing)",
+        "fields": [
+          { "name": "id", "type": "INTEGER PRIMARY KEY AUTOINCREMENT" },
+          {
+            "name": "listing_id",
+            "type": "INTEGER NOT NULL",
+            "foreign_key": "listings(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "filename",
+            "type": "VARCHAR(255) NOT NULL",
+            "description": "Stored filename in /uploads"
+          },
+          {
+            "name": "original_filename",
+            "type": "VARCHAR(255)",
+            "description": "Original upload name"
+          },
+          {
+            "name": "sort_order",
+            "type": "INTEGER DEFAULT 0",
+            "description": "Display order"
+          },
+          {
+            "name": "is_primary",
+            "type": "BOOLEAN DEFAULT 0",
+            "description": "Primary image for cards"
+          },
+          { "name": "created_at", "type": "DATETIME DEFAULT CURRENT_TIMESTAMP" }
+        ],
+        "constraints": [
+          "Only ONE primary image per listing",
+          "Cascade delete when listing is deleted"
+        ],
+        "image_processing": [
+          "Resize to max 1200px width",
+          "Compress to 85% quality JPEG",
+          "Generate thumbnails (300x200 for cards)",
+          "Allowed formats: PNG, JPG only",
+          "Max file size: 5MB per image"
+        ]
+      },
+      {
+        "table_name": "messages",
+        "purpose": "Store inquiries from visitors to listing owners",
+        "fields": [
+          { "name": "id", "type": "INTEGER PRIMARY KEY AUTOINCREMENT" },
+          {
+            "name": "listing_id",
+            "type": "INTEGER NOT NULL",
+            "foreign_key": "listings(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "sender_email",
+            "type": "VARCHAR(100) NOT NULL",
+            "description": "Visitor's email"
+          },
+          {
+            "name": "sender_name",
+            "type": "VARCHAR(100)",
+            "description": "Optional name"
+          },
+          {
+            "name": "message",
+            "type": "TEXT NOT NULL",
+            "description": "Message content"
+          },
+          {
+            "name": "read_at",
+            "type": "DATETIME",
+            "description": "When owner read the message"
+          },
+          { "name": "created_at", "type": "DATETIME DEFAULT CURRENT_TIMESTAMP" }
+        ],
+        "important_notes": [
+          "No date picker (removed from WordPress version)",
+          "Message field replaces 'Book Now' functionality",
+          "Email field displayed above message field",
+          "Owner receives notification email immediately"
+        ]
+      },
+      {
+        "table_name": "saved_searches",
+        "purpose": "Store user's saved searches for email alerts",
+        "fields": [
+          { "name": "id", "type": "INTEGER PRIMARY KEY AUTOINCREMENT" },
+          {
+            "name": "user_email",
+            "type": "VARCHAR(100) NOT NULL",
+            "description": "Can be registered user or just email"
+          },
+          {
+            "name": "search_params",
+            "type": "JSON NOT NULL",
+            "description": "All filter values as JSON"
+          },
+          {
+            "name": "alert_frequency",
+            "type": "ENUM('instant', 'daily', 'weekly') DEFAULT 'daily'"
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN DEFAULT 1",
+            "description": "User can pause alerts"
+          },
+          {
+            "name": "last_sent",
+            "type": "DATETIME",
+            "description": "Last alert sent timestamp"
+          },
+          { "name": "created_at", "type": "DATETIME DEFAULT CURRENT_TIMESTAMP" }
+        ],
+        "email_alert_logic": [
+          "Instant: Send email immediately when new matching listing appears",
+          "Daily: Send digest at 9am with new matches from last 24h",
+          "Weekly: Send digest every Monday with new matches from last 7 days"
+        ]
+      },
+      {
+        "table_name": "favorites",
+        "purpose": "Store user's favorite listings",
+        "fields": [
+          { "name": "id", "type": "INTEGER PRIMARY KEY AUTOINCREMENT" },
+          {
+            "name": "user_id",
+            "type": "INTEGER NOT NULL",
+            "foreign_key": "users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "listing_id",
+            "type": "INTEGER NOT NULL",
+            "foreign_key": "listings(id) ON DELETE CASCADE"
+          },
+          { "name": "created_at", "type": "DATETIME DEFAULT CURRENT_TIMESTAMP" }
+        ],
+        "constraints": ["UNIQUE(user_id, listing_id)"],
+        "ui_note": "Heart icon on listing cards - toggle to add/remove from favorites"
+      },
+      {
+        "table_name": "admin_logs",
+        "purpose": "Record all admin/moderator actions for accountability",
+        "fields": [
+          { "name": "id", "type": "INTEGER PRIMARY KEY AUTOINCREMENT" },
+          {
+            "name": "admin_id",
+            "type": "INTEGER NOT NULL",
+            "foreign_key": "users(id)"
+          },
+          {
+            "name": "action",
+            "type": "VARCHAR(50) NOT NULL",
+            "description": "edit_listing, delete_listing, edit_user, approve_listing, etc."
+          },
+          {
+            "name": "target_type",
+            "type": "VARCHAR(50)",
+            "description": "listing, user"
+          },
+          {
+            "name": "target_id",
+            "type": "INTEGER",
+            "description": "ID of affected entity"
+          },
+          {
+            "name": "changes",
+            "type": "JSON",
+            "description": "Before/after values"
+          },
+          {
+            "name": "reason",
+            "type": "TEXT",
+            "description": "Why was action taken (required for deletes)"
+          },
+          { "name": "ip_address", "type": "VARCHAR(45)" },
+          { "name": "user_agent", "type": "TEXT" },
+          { "name": "created_at", "type": "DATETIME DEFAULT CURRENT_TIMESTAMP" }
+        ],
+        "critical_requirement": "Every change must be logged: WHO did WHAT, WHEN, and WHY"
+      },
+      {
+        "table_name": "reports",
+        "purpose": "User reports for inappropriate listings",
+        "fields": [
+          { "name": "id", "type": "INTEGER PRIMARY KEY AUTOINCREMENT" },
+          {
+            "name": "listing_id",
+            "type": "INTEGER NOT NULL",
+            "foreign_key": "listings(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "reporter_email",
+            "type": "VARCHAR(100)",
+            "description": "Optional"
+          },
+          {
+            "name": "reason",
+            "type": "TEXT NOT NULL",
+            "description": "Why is this being reported"
+          },
+          {
+            "name": "status",
+            "type": "ENUM('pending', 'reviewed', 'dismissed') DEFAULT 'pending'"
+          },
+          {
+            "name": "admin_notes",
+            "type": "TEXT",
+            "description": "Admin's decision notes"
+          },
+          {
+            "name": "reviewed_by",
+            "type": "INTEGER",
+            "foreign_key": "users(id)"
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME DEFAULT CURRENT_TIMESTAMP"
+          },
+          { "name": "reviewed_at", "type": "DATETIME" }
+        ],
+        "admin_workflow": [
+          "View all pending reports",
+          "Review reported listing",
+          "Take action: Approve (dismiss report), Edit listing, Delete listing",
+          "Record decision in admin_notes"
+        ]
+      }
+    ]
+  },
+
+  "file_structure": {
+    "root_directory": "xpatly/",
+    "structure": {
+      "config/": {
+        "description": "Configuration files",
+        "files": [
+          "database.php - Database connection settings",
+          "app.php - General app configuration (site name, URL, etc.)",
+          "languages.php - Available languages definition",
+          "mail.php - SMTP email settings",
+          "mapbox.php - Mapbox API credentials"
+        ]
+      },
+      "core/": {
+        "description": "Core framework classes (custom MVC)",
+        "files": [
+          "Router.php - URL routing with locale support",
+          "Database.php - SQLite/MySQL wrapper with query builder",
+          "Auth.php - Authentication system",
+          "Validator.php - Form validation",
+          "Translation.php - i18n system",
+          "Session.php - Session management",
+          "Flash.php - Flash messages",
+          "Uploader.php - File upload handler",
+          "Cache.php - Simple file-based caching"
+        ]
+      },
+      "controllers/": {
+        "description": "MVC Controllers",
+        "files": [
+          "HomeController.php",
+          "ListingController.php",
+          "SearchController.php",
+          "AuthController.php",
+          "UserController.php",
+          "MessageController.php",
+          "AdminController.php",
+          "AdminListingController.php",
+          "AdminUserController.php",
+          "ApiController.php - JSON API endpoints"
+        ]
+      },
+      "models/": {
+        "description": "Database models",
+        "files": [
+          "User.php",
+          "Listing.php",
+          "ListingImage.php",
+          "Message.php",
+          "SavedSearch.php",
+          "Favorite.php",
+          "AdminLog.php",
+          "Report.php"
+        ]
+      },
+      "views/": {
+        "description": "HTML templates (PHP-based)",
+        "subdirectories": {
+          "layouts/": ["header.php", "footer.php", "admin-layout.php"],
+          "home/": ["index.php"],
+          "listings/": [
+            "index.php",
+            "create.php",
+            "edit.php",
+            "show.php",
+            "my-listings.php"
+          ],
+          "search/": ["index.php", "results.php"],
+          "auth/": [
+            "register.php",
+            "login.php",
+            "forgot-password.php",
+            "verify-email.php"
+          ],
+          "admin/": [
+            "dashboard.php",
+            "listings.php",
+            "users.php",
+            "reports.php",
+            "logs.php"
+          ],
+          "components/": [
+            "listing-card.php",
+            "filter-sidebar.php",
+            "map.php",
+            "pagination.php"
+          ]
+        }
+      },
+      "public/": {
+        "description": "Public web root",
+        "files": [
+          "index.php - Application entry point",
+          ".htaccess - URL rewriting"
+        ],
+        "subdirectories": {
+          "assets/": {
+            "css/": ["app.css - Compiled Tailwind"],
+            "js/": [
+              "app.js - Alpine.js components",
+              "map.js - Mapbox integration"
+            ],
+            "images/": ["logo.svg", "placeholder.jpg", "icons/"]
+          },
+          "uploads/": {
+            "description": "User-uploaded images",
+            "structure": "uploads/listings/{listing_id}/{filename}.jpg"
+          }
+        }
+      },
+      "languages/": {
+        "description": "Translation JSON files",
+        "files": ["et.json", "en.json", "ru.json"]
+      },
+      "storage/": {
+        "description": "Storage directory",
+        "subdirectories": {
+          "database/": ["database.sqlite"],
+          "logs/": ["app.log", "error.log"],
+          "cache/": ["*.cache - Cached data"],
+          "sessions/": ["PHP sessions if file-based"]
+        }
+      },
+      "migrations/": {
+        "description": "Database migration scripts",
+        "files": [
+          "001_create_users_table.php",
+          "002_create_listings_table.php",
+          "003_create_listing_images_table.php",
+          "...",
+          "mysql_migration.php - SQLite to MySQL migration"
+        ]
+      },
+      "emails/": {
+        "description": "Email templates",
+        "files": [
+          "welcome.php",
+          "verify-email.php",
+          "reset-password.php",
+          "new-message.php",
+          "listing-approved.php",
+          "alert-new-listings.php"
+        ]
+      },
+      "composer.json": "Dependencies (PHPMailer, etc.)",
+      "package.json": "Node dependencies (Tailwind, Alpine.js)",
+      "tailwind.config.js": "Tailwind configuration",
+      ".env": "Environment variables (NOT in git)",
+      ".gitignore": "Git ignore file",
+      "README.md": "Project documentation"
+    }
+  },
+
+  "user_acceptance_criteria": {
+    "admin_features": [
+      {
+        "id": "ADM-1",
+        "feature": "Roles and Permissions",
+        "acceptance": "System supports Super Admin (full access) and Moderator (edit/delete listings and users only)",
+        "implementation_notes": "Check role on every admin action, deny access with clear error message"
+      },
+      {
+        "id": "ADM-2",
+        "feature": "Listing Search",
+        "acceptance": "Admin can search listings by ID, Title, owner name, and filter by status",
+        "implementation_notes": "Search box in admin panel with auto-complete, multi-filter support"
+      },
+      {
+        "id": "ADM-3",
+        "feature": "Edit Listings",
+        "acceptance": "Admin can edit all listing fields (title, description, size, price, address, photos)",
+        "implementation_notes": "Same form as owner creation, pre-populated, all fields editable"
+      },
+      {
+        "id": "ADM-4",
+        "feature": "Delete Listing",
+        "acceptance": "Admin can delete listing with mandatory reason (inappropriate, fake, spam, etc.)",
+        "implementation_notes": "Confirmation modal, dropdown for reason + text field for details, logged in admin_logs"
+      },
+      {
+        "id": "ADM-5",
+        "feature": "Listing Status",
+        "acceptance": "Admin can change listing status: active, pending, paused, archived",
+        "implementation_notes": "Status dropdown in listing row, instant update, logged"
+      },
+      {
+        "id": "ADM-6",
+        "feature": "Availability Status",
+        "acceptance": "Admin can change availability status (available/not available)",
+        "implementation_notes": "Toggle switch, instant update"
+      },
+      {
+        "id": "ADM-7",
+        "feature": "Reporting/Request Change",
+        "acceptance": "Admin can view user reports and take action: approve, edit, or delete listing",
+        "implementation_notes": "Reports queue page, show reporter info, listing preview, action buttons"
+      },
+      {
+        "id": "ADM-8",
+        "feature": "Edit User",
+        "acceptance": "Admin can update user details (name, phone, locale, verification status)",
+        "implementation_notes": "User edit form, can manually verify email/phone, change locale"
+      },
+      {
+        "id": "ADM-9",
+        "feature": "User Search",
+        "acceptance": "Admin can search users by name, email, phone, and filter by verification status",
+        "implementation_notes": "Search box + filters, paginated results"
+      },
+      {
+        "id": "ADM-10",
+        "feature": "Activity Log",
+        "acceptance": "Every change is recorded with WHO (admin), WHEN (timestamp), WHAT (action + changes)",
+        "implementation_notes": "CRITICAL - Log EVERYTHING to admin_logs table, display in admin panel with filters"
+      }
+    ],
+    "global_features": [
+      {
+        "id": "GLO-1",
+        "feature": "Multi-language Support",
+        "acceptance": "All UI, forms, and details available in Estonian, English, and Russian",
+        "implementation_notes": "URL-based locale (/et/, /en/, /ru/), language switcher in header, session persistence"
+      },
+      {
+        "id": "GLO-2",
+        "feature": "Date, Time, and Number Localization",
+        "acceptance": "Dates, area (m² or ft²), and numbers formatted according to locale",
+        "implementation_notes": "PHP Intl extension for formatting, helper functions for consistent display"
+      }
+    ],
+    "communication_features": [
+      {
+        "id": "COM-1",
+        "feature": "Email Alerts",
+        "acceptance": "Users can create alerts based on their saved searches",
+        "implementation_notes": "Save search functionality, choose frequency (instant/daily/weekly), cron job for sending"
+      }
+    ],
+    "listing_creation_features": [
+      {
+        "id": "LIS-1",
+        "feature": "7-Step Creation Flow",
+        "acceptance": "Category → Address → Details → Media → Pricing → Availability → Preview → Publish",
+        "implementation_notes": "Multi-step form with progress indicator, save draft functionality, validation at each step"
+      },
+      {
+        "id": "LIS-2",
+        "feature": "Map Location Pinning",
+        "acceptance": "User can pin exact location on interactive map",
+        "implementation_notes": "Mapbox integration, click to pin, drag to adjust, auto-fill address if possible"
+      },
+      {
+        "id": "LIS-3",
+        "feature": "Image Upload",
+        "acceptance": "User can upload minimum 1, maximum 40 images (PNG/JPG only)",
+        "implementation_notes": "Drag-and-drop interface, preview thumbnails, reorder images, set primary image, show upload progress"
+      },
+      {
+        "id": "LIS-4",
+        "feature": "YouTube Video Link",
+        "acceptance": "User can add YouTube link showing apartment/house",
+        "implementation_notes": "Text field for URL, validate YouTube format, embed preview on listing detail page"
+      },
+      {
+        "id": "LIS-5",
+        "feature": "Duplicate Check",
+        "acceptance": "Warn user if duplicate detected by address, image similarity, or identical title",
+        "implementation_notes": "Check on submit, show warning modal with existing listing link, allow override with confirmation"
+      },
+      {
+        "id": "LIS-6",
+        "feature": "Edit Listings",
+        "acceptance": "User can edit their listings (details, price, images)",
+        "implementation_notes": "Same form as creation, pre-populated, status changes to 'pending' if major changes, re-approval needed"
+      }
+    ],
+    "owner_features": [
+      {
+        "id": "OWN-1",
+        "feature": "Account Creation",
+        "acceptance": "Owner can register with Email + Password OR Google account",
+        "implementation_notes": "Registration form with validation, Google OAuth button, redirect after registration"
+      },
+      {
+        "id": "OWN-2",
+        "feature": "Password Reset",
+        "acceptance": "Owner can reset password via email link",
+        "implementation_notes": "Forgot password link, send secure token to email (from xpatly.com domain, NOT wordpress.com), token expiry 1 hour"
+      },
+      {
+        "id": "OWN-4",
+        "feature": "Verification Required",
+        "acceptance": "Phone (OTP) and email verification REQUIRED before publishing",
+        "implementation_notes": "Block publish button until both verified, send OTP via SMS, verify code input, email verification via link"
+      },
+      {
+        "id": "OWN-5",
+        "feature": "My Ads Dashboard",
+        "acceptance": "Owner sees all listings in 'My Ads' with status (active, expired, pending, paused)",
+        "implementation_notes": "Tabbed interface for status filtering, quick actions (edit, pause, delete), statistics per listing"
+      },
+      {
+        "id": "OWN-6",
+        "feature": "Communication",
+        "acceptance": "Owner can receive/respond to messages and schedule viewings",
+        "implementation_notes": "Message inbox, email notifications for new messages, respond via platform or email reply"
+      }
+    ],
+    "visitor_features": [
+      {
+        "id": "VIS-1",
+        "feature": "Browse Listings",
+        "acceptance": "User can view all listings in LIST and MAP views WITHOUT login",
+        "implementation_notes": "No authentication wall, toggle between views, both views show same data"
+      },
+      {
+        "id": "VIS-2",
+        "feature": "Language Switcher",
+        "acceptance": "User can switch site language (ET/EN/RU)",
+        "implementation_notes": "Dropdown in header, immediate reload with new locale, session persistence"
+      },
+      {
+        "id": "VIS-3",
+        "feature": "Sharing",
+        "acceptance": "User can share listing via link, email, or DM to social platforms",
+        "implementation_notes": "Share buttons on listing detail page, copy link, email share, Facebook/WhatsApp/Telegram buttons"
+      },
+      {
+        "id": "VIS-4",
+        "feature": "Cookie Consent",
+        "acceptance": "Cookie banner shown on first visit; user can Accept/Reject; system respects choice",
+        "implementation_notes": "GDPR compliant banner, save choice in localStorage, don't track if rejected"
+      }
+    ],
+    "search_features": [
+      {
+        "id": "SEA-1",
+        "feature": "Clear All Filters",
+        "acceptance": "Filter pills displayed and removable individually; 'Clear All' button resets everything",
+        "implementation_notes": "Show active filters as removable pills, click X to remove one, button to clear all"
+      },
+      {
+        "id": "SEA-2",
+        "feature": "Sort Options",
+        "acceptance": "Sort by: newest, price (low/high), price/m², area, relevance, popularity",
+        "implementation_notes": "Dropdown selector, instant results update, remember choice in session"
+      },
+      {
+        "id": "SEA-3",
+        "feature": "Saved Search",
+        "acceptance": "User can save search and get email alerts (instant/daily/weekly)",
+        "implementation_notes": "Save button after search, modal to choose frequency, manage saved searches in dashboard"
+      },
+      {
+        "id": "SEA-4",
+        "feature": "Comprehensive Filters",
+        "acceptance": "Location (country, city, neighborhood), deal type (sale/rent), rooms (range), area (range), price (range), condition, extras (sauna, garage, balcony, storage, elevator, fireplace, pet-friendly)",
+        "implementation_notes": "Collapsible filter sidebar, advanced search section, remember filters during session"
+      },
+      {
+        "id": "SEA-5",
+        "feature": "List + Map View Toggle",
+        "acceptance": "Users can switch between list and map view for browsing listings",
+        "implementation_notes": "Toggle buttons, map view shows markers with popups, click marker to see listing card"
+      }
+    ],
+    "personalized_features": [
+      {
+        "id": "PER-1",
+        "feature": "Saved Searches/Favorites",
+        "acceptance": "Users can mark favorites and have searches remembered",
+        "implementation_notes": "Heart icon on cards (requires login), favorites page in dashboard"
+      },
+      {
+        "id": "PER-2",
+        "feature": "E-Agent/Notification",
+        "acceptance": "Push new matches via email based on saved searches",
+        "implementation_notes": "Cron job checks for new listings matching saved searches, sends digest emails"
+      }
+    ]
+  },
+
+  "critical_ui_ux_requirements": {
+    "wordpress_issues_to_fix": [
+      {
+        "issue": "Blurry logo",
+        "solution": "Use SVG format logo, ensure high-resolution export, proper image optimization",
+        "file_location": "public/assets/images/logo.svg"
+      },
+      {
+        "issue": "Sign In button not visible enough",
+        "solution": "Prominent button in header, placed next to 'List Property', distinct color (blue), adequate padding",
+        "design": "Tailwind: bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+      },
+      {
+        "issue": "Register and Sign In are same page",
+        "solution": "SEPARATE pages: /register and /login, different forms, clear navigation between them",
+        "note": "WordPress limitation - now we control this"
+      },
+      {
+        "issue": "Password reset uses WordPress email",
+        "solution": "Send from @xpatly.com domain using PHPMailer SMTP, branded email template",
+        "implementation": "Configure SMTP in config/mail.php, custom email template"
+      },
+      {
+        "issue": "Bedroom + Bathroom separate fields",
+        "solution": "SINGLE field: 'Number of Rooms' with min/max range inputs",
+        "rationale": "Client specifically requested this change multiple times"
+      },
+      {
+        "issue": "Tags section poorly named",
+        "solution": "Rename to 'Extras', provide checkboxes with icons for: balcony, garage, sauna, elevator, fireplace, parking, storage room, pet-friendly",
+        "ui": "Multi-select with visual indicators"
+      },
+      {
+        "issue": "'Town' label",
+        "solution": "Change to 'Settlement'",
+        "applies_to": "All forms and filters"
+      },
+      {
+        "issue": "SQ footage vs SQ meter",
+        "solution": "Use 'Area (m²)' everywhere, no conversion to feet",
+        "max_value": "500 m² (as per client request)"
+      },
+      {
+        "issue": "Price/Area up/down buttons",
+        "solution": "Remove spinner buttons, use plain number input",
+        "html": "<input type='number' step='0.01'> WITHOUT spinner arrows"
+      },
+      {
+        "issue": "Book Now button (Airbnb style)",
+        "solution": "Replace with 'Send Message' button",
+        "note": "This is long-term rental, not short-term booking"
+      },
+      {
+        "issue": "Date picker for booking",
+        "solution": "REMOVE date picker entirely, replace with message textarea",
+        "form_fields": "Email field + Message textarea (no dates)"
+      },
+      {
+        "issue": "Star ratings and reviews",
+        "solution": "REMOVE all review/rating functionality, replace with Expat-Friendly Badge",
+        "badge_design": "Green badge with checkmark icon, text: 'Expat-Friendly'"
+      },
+      {
+        "issue": "/night pricing",
+        "solution": "Remove '/night', show monthly price only",
+        "display": "€XXX/month"
+      },
+      {
+        "issue": "Hover dropdowns opening accidentally",
+        "solution": "Change to CLICK-only dropdowns, no hover triggers",
+        "accessibility": "Better for mobile too"
+      },
+      {
+        "issue": "Categories disappear after search",
+        "solution": "Keep all category filters visible at all times",
+        "note": "Persistent filter UI"
+      },
+      {
+        "issue": "Required fields shown one at a time",
+        "solution": "Show ALL required field errors simultaneously on submit",
+        "ux": "Red border + error message under each invalid field"
+      },
+      {
+        "issue": "Image field not marked as required",
+        "solution": "Add asterisk (*) to image upload, show error if no images",
+        "validation": "Minimum 1 image required before publish"
+      },
+      {
+        "issue": "Status dropdown shows 'Status, Rent, Sell'",
+        "solution": "Simplify to only 'Rent' or 'Sell' (this is deal_type, not status)",
+        "clarification": "Status is separate field (draft/pending/active/paused/archived)"
+      },
+      {
+        "issue": "Region/settlement not in filters",
+        "solution": "Add region dropdown (Tallinn/Tartu), conditional settlement dropdown (Lasnamäe, Kesklinn, Kristiine, Mustamäe, Nõmme for Tallinn)",
+        "ui": "Settlement only shows when region selected"
+      },
+      {
+        "issue": "Condition field missing",
+        "solution": "Add 'Condition' dropdown with: New development, Good condition, Renovated, Needs renovation",
+        "location": "Listing creation form AND search filters"
+      },
+      {
+        "issue": "Placeholder issues",
+        "solution": "Use proper placeholders: 'Rent' (not '-'), descriptive placeholders for all inputs",
+        "examples": "'Min rooms', 'Max rooms', 'Min price', 'Max price'"
+      },
+      {
+        "issue": "Advanced search hidden",
+        "solution": "Show 3 main filters always visible, 'Advanced Search' button reveals rest",
+        "layout": "Expandable section, smooth animation"
+      },
+      {
+        "issue": "Contact section name",
+        "solution": "Change 'Contact' to 'Contact Us' or 'Contact with Us'",
+        "applies_to": "Footer and contact page"
+      },
+      {
+        "issue": "Pets field too complex",
+        "solution": "Simple toggle: 'Pets Allowed: Yes/No'",
+        "note": "Remove 'cats only' / 'dogs only' options"
+      },
+      {
+        "issue": "Generic blog content",
+        "solution": "Remove placeholder lorem ipsum, leave section for future content or remove entirely",
+        "seo_note": "Client knows blog is good for SEO, will provide content later"
+      },
+      {
+        "issue": "'What people say' section",
+        "solution": "REMOVE for now (no reviews yet), can add later when real reviews exist"
+      },
+      {
+        "issue": "Realtor/Agencies section",
+        "solution": "REMOVE for now, not part of MVP"
+      },
+      {
+        "issue": "Regional tags on homepage",
+        "solution": "REMOVE generic region tags, integrate Tallinn neighborhoods into search filters instead"
+      }
+    ],
+    "design_principles": {
+      "overall_philosophy": "Minimal, clean, modern design focused on content",
+      "color_scheme": {
+        "primary": "Blue (#2563EB - Tailwind blue-600)",
+        "success": "Green (#10B981 - for expat-friendly badge)",
+        "error": "Red (#EF4444)",
+        "neutral": "Gray scale (#F3F4F6 backgrounds, #1F2937 text)"
+      },
+      "typography": {
+        "font_family": "System font stack (SF Pro, Segoe UI, Roboto, etc.)",
+        "headings": "Bold, clear hierarchy (text-2xl, text-xl, text-lg)",
+        "body": "text-base (16px), line-height relaxed"
+      },
+      "spacing": {
+        "principle": "Generous whitespace, not cramped",
+        "containers": "max-w-7xl mx-auto",
+        "sections": "py-12 or py-16 between sections"
+      },
+      "buttons": {
+        "primary": "bg-blue-600 text-white hover:bg-blue-700 px-6 py-3 rounded-lg",
+        "secondary": "bg-gray-200 text-gray-800 hover:bg-gray-300 px-6 py-3 rounded-lg",
+        "danger": "bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded"
+      },
+      "forms": {
+        "inputs": "border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500",
+        "labels": "block text-sm font-medium text-gray-700 mb-2",
+        "errors": "text-red-600 text-sm mt-1",
+        "layout": "Vertical labels above inputs, adequate spacing"
+      },
+      "cards": {
+        "listing_cards": "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition",
+        "images": "aspect-w-16 aspect-h-9 (maintain ratio)",
+        "badges": "Absolute positioned top-right for expat-friendly"
+      },
+      "navigation": {
+        "header": "Sticky top, white background, shadow on scroll",
+        "menu": "Click-only dropdowns (NO hover)",
+        "mobile": "Hamburger menu, slide-in sidebar"
+      },
+      "responsive": {
+        "breakpoints": "Tailwind defaults (sm: 640px, md: 768px, lg: 1024px, xl: 1280px)",
+        "mobile_first": "Design for mobile, enhance for desktop",
+        "grid": "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 (listing cards)"
+      }
+    }
+  },
+
+  "authentication_and_security": {
+    "password_requirements": {
+      "min_length": 12,
+      "rules": [
+        "At least one uppercase letter",
+        "At least one lowercase letter",
+        "At least one number",
+        "No common passwords (check against HaveIBeenPwned API or local list)",
+        "No sequential characters (123, abc)",
+        "No repeated characters (aaa, 111)"
+      ],
+      "hashing": "bcrypt with cost factor 12",
+      "storage": "NEVER store plain text, only hash"
+    },
+    "email_verification": {
+      "flow": [
+        "User registers",
+        "Generate random 64-char token",
+        "Save token to user.verification_token",
+        "Send email with verification link: /verify-email?token={token}",
+        "User clicks link",
+        "Verify token matches and is not expired",
+        "Set user.email_verified = 1",
+        "Clear verification_token",
+        "Show success message"
+      ],
+      "token_expiry": "24 hours",
+      "resend_option": "Allow resend after 5 minutes"
+    },
+    "phone_verification": {
+      "method": "SMS OTP (One-Time Password)",
+      "provider": "Twilio or Vonage",
+      "flow": [
+        "User enters phone number",
+        "Generate 6-digit OTP",
+        "Store OTP + expiry in session or temp table",
+        "Send SMS with OTP",
+        "User enters OTP",
+        "Verify OTP matches and not expired",
+        "Set user.phone_verified = 1",
+        "Clear OTP"
+      ],
+      "otp_expiry": "10 minutes",
+      "rate_limiting": "Max 3 SMS per phone per hour"
+    },
+    "google_oauth": {
+      "library": "league/oauth2-google Composer package",
+      "flow": [
+        "User clicks 'Sign in with Google'",
+        "Redirect to Google OAuth",
+        "Get authorization code",
+        "Exchange for access token",
+        "Get user profile (email, name, google_id)",
+        "Check if user exists by google_id or email",
+        "If exists: log in, if not: create account",
+        "Auto-verify email (Google already verified it)",
+        "Phone verification still required for publishing"
+      ],
+      "credentials": "Store client_id and client_secret in .env"
+    },
+    "session_management": {
+      "duration": "Remember me: 30 days, Regular: 24 hours",
+      "security": [
+        "httpOnly cookies",
+        "Secure flag (HTTPS only)",
+        "SameSite=Strict",
+        "Regenerate session ID on login",
+        "Clear session on logout"
+      ]
+    },
+    "csrf_protection": {
+      "method": "Generate token per session",
+      "include_in": "All forms as hidden input",
+      "validate_on": "All POST/PUT/DELETE requests",
+      "error_handling": "Return 403 Forbidden if invalid"
+    },
+    "rate_limiting": {
+      "login_attempts": "5 per IP per 15 minutes, lockout 30 minutes",
+      "registration": "3 per IP per hour",
+      "password_reset": "3 per email per hour",
+      "listing_creation": "10 per user per day",
+      "message_sending": "10 per email per hour (prevent spam)"
+    },
+    "sql_injection_prevention": {
+      "method": "ALWAYS use prepared statements",
+      "never": "Never concatenate user input into SQL",
+      "validation": "Validate and sanitize ALL inputs"
+    },
+    "xss_prevention": {
+      "output_escaping": "htmlspecialchars() for all user-generated content",
+      "input_sanitization": "Filter inputs, but rely on output escaping",
+      "rich_text": "If allowing HTML (descriptions), use HTML Purifier library"
+    },
+    "file_upload_security": {
+      "validation": [
+        "Check file extension (allow only .jpg, .jpeg, .png)",
+        "Check MIME type",
+        "Check file size (max 5MB)",
+        "Verify it's actually an image (getimagesize)",
+        "Rename file (don't use original filename)",
+        "Store outside web root or with .htaccess protection"
+      ],
+      "storage_path": "public/uploads/listings/{listing_id}/{random_name}.jpg",
+      "permissions": "0644 for files, 0755 for directories"
+    }
+  },
+
+  "email_system": {
+    "library": "PHPMailer",
+    "smtp_configuration": {
+      "host": "smtp.hostinger.com (or Gmail)",
+      "port": 587,
+      "encryption": "TLS",
+      "auth": true,
+      "from_address": "noreply@xpatly.com",
+      "from_name": "Xpatly"
+    },
+    "email_types": [
+      {
+        "type": "Welcome Email",
+        "trigger": "User registration",
+        "content": "Welcome message, verify email link, getting started tips"
+      },
+      {
+        "type": "Email Verification",
+        "trigger": "User registers",
+        "content": "Click link to verify email, token in URL"
+      },
+      {
+        "type": "Password Reset",
+        "trigger": "User requests password reset",
+        "content": "Reset link with token, expires in 1 hour, security notice"
+      },
+      {
+        "type": "Listing Approved",
+        "trigger": "Admin approves listing",
+        "content": "Your listing is now live, link to listing, tips for success"
+      },
+      {
+        "type": "Listing Rejected/Deleted",
+        "trigger": "Admin rejects or deletes listing",
+        "content": "Reason for rejection, what to fix, how to resubmit"
+      },
+      {
+        "type": "New Message Received",
+        "trigger": "Visitor sends message to listing owner",
+        "content": "You have a new inquiry, message preview, reply link"
+      },
+      {
+        "type": "Saved Search Alert - Instant",
+        "trigger": "New listing matches saved search",
+        "content": "New property matching your search, listing card, view all link"
+      },
+      {
+        "type": "Saved Search Alert - Daily Digest",
+        "trigger": "Cron job daily at 9am",
+        "content": "X new properties in last 24 hours, list of listings, manage alerts link"
+      },
+      {
+        "type": "Saved Search Alert - Weekly Digest",
+        "trigger": "Cron job Monday 9am",
+        "content": "X new properties this week, list of listings, manage alerts link"
+      }
+    ],
+    "template_design": {
+      "responsive": "Mobile-friendly HTML emails",
+      "branding": "Xpatly logo, brand colors",
+      "footer": "Unsubscribe link (for alerts), contact info, social links"
+    }
+  },
+
+  "mapbox_integration": {
+    "api_key": "Store in .env file",
+    "features_needed": [
+      {
+        "feature": "Pin Location (Listing Creation)",
+        "implementation": "Interactive map, user clicks to set marker, draggable marker, auto-fill address if possible, save lat/lng to database"
+      },
+      {
+        "feature": "Map View (Search Results)",
+        "implementation": "Show all listings as markers, cluster markers when zoomed out, popup on marker click with listing preview card, click popup to go to listing detail"
+      },
+      {
+        "feature": "Single Listing Map",
+        "implementation": "Show exact location on detail page, marker at property location, surrounding neighborhood visible"
+      }
+    ],
+    "map_style": "mapbox://styles/mapbox/streets-v11 (or custom style)",
+    "default_center": {
+      "tallinn": [24.7536, 59.437],
+      "tartu": [26.729, 58.378]
+    },
+    "marker_customization": {
+      "default": "Blue marker for regular listings",
+      "expat_friendly": "Green marker for expat-friendly listings",
+      "selected": "Red marker for currently selected listing"
+    }
+  },
+
+  "image_processing": {
+    "upload_constraints": {
+      "min_images": 1,
+      "max_images": 40,
+      "formats": ["PNG", "JPG", "JPEG"],
+      "max_size_per_image": "5MB",
+      "total_max_size": "200MB per listing"
+    },
+    "processing_steps": [
+      {
+        "step": "Validation",
+        "actions": [
+          "Check file extension",
+          "Check MIME type",
+          "Check file size",
+          "Verify image with getimagesize()"
+        ]
+      },
+      {
+        "step": "Resize",
+        "actions": [
+          "If width > 1200px, resize to max 1200px width",
+          "Maintain aspect ratio",
+          "Use GD Library imagecopyresampled()"
+        ]
+      },
+      {
+        "step": "Compress",
+        "actions": [
+          "Save as JPEG with 85% quality",
+          "Reduces file size significantly"
+        ]
+      },
+      {
+        "step": "Generate Thumbnail",
+        "actions": [
+          "Create 300x200 thumbnail for listing cards",
+          "Crop to center if needed",
+          "Save as {filename}_thumb.jpg"
+        ]
+      },
+      {
+        "step": "Store",
+        "actions": [
+          "Generate unique filename: {timestamp}_{random}.jpg",
+          "Save to /uploads/listings/{listing_id}/",
+          "Save filename to database"
+        ]
+      },
+      {
+        "step": "Set Primary Image",
+        "actions": [
+          "First uploaded image is primary by default",
+          "User can change primary image by clicking star icon",
+          "Only one primary per listing"
+        ]
+      }
+    ],
+    "reordering": {
+      "ui": "Drag-and-drop interface in listing creation/edit",
+      "implementation": "Save sort_order field, update on drag",
+      "display": "Show images in sort_order on listing detail page"
+    }
+  },
+
+  "search_and_filtering_logic": {
+    "available_filters": [
+      {
+        "filter": "Region",
+        "type": "Dropdown",
+        "options": ["All", "Tallinn", "Tartu"],
+        "sql": "WHERE region = ?"
+      },
+      {
+        "filter": "Settlement (conditional)",
+        "type": "Dropdown",
+        "options": {
+          "tallinn": [
+            "All",
+            "Lasnamäe",
+            "Kesklinn",
+            "Kristiine",
+            "Mustamäe",
+            "Nõmme",
+            "Pirita",
+            "Põhja-Tallinn",
+            "Haabersti"
+          ],
+          "tartu": [
+            "All",
+            "Kesklinn",
+            "Annelinn",
+            "Ränilinn",
+            "Ihaste",
+            "Raadi",
+            "Karlova"
+          ]
+        },
+        "visibility": "Only show when region selected",
+        "sql": "AND settlement = ?"
+      },
+      {
+        "filter": "Deal Type",
+        "type": "Dropdown",
+        "options": ["All", "Rent", "Sell"],
+        "sql": "AND deal_type = ?"
+      },
+      {
+        "filter": "Category",
+        "type": "Buttons/Pills",
+        "options": ["All", "Apartment", "House", "Room"],
+        "sql": "AND category = ?"
+      },
+      {
+        "filter": "Rooms",
+        "type": "Range (two number inputs)",
+        "inputs": ["Min rooms", "Max rooms"],
+        "sql": "AND rooms BETWEEN ? AND ?"
+      },
+      {
+        "filter": "Price",
+        "type": "Range",
+        "inputs": ["Min price €", "Max price €"],
+        "sql": "AND price BETWEEN ? AND ?"
+      },
+      {
+        "filter": "Area",
+        "type": "Range",
+        "inputs": ["Min m²", "Max m² (500)"],
+        "validation": "Max value 500",
+        "sql": "AND area_sqm BETWEEN ? AND ?"
+      },
+      {
+        "filter": "Condition",
+        "type": "Dropdown",
+        "options": [
+          "All",
+          "New development",
+          "Good condition",
+          "Renovated",
+          "Needs renovation"
+        ],
+        "sql": "AND condition = ?"
+      },
+      {
+        "filter": "Extras",
+        "type": "Multi-select checkboxes",
+        "options": [
+          "Balcony",
+          "Garage",
+          "Sauna",
+          "Elevator",
+          "Fireplace",
+          "Parking",
+          "Storage room",
+          "Pet-friendly"
+        ],
+        "sql": "AND JSON_EXTRACT(extras, '$.balcony') = 1",
+        "note": "Each selected extra adds another JSON_EXTRACT condition"
+      },
+      {
+        "filter": "Expat-Friendly Only",
+        "type": "Checkbox",
+        "sql": "AND expat_friendly = 1"
+      }
+    ],
+    "sort_options": [
+      {
+        "option": "Newest",
+        "sql": "ORDER BY created_at DESC",
+        "default": true
+      },
+      {
+        "option": "Price: Low to High",
+        "sql": "ORDER BY price ASC"
+      },
+      {
+        "option": "Price: High to Low",
+        "sql": "ORDER BY price DESC"
+      },
+      {
+        "option": "Area: Largest First",
+        "sql": "ORDER BY area_sqm DESC"
+      },
+      {
+        "option": "Price per m²",
+        "sql": "ORDER BY price_per_sqm ASC"
+      },
+      {
+        "option": "Relevance",
+        "sql": "ORDER BY expat_friendly DESC, created_at DESC",
+        "note": "Expat-friendly first, then newest"
+      }
+    ],
+    "ui_components": {
+      "active_filters_pills": "Show pills above results: 'Region: Tallinn [X]', 'Rooms: 2-3 [X]', etc.",
+      "clear_all_button": "Remove all filters at once",
+      "results_count": "Show 'X properties found'",
+      "no_results": "Friendly message with suggestions to adjust filters"
+    },
+    "performance": {
+      "pagination": "20 results per page",
+      "indexes": "Index all filterable columns in database",
+      "caching": "Cache popular searches for 15 minutes"
+    }
+  },
+
+  "admin_panel": {
+    "access_control": {
+      "url": "/admin (protected route)",
+      "authentication": "Redirect to login if not authenticated",
+      "authorization": "Check user.role IN ('admin', 'moderator')",
+      "super_admin_only_pages": [
+        "User Management",
+        "System Settings",
+        "Role Management"
+      ]
+    },
+    "dashboard": {
+      "widgets": [
+        "Total Listings (by status)",
+        "Total Users (by role)",
+        "Pending Approvals (count)",
+        "Recent Reports (count)",
+        "New Users This Week (graph)",
+        "New Listings This Week (graph)"
+      ]
+    },
+    "listings_management": {
+      "features": [
+        "Search by ID, title, owner name",
+        "Filter by status (pending, active, paused, archived)",
+        "Filter by expat-friendly",
+        "Bulk actions (approve, reject, delete)",
+        "Quick edit (inline status change)",
+        "Full edit (opens listing form)",
+        "Delete with reason (modal)",
+        "View listing (public view in new tab)"
+      ],
+      "table_columns": [
+        "ID",
+        "Image",
+        "Title",
+        "Owner",
+        "Price",
+        "Status",
+        "Expat-Friendly Badge",
+        "Created",
+        "Actions"
+      ],
+      "actions_per_row": ["View", "Edit", "Change Status", "Delete"]
+    },
+    "user_management": {
+      "features": [
+        "Search by name, email, phone",
+        "Filter by role",
+        "Filter by verification status",
+        "View user details",
+        "Edit user (name, phone, locale, role)",
+        "Manually verify email/phone",
+        "View user's listings",
+        "Ban/Unban user (sets status to inactive)",
+        "Delete user (with confirmation)"
+      ],
+      "table_columns": [
+        "ID",
+        "Name",
+        "Email",
+        "Phone",
+        "Role",
+        "Verified",
+        "Listings Count",
+        "Created",
+        "Actions"
+      ]
+    },
+    "reports_handling": {
+      "workflow": [
+        "View pending reports queue",
+        "See report details: reporter email, reason, listing preview",
+        "Review reported listing (open in new tab)",
+        "Take action: Dismiss report, Edit listing, Delete listing",
+        "Add admin notes",
+        "Mark as reviewed",
+        "Notify reporter (optional)"
+      ],
+      "table_columns": [
+        "ID",
+        "Listing",
+        "Reporter",
+        "Reason",
+        "Status",
+        "Created",
+        "Actions"
+      ]
+    },
+    "activity_logs": {
+      "features": [
+        "View all logged actions",
+        "Filter by admin",
+        "Filter by action type",
+        "Filter by date range",
+        "Search by target (listing ID, user ID)",
+        "View before/after changes",
+        "Export logs (CSV)"
+      ],
+      "table_columns": [
+        "Timestamp",
+        "Admin",
+        "Action",
+        "Target",
+        "Changes Summary",
+        "Reason",
+        "IP",
+        "Details"
+      ]
+    }
+  },
+
+  "cron_jobs_and_automation": {
+    "required_cron_jobs": [
+      {
+        "name": "Daily Email Digest",
+        "schedule": "Daily at 9:00 AM",
+        "script": "cron/send_daily_alerts.php",
+        "action": [
+          "Get all saved searches with frequency = 'daily'",
+          "For each search, find new listings from last 24 hours",
+          "If matches found, send email digest",
+          "Update last_sent timestamp"
+        ]
+      },
+      {
+        "name": "Weekly Email Digest",
+        "schedule": "Monday at 9:00 AM",
+        "script": "cron/send_weekly_alerts.php",
+        "action": [
+          "Get all saved searches with frequency = 'weekly'",
+          "For each search, find new listings from last 7 days",
+          "If matches found, send email digest",
+          "Update last_sent timestamp"
+        ]
+      },
+      {
+        "name": "Instant Alerts",
+        "schedule": "Every 5 minutes",
+        "script": "cron/send_instant_alerts.php",
+        "action": [
+          "Get all saved searches with frequency = 'instant'",
+          "Get listings created in last 5 minutes",
+          "Match against saved search criteria",
+          "Send immediate email for each match",
+          "Update last_sent timestamp"
+        ]
+      },
+      {
+        "name": "Cleanup Old Sessions",
+        "schedule": "Daily at 2:00 AM",
+        "script": "cron/cleanup_sessions.php",
+        "action": "Delete sessions older than 30 days"
+      },
+      {
+        "name": "Cleanup Old Tokens",
+        "schedule": "Daily at 2:30 AM",
+        "script": "cron/cleanup_tokens.php",
+        "action": "Delete expired verification tokens and password reset tokens"
+      },
+      {
+        "name": "Database Backup (if SQLite)",
+        "schedule": "Daily at 3:00 AM",
+        "script": "cron/backup_database.php",
+        "action": "Copy database.sqlite to storage/backups/ with timestamp"
+      }
+    ],
+    "cron_setup_on_hostinger": "Use Hostinger cPanel cron jobs interface to schedule these scripts"
+  },
+
+  "testing_requirements": {
+    "unit_tests": [
+      "User authentication (register, login, logout, password reset)",
+      "Listing creation (validation, duplicate check, discriminatory content blocker)",
+      "Search filtering (all combinations)",
+      "Admin permissions (role-based access)",
+      "Email sending (mock SMTP)",
+      "Image upload and processing"
+    ],
+    "integration_tests": [
+      "Full listing creation flow",
+      "Full search and filter flow",
+      "Message sending and receiving",
+      "Admin approval workflow",
+      "Saved search alert triggering"
+    ],
+    "manual_testing_checklist": [
+      "Multi-language switching (all pages)",
+      "Map functionality (pin, view, markers)",
+      "Image upload (all formats, size limits, reordering)",
+      "Mobile responsiveness (all breakpoints)",
+      "Email delivery (check spam folders)",
+      "Admin panel (all CRUD operations)",
+      "Security (SQL injection, XSS, CSRF attempts)",
+      "Performance (page load times with 100+ listings)"
+    ]
+  },
+
+  "deployment_instructions": {
+    "prerequisites": [
+      "Domain pointed to Hostinger",
+      "SSL certificate active (Let's Encrypt via Hostinger)",
+      "PHP 8.2+ enabled",
+      "Composer installed (via SSH or locally then upload vendor/)",
+      "Node.js installed (for Tailwind compilation)"
+    ],
+    "deployment_steps": [
+      {
+        "step": 1,
+        "action": "Upload files",
+        "details": "FTP all files to public_html/ or subdirectory, ensure .htaccess uploaded"
+      },
+      {
+        "step": 2,
+        "action": "Set permissions",
+        "details": "chmod 755 for directories, chmod 644 for files, chmod 777 for storage/ and public/uploads/"
+      },
+      {
+        "step": 3,
+        "action": "Configure .env",
+        "details": "Copy .env.example to .env, fill in database path, API keys, SMTP settings"
+      },
+      {
+        "step": 4,
+        "action": "Run migrations",
+        "details": "SSH: php migrations/run_all.php OR run via browser: /install.php (create install script)"
+      },
+      {
+        "step": 5,
+        "action": "Create admin user",
+        "details": "Run seed script or register first user, manually set role to 'super_admin' in database"
+      },
+      {
+        "step": 6,
+        "action": "Compile Tailwind CSS",
+        "details": "Locally: npm run build, upload compiled app.css to public/assets/css/"
+      },
+      {
+        "step": 7,
+        "action": "Setup cron jobs",
+        "details": "In cPanel, add cron jobs for email alerts and cleanup tasks"
+      },
+      {
+        "step": 8,
+        "action": "Test",
+        "details": "Go through manual testing checklist, verify all features working"
+      },
+      {
+        "step": 9,
+        "action": "Go live",
+        "details": "Remove maintenance mode, announce launch"
+      }
+    ],
+    "post_deployment": [
+      "Monitor error logs daily",
+      "Setup uptime monitoring (UptimeRobot)",
+      "Setup analytics (Google Analytics or self-hosted)",
+      "Setup backup schedule (daily database backup)",
+      "Plan content creation (blog posts for SEO)"
+    ]
+  },
+
+  "sqlite_to_mysql_migration": {
+    "when_to_migrate": "When traffic exceeds ~1000 daily visitors or when concurrent writes become an issue",
+    "migration_steps": [
+      {
+        "step": 1,
+        "action": "Create MySQL database in Hostinger cPanel"
+      },
+      {
+        "step": 2,
+        "action": "Run migration script",
+        "details": "php migrations/mysql_migration.php (reads SQLite, writes to MySQL)"
+      },
+      {
+        "step": 3,
+        "action": "Update config/database.php",
+        "details": "Change DSN from SQLite to MySQL"
+      },
+      {
+        "step": 4,
+        "action": "Test thoroughly",
+        "details": "Verify all data migrated correctly, test all features"
+      },
+      {
+        "step": 5,
+        "action": "Keep SQLite as backup",
+        "details": "Don't delete SQLite file immediately, keep for 1 week as backup"
+      }
+    ],
+    "schema_differences": [
+      "SQLite AUTOINCREMENT → MySQL AUTO_INCREMENT",
+      "SQLite BOOLEAN → MySQL TINYINT(1)",
+      "SQLite JSON → MySQL JSON (same)",
+      "Adjust any SQLite-specific queries"
+    ]
+  },
+
+  "performance_optimizations": {
+    "database": [
+      "Enable WAL mode for SQLite",
+      "Create indexes on frequently queried columns",
+      "Use prepared statements (prevents SQL injection AND improves performance)",
+      "Limit SELECT queries (don't SELECT *, specify columns)",
+      "Paginate large result sets"
+    ],
+    "caching": [
+      "Implement simple file-based cache for expensive queries",
+      "Cache search results for 15 minutes",
+      "Cache homepage listing cards for 5 minutes",
+      "Cache language files in memory"
+    ],
+    "images": [
+      "Serve optimized JPEGs (85% quality)",
+      "Use thumbnails for listing cards",
+      "Lazy load images below fold",
+      "Consider WebP format (convert JPEGs, fallback to JPEG)",
+      "Add width/height attributes to prevent layout shift"
+    ],
+    "css_js": [
+      "Minify Tailwind CSS (production build)",
+      "Combine JS files where possible",
+      "Use defer/async for non-critical JS",
+      "Inline critical CSS if needed"
+    ],
+    "hosting": [
+      "Enable Gzip compression (.htaccess)",
+      "Set browser caching headers",
+      "Use Hostinger's caching features if available",
+      "Consider Cloudflare free tier for CDN"
+    ]
+  },
+
+  "seo_requirements": {
+    "technical_seo": [
+      "Clean URLs (no query strings, use /et/listings/apartment-tallinn-kesklinn)",
+      "Canonical URLs for multi-language (hreflang tags)",
+      "XML sitemap (auto-generated, update on new listing)",
+      "Robots.txt (allow all, disallow /admin)",
+      "Structured data (JSON-LD for listings - schema.org/Accommodation)",
+      "Meta descriptions for all pages (dynamic for listings)",
+      "Open Graph tags (for social sharing)",
+      "Fast load times (under 3 seconds)",
+      "Mobile-friendly (responsive design)"
+    ],
+    "content_seo": [
+      "Unique title for each listing (listing title + location)",
+      "H1 tag on each page",
+      "Alt text for all images",
+      "Internal linking (related listings)",
+      "Blog section (content marketing for SEO)",
+      "Location pages (Tallinn, Tartu, neighborhoods)"
+    ],
+    "ongoing_seo": [
+      "Regular blog posts (client responsibility)",
+      "Encourage user-generated content (reviews if added later)",
+      "Build backlinks (submit to directories, partner with expat communities)",
+      "Monitor Google Search Console",
+      "Track rankings for key terms: 'expat-friendly apartments Estonia', 'rent Tallinn expat', etc."
+    ]
+  },
+
+  "additional_notes_for_developer": {
+    "code_quality": [
+      "Follow PSR-12 coding standards",
+      "Use meaningful variable and function names",
+      "Comment complex logic",
+      "Keep functions small and focused (single responsibility)",
+      "DRY principle - don't repeat yourself",
+      "Validate all inputs, escape all outputs"
+    ],
+    "git_workflow": [
+      "Initialize Git repository",
+      "Create .gitignore (.env, storage/, uploads/, node_modules/)",
+      "Commit frequently with clear messages",
+      "Use branches for features (feature/listing-creation, feature/admin-panel)",
+      "Merge to main after testing"
+    ],
+    "documentation": [
+      "README.md with setup instructions",
+      "Document API endpoints if creating JSON API",
+      "Comment database schema changes",
+      "Keep changelog of major updates"
+    ],
+    "client_communication": [
+      "Weekly progress updates",
+      "Demo after each milestone",
+      "Request feedback early and often",
+      "Document any changes from original plan"
+    ]
+  },
+
+  "final_checklist_before_launch": [
+    "All user acceptance criteria met",
+    "No console errors in browser",
+    "All forms validated properly",
+    "All emails sending correctly (from correct domain)",
+    "Multi-language working on all pages",
+    "Map showing correctly",
+    "Image upload working (all sizes, formats)",
+    "Expat-friendly pledge working",
+    "Discriminatory content blocker working",
+    "Admin panel fully functional",
+    "Activity logs recording properly",
+    "Saved searches and alerts working",
+    "Mobile responsive on all pages",
+    "Fast load times (tested with GTmetrix or PageSpeed Insights)",
+    "Security checklist completed (SQL injection, XSS, CSRF tested)",
+    "SSL certificate installed and working",
+    "Cron jobs scheduled and tested",
+    "Backup system in place",
+    "Error logging working",
+    "Analytics installed (Google Analytics or alternative)",
+    "Cookie consent banner working",
+    "GDPR compliance verified",
+    "Client training completed (how to use admin panel)",
+    "Maintenance plan discussed"
+  ]
+}

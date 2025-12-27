@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer install:*)",
+      "Bash(php:*)",
+      "Bash(timeout 3 php:*)",
+      "Bash(curl:*)",
+      "Bash(kill:*)",
+      "Bash(sqlite3:*)"
+    ]
+  }
+}

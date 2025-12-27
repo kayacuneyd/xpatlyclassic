@@ -1,0 +1,28 @@
+{
+    "name": "xpatly/real-estate-platform",
+    "description": "Expat-friendly real estate platform for Estonia",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "ext-pdo": "*",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "ext-json": "*",
+        "phpmailer/phpmailer": "^6.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/",
+            "Models\\": "models/",
+            "Controllers\\": "controllers/"
+        },
+        "files": [
+            "core/Translation.php"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
