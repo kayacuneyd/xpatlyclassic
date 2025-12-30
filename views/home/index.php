@@ -409,73 +409,139 @@ require __DIR__ . '/../layouts/header.php';
                 <p class="text-gray-500"><?= __('home.no_featured') ?? 'No featured listings at the moment.' ?></p>
             </div>
         <?php else: ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php foreach ($featuredListings as $listing): ?>
-                    <a href="<?= url("listings/{$listing['id']}") ?>"
-                        class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-                        <div class="relative aspect-[4/3] overflow-hidden">
-                            <?php if (!empty($listing['primary_image'])): ?>
-                                <img src="/uploads/listings/<?= $listing['id'] ?>/<?= $listing['primary_image'] ?>"
-                                    alt="<?= htmlspecialchars($listing['title']) ?>"
-                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                    loading="lazy">
-                            <?php else: ?>
-                                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                                    <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                            <?php endif; ?>
+            <!-- Carousel Container -->
+            <div class="relative" x-data="{
+                currentIndex: 0,
+                itemsPerPage: window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2 : 1),
+                totalItems: <?= count($featuredListings) ?>,
+                get maxIndex() {
+                    return Math.max(0, this.totalItems - this.itemsPerPage);
+                },
+                next() {
+                    if (this.currentIndex < this.maxIndex) {
+                        this.currentIndex++;
+                    } else {
+                        this.currentIndex = 0;
+                    }
+                },
+                prev() {
+                    if (this.currentIndex > 0) {
+                        this.currentIndex--;
+                    } else {
+                        this.currentIndex = this.maxIndex;
+                    }
+                },
+                init() {
+                    window.addEventListener('resize', () => {
+                        this.itemsPerPage = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2 : 1);
+                        if (this.currentIndex > this.maxIndex) {
+                            this.currentIndex = this.maxIndex;
+                        }
+                    });
+                }
+            }">
+                <!-- Previous Button -->
+                <button @click="prev()"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    :class="{ 'opacity-50 cursor-not-allowed': totalItems <= itemsPerPage }">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
 
-                            <div class="absolute top-4 right-4">
-                                <span
-                                    class="px-3 py-1 bg-white/90 backdrop-blur text-xs font-bold text-gray-900 rounded-full shadow-sm">
-                                    <?= ucfirst($listing['deal_type']) ?>
-                                </span>
+                <!-- Next Button -->
+                <button @click="next()"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    :class="{ 'opacity-50 cursor-not-allowed': totalItems <= itemsPerPage }">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+
+                <!-- Carousel Track -->
+                <div class="overflow-hidden">
+                    <div class="flex transition-transform duration-500 ease-out gap-8"
+                        :style="`transform: translateX(-${currentIndex * (100 / itemsPerPage)}%)`">
+                        <?php foreach ($featuredListings as $listing): ?>
+                            <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <a href="<?= url("listings/{$listing['id']}") ?>"
+                                    class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden block">
+                                    <div class="relative aspect-[4/3] overflow-hidden">
+                                        <?php if (!empty($listing['primary_image'])): ?>
+                                            <img src="/uploads/listings/<?= $listing['id'] ?>/<?= $listing['primary_image'] ?>"
+                                                alt="<?= htmlspecialchars($listing['title']) ?>"
+                                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                loading="lazy">
+                                        <?php else: ?>
+                                            <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                                                <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <div class="absolute top-4 right-4">
+                                            <span
+                                                class="px-3 py-1 bg-white/90 backdrop-blur text-xs font-bold text-gray-900 rounded-full shadow-sm">
+                                                <?= ucfirst($listing['deal_type']) ?>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-5">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h3
+                                                class="text-lg font-bold text-gray-900 line-clamp-1 group-hover:text-primary-600 transition-colors">
+                                                <?= htmlspecialchars($listing['title']) ?>
+                                            </h3>
+                                        </div>
+
+                                        <p class="text-gray-500 text-sm mb-4 flex items-center">
+                                            <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            <?= htmlspecialchars($listing['settlement']) ?>, <?= htmlspecialchars($listing['region']) ?>
+                                        </p>
+
+                                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                                            <div class="flex items-center gap-4 text-sm text-gray-600">
+                                                <span class="flex items-center gap-1">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                    </svg>
+                                                    <?= $listing['rooms'] ?>
+                                                </span>
+                                                <span class="flex items-center gap-1">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                                    </svg>
+                                                    <?= (int) $listing['area_sqm'] ?> m²
+                                                </span>
+                                            </div>
+                                            <span class="text-xl font-bold text-primary-600">€<?= number_format($listing['price']) ?></span>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
 
-                        <div class="p-5">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3
-                                    class="text-lg font-bold text-gray-900 line-clamp-1 group-hover:text-primary-600 transition-colors">
-                                    <?= htmlspecialchars($listing['title']) ?>
-                                </h3>
-                            </div>
-
-                            <p class="text-gray-500 text-sm mb-4 flex items-center">
-                                <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <?= htmlspecialchars($listing['settlement']) ?>, <?= htmlspecialchars($listing['region']) ?>
-                            </p>
-
-                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                                <div class="flex items-center gap-4 text-sm text-gray-600">
-                                    <span class="flex items-center gap-1">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                        </svg>
-                                        <?= $listing['rooms'] ?>
-                                    </span>
-                                    <span class="flex items-center gap-1">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                                        </svg>
-                                        <?= (int) $listing['area_sqm'] ?> m²
-                                    </span>
-                                </div>
-                                <span class="text-xl font-bold text-primary-600">€<?= number_format($listing['price']) ?></span>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
+                <!-- Dots Indicator -->
+                <div class="flex justify-center gap-2 mt-8">
+                    <template x-for="i in Math.ceil(totalItems / itemsPerPage)" :key="i">
+                        <button @click="currentIndex = i - 1"
+                            class="w-2 h-2 rounded-full transition-all duration-200"
+                            :class="currentIndex === i - 1 ? 'bg-primary-600 w-8' : 'bg-gray-300 hover:bg-gray-400'">
+                        </button>
+                    </template>
+                </div>
             </div>
         <?php endif; ?>
 
