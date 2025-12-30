@@ -82,6 +82,83 @@
                         </div>
                     </div>
 
+                    <!-- Storage Settings (Super Admin Only) -->
+                    <?php if (Core\Auth::isSuperAdmin()): ?>
+                        <div class="border-b pb-6">
+                            <h3 class="text-lg font-semibold mb-4">
+                                <svg class="w-5 h-5 inline mr-1 text-secondary-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z">
+                                    </path>
+                                </svg>
+                                Cloudflare R2 Storage
+                            </h3>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                <p class="text-sm text-blue-800">
+                                    <strong>Note:</strong> If R2 credentials are configured, listing images will be uploaded
+                                    to Cloudflare R2.
+                                    Otherwise, images are stored on the local server.
+                                </p>
+                                <?php if (\Core\StorageManager::isR2Available()): ?>
+                                    <p class="text-sm text-green-700 mt-2 font-medium">✓ Currently using: Cloudflare R2</p>
+                                <?php else: ?>
+                                    <p class="text-sm text-gray-600 mt-2">Currently using: Local Storage</p>
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- R2 Access Key ID -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">R2 Access Key ID</label>
+                                <input type="text" name="r2_access_key_id"
+                                    value="<?= htmlspecialchars(settings('r2_access_key_id', '')) ?>"
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                    placeholder="Enter your Cloudflare R2 Access Key ID">
+                            </div>
+
+                            <!-- R2 Secret Access Key -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">R2 Secret Access Key</label>
+                                <input type="password" name="r2_secret_access_key"
+                                    value="<?= htmlspecialchars(settings('r2_secret_access_key', '')) ?>"
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                    placeholder="Enter your Cloudflare R2 Secret Access Key">
+                            </div>
+
+                            <!-- R2 Bucket Name -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">R2 Bucket Name</label>
+                                <input type="text" name="r2_bucket_name"
+                                    value="<?= htmlspecialchars(settings('r2_bucket_name', '')) ?>"
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                    placeholder="e.g., xpatly-images">
+                            </div>
+
+                            <!-- R2 Endpoint -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">R2 Endpoint URL</label>
+                                <input type="text" name="r2_endpoint"
+                                    value="<?= htmlspecialchars(settings('r2_endpoint', '')) ?>"
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                    placeholder="https://xxx.r2.cloudflarestorage.com">
+                                <p class="text-xs text-gray-500 mt-1">Found in Cloudflare Dashboard → R2 → Bucket → Settings
+                                </p>
+                            </div>
+
+                            <!-- R2 Public URL -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">R2 Public URL</label>
+                                <input type="text" name="r2_public_url"
+                                    value="<?= htmlspecialchars(settings('r2_public_url', '')) ?>"
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                    placeholder="https://images.yourdomain.com">
+                                <p class="text-xs text-gray-500 mt-1">The public URL for accessing your R2 bucket (custom
+                                    domain or r2.dev URL)</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Contact Information -->
                     <div>
                         <h3 class="text-lg font-semibold mb-4">Contact Information</h3>

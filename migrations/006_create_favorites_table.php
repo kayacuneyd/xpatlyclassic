@@ -6,6 +6,7 @@ return [
         user_id INTEGER NOT NULL,
         listing_id INTEGER NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE,
         UNIQUE(user_id, listing_id)

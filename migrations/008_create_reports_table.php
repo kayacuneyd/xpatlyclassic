@@ -10,6 +10,7 @@ return [
         admin_notes TEXT,
         reviewed_by INTEGER,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         reviewed_at DATETIME,
         FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE,
         FOREIGN KEY (reviewed_by) REFERENCES users(id)

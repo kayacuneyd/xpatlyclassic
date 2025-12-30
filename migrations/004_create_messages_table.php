@@ -9,6 +9,7 @@ return [
         message TEXT NOT NULL,
         read_at DATETIME,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE
     )",
 

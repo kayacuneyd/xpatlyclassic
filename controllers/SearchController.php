@@ -87,6 +87,26 @@ class SearchController
             $filters['area_max'] = (float)$params['area_max'];
         }
 
+        if (!empty($params['floor_min'])) {
+            $filters['floor_min'] = (int)$params['floor_min'];
+        }
+
+        if (!empty($params['floor_max'])) {
+            $filters['floor_max'] = (int)$params['floor_max'];
+        }
+
+        if (!empty($params['year_min'])) {
+            $filters['year_min'] = (int)$params['year_min'];
+        }
+
+        if (!empty($params['year_max'])) {
+            $filters['year_max'] = (int)$params['year_max'];
+        }
+
+        if (!empty($params['energy_class'])) {
+            $filters['energy_class'] = $params['energy_class'];
+        }
+
         if (!empty($params['q'])) {
             $filters['q'] = trim($params['q']);
         }

@@ -129,9 +129,9 @@ class ListingController
             'address' => $_POST['address'],
             'latitude' => $_POST['latitude'] ?? null,
             'longitude' => $_POST['longitude'] ?? null,
-            'rooms' => (int)$_POST['rooms'],
-            'area_sqm' => (float)$_POST['area_sqm'],
-            'price' => (float)$_POST['price'],
+            'rooms' => (int) $_POST['rooms'],
+            'area_sqm' => (float) $_POST['area_sqm'],
+            'price' => (float) $_POST['price'],
             'price_per_sqm' => $pricePerSqm,
             'condition' => $_POST['condition'],
             'extras' => json_encode($extras),
@@ -147,12 +147,12 @@ class ListingController
             'status' => 'pending'
         ]);
 
-        // Handle image uploads
+        // Handle image uploads with hybrid storage (R2 or local)
         if (!empty($_FILES['images']['name'][0])) {
             $uploader = new Uploader();
-            $uploadedImages = $uploader->uploadMultiple(
+            $uploadedImages = $uploader->uploadMultipleWithStorage(
                 $_FILES['images'],
-                "public/uploads/listings/{$listingId}",
+                "listings/{$listingId}",
                 'listing_'
             );
 
@@ -161,6 +161,7 @@ class ListingController
                     'listing_id' => $listingId,
                     'filename' => $image['filename'],
                     'original_filename' => $image['original_name'],
+                    'path' => $image['path'] ?? null,
                     'sort_order' => $index,
                     'is_primary' => $index === 0 ? 1 : 0
                 ]);
@@ -262,7 +263,7 @@ class ListingController
         Listing::update($id, [
             'title' => $_POST['title'],
             'description' => $_POST['description'],
-            'price' => (float)$_POST['price'],
+            'price' => (float) $_POST['price'],
             'price_per_sqm' => $pricePerSqm,
             'extras' => json_encode($extras),
             'youtube_url' => $_POST['youtube_url'] ?? null,

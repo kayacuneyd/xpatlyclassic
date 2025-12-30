@@ -7,10 +7,64 @@
     <title><?= $title ?? 'Xpatly - Expat-Friendly Housing' ?></title>
     <meta name="description" content="Find expat-friendly housing in Estonia without discrimination">
 
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="/assets/css/app.css?v=<?= filemtime(__DIR__ . '/../../public/assets/css/app.css') ?>">
+    <!-- Google Fonts - Lexend & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-    <!-- Alpine.js -->
+    <!-- TailwindCSS CDN with Custom Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fffde7',
+                            100: '#fff9c4',
+                            200: '#fff59d',
+                            300: '#fff176',
+                            400: '#ffee58',
+                            500: '#f9a825',
+                            600: '#f9a825',
+                            700: '#f57f17',
+                            800: '#e65100',
+                            900: '#bf360c',
+                        },
+                        secondary: {
+                            50: '#e3f2fd',
+                            100: '#bbdefb',
+                            200: '#90caf9',
+                            300: '#64b5f6',
+                            400: '#42a5f5',
+                            500: '#1976d2',
+                            600: '#1976d2',
+                            700: '#1565c0',
+                            800: '#0d47a1',
+                            900: '#0a3d91',
+                        },
+                        success: {
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        },
+                    },
+                    fontFamily: {
+                        'heading': ['Lexend', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+    <!-- Alpine.js with Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <?php if (!empty($useMap)): ?>
@@ -20,16 +74,94 @@
     <?php endif; ?>
 </head>
 
-<body class="bg-gray-50">
-    <!-- Flash Messages -->
+<body class="bg-gray-50 font-body">
+    <!-- Toast Notification System - Centered Modal Style -->
     <?php if (Core\Flash::has()): ?>
-        <div class="fixed top-4 right-4 z-50 space-y-2" x-data="{ show: true }" x-show="show"
-            x-init="setTimeout(() => show = false, 5000)">
-            <?php foreach (Core\Flash::get() as $message): ?>
-                <div class="alert alert-<?= $message['type'] ?> max-w-md shadow-lg">
-                    <?= htmlspecialchars($message['message']) ?>
+        <div class="fixed inset-0 z-50 flex items-start justify-center pt-20 pointer-events-none">
+            <?php foreach (Core\Flash::get() as $index => $message): ?>
+                <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 transform -translate-y-4"
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100 transform translate-y-0"
+                    x-transition:leave-end="opacity-0 transform -translate-y-4" class="pointer-events-auto max-w-md w-full mx-4 mb-3 <?php
+                    echo match ($message['type']) {
+                        'success' => 'bg-green-50 border-green-400 text-green-800',
+                        'error' => 'bg-red-50 border-red-400 text-red-800',
+                        'warning' => 'bg-yellow-50 border-yellow-400 text-yellow-800',
+                        default => 'bg-blue-50 border-blue-400 text-blue-800',
+                    };
+                    ?> border-l-4 rounded-lg shadow-xl p-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <?php if ($message['type'] === 'success'): ?>
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            <?php elseif ($message['type'] === 'error'): ?>
+                                <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            <?php elseif ($message['type'] === 'warning'): ?>
+                                <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            <?php else: ?>
+                                <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            <?php endif; ?>
+                        </div>
+                        <div class="ml-3 flex-1">
+                            <p class="text-sm font-medium"><?= htmlspecialchars($message['message']) ?></p>
+                        </div>
+                        <button @click="show = false" class="ml-4 flex-shrink-0 text-gray-400 hover:text-gray-600">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- Email Verification Warning Banner -->
+    <?php if (Core\Auth::check() && !\Models\User::isEmailVerified(Core\Auth::id())): ?>
+        <div class="bg-amber-500 text-amber-900 py-3 px-4" x-data="{ show: true }" x-show="show">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm font-medium">
+                        <?= __('auth.verify_email_warning') ?? 'Please verify your email address to access all features.' ?>
+                    </span>
+                    <a href="<?= url('resend-verification') ?>" class="ml-3 text-sm font-bold underline hover:no-underline">
+                        <?= __('auth.resend_verification') ?? 'Resend verification email' ?>
+                    </a>
+                </div>
+                <button @click="show = false" class="text-amber-900 hover:text-amber-700" aria-label="Dismiss">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
         </div>
     <?php endif; ?>
 
@@ -49,6 +181,8 @@
                     <a href="<?= url('') ?>" class="text-gray-700 hover:text-primary-600"><?= __('common.home') ?></a>
                     <a href="<?= url('listings') ?>"
                         class="text-gray-700 hover:text-primary-600"><?= __('common.listings') ?></a>
+                    <a href="<?= url('blog') ?>"
+                        class="text-gray-700 hover:text-primary-600"><?= __('common.blog') ?? 'Blog' ?></a>
                     <a href="<?= url('about') ?>"
                         class="text-gray-700 hover:text-primary-600"><?= __('pages.about.title') ?></a>
                     <a href="<?= url('contact') ?>"
@@ -69,30 +203,32 @@
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open"
                             class="text-gray-700 hover:text-primary-600 px-2 sm:px-3 py-2 rounded-md hover:bg-gray-100 flex items-center space-x-1">
-                            <span class="text-lg sm:text-xl">
-                                <?php
-                                $currentLocale = Core\Translation::getLocale();
-                                echo $currentLocale === 'en' ? '🇬🇧' : ($currentLocale === 'et' ? '🇪🇪' : '🇷🇺');
-                                ?>
-                            </span>
-                            <span class="hidden sm:inline text-sm"><?= strtoupper($currentLocale) ?></span>
+                            <span class="flag-icon <?php
+                            $currentLocale = Core\Translation::getLocale();
+                            echo $currentLocale === 'en' ? 'flag-icon-gb' : ($currentLocale === 'et' ? 'flag-icon-ee' : 'flag-icon-ru');
+                            ?>"></span>
+                            <span class="hidden sm:inline text-sm ml-1"><?= strtoupper($currentLocale) ?></span>
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
                         <div x-show="open" x-cloak @click.away="open = false"
                             class="absolute right-0 mt-2 w-36 sm:w-40 bg-white rounded-lg shadow-lg py-1 border border-gray-200 z-50">
-                            <a href="/en<?= $cleanPath ?>" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100">
-                                <span class="text-xl mr-2">🇬🇧</span>
-                                <span class="hidden sm:inline">English</span>
+                            <a href="/en<?= $cleanPath ?>"
+                                class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100">
+                                <span class="flag-icon flag-icon-gb mr-2"></span>
+                                <span>English</span>
                             </a>
-                            <a href="/et<?= $cleanPath ?>" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100">
-                                <span class="text-xl mr-2">🇪🇪</span>
-                                <span class="hidden sm:inline">Eesti</span>
+                            <a href="/et<?= $cleanPath ?>"
+                                class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100">
+                                <span class="flag-icon flag-icon-ee mr-2"></span>
+                                <span>Eesti</span>
                             </a>
-                            <a href="/ru<?= $cleanPath ?>" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100">
-                                <span class="text-xl mr-2">🇷🇺</span>
-                                <span class="hidden sm:inline">Русский</span>
+                            <a href="/ru<?= $cleanPath ?>"
+                                class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100">
+                                <span class="flag-icon flag-icon-ru mr-2"></span>
+                                <span>Русский</span>
                             </a>
                         </div>
                     </div>
@@ -192,53 +328,91 @@
                             </div>
                         </div>
                     <?php else: ?>
-                        <a href="<?= url('login') ?>" class="hidden md:inline-block btn btn-secondary text-sm px-4 py-2"><?= __('common.login') ?></a>
-                        <a href="<?= url('register') ?>" class="hidden md:inline-block btn btn-primary text-sm px-4 py-2"><?= __('common.register') ?></a>
+                        <!-- Combined Sign In / Register Dropdown -->
+                        <div x-data="{ open: false }" class="relative hidden md:block">
+                            <button @click="open = !open"
+                                class="flex items-center space-x-1 bg-primary-500 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                <span><?= __('common.login') ?></span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div x-show="open" x-cloak @click.away="open = false"
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border border-gray-200 z-50">
+                                <a href="<?= url('login') ?>"
+                                    class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                                        </path>
+                                    </svg>
+                                    <?= __('common.login') ?>
+                                </a>
+                                <a href="<?= url('register') ?>"
+                                    class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                                        </path>
+                                    </svg>
+                                    <?= __('common.register') ?>
+                                </a>
+                            </div>
+                        </div>
                     <?php endif; ?>
 
                     <!-- Hamburger Menu Button - Mobile Only -->
                     <button @click="mobileMenuOpen = !mobileMenuOpen"
-                            class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100">
+                        class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile Menu -->
-            <div x-show="mobileMenuOpen"
-                 x-cloak
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 -translate-y-1"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 translate-y-0"
-                 x-transition:leave-end="opacity-0 -translate-y-1"
-                 class="md:hidden border-t border-gray-200 bg-white">
+            <div x-show="mobileMenuOpen" x-cloak x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1"
+                class="md:hidden border-t border-gray-200 bg-white">
                 <div class="px-4 py-4 space-y-3">
                     <!-- Main Navigation Links -->
-                    <a href="<?= url('') ?>" class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
+                    <a href="<?= url('') ?>"
+                        class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
                         <?= __('common.home') ?>
                     </a>
-                    <a href="<?= url('listings') ?>" class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
+                    <a href="<?= url('listings') ?>"
+                        class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
                         <?= __('common.listings') ?>
                     </a>
-                    <a href="<?= url('about') ?>" class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
+                    <a href="<?= url('about') ?>"
+                        class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
                         <?= __('pages.about.title') ?>
                     </a>
-                    <a href="<?= url('contact') ?>" class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
+                    <a href="<?= url('contact') ?>"
+                        class="block py-2 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md px-3">
                         <?= __('pages.contact.title') ?>
                     </a>
 
                     <?php if (!Core\Auth::check()): ?>
                         <!-- Auth Links for Non-logged Users -->
                         <div class="border-t border-gray-200 pt-3 mt-3 space-y-2">
-                            <a href="<?= url('login') ?>" class="block w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                            <a href="<?= url('login') ?>"
+                                class="block w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
                                 <?= __('common.login') ?>
                             </a>
-                            <a href="<?= url('register') ?>" class="block w-full text-center py-2 px-4 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                            <a href="<?= url('register') ?>"
+                                class="block w-full text-center py-2 px-4 bg-primary-600 text-white rounded-md hover:bg-primary-700">
                                 <?= __('common.register') ?>
                             </a>
                         </div>

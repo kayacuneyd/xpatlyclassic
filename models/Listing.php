@@ -33,22 +33,22 @@ class Listing extends Model
 
         // Apply filters
         if (!empty($filters['region'])) {
-            $sql .= " AND l.region = ?";
+            $sql .= " AND LOWER(l.region) = LOWER(?)";
             $params[] = $filters['region'];
         }
 
         if (!empty($filters['settlement'])) {
-            $sql .= " AND l.settlement = ?";
+            $sql .= " AND LOWER(l.settlement) = LOWER(?)";
             $params[] = $filters['settlement'];
         }
 
         if (!empty($filters['category'])) {
-            $sql .= " AND l.category = ?";
+            $sql .= " AND LOWER(l.category) = LOWER(?)";
             $params[] = $filters['category'];
         }
 
         if (!empty($filters['deal_type'])) {
-            $sql .= " AND l.deal_type = ?";
+            $sql .= " AND LOWER(l.deal_type) = LOWER(?)";
             $params[] = $filters['deal_type'];
         }
 
@@ -68,34 +68,62 @@ class Listing extends Model
         // Rooms range
         if (isset($filters['rooms_min']) && $filters['rooms_min'] !== '') {
             $sql .= " AND l.rooms >= ?";
-            $params[] = (int)$filters['rooms_min'];
+            $params[] = (int) $filters['rooms_min'];
         }
 
         if (isset($filters['rooms_max']) && $filters['rooms_max'] !== '') {
             $sql .= " AND l.rooms <= ?";
-            $params[] = (int)$filters['rooms_max'];
+            $params[] = (int) $filters['rooms_max'];
         }
 
         // Price range
         if (isset($filters['price_min']) && $filters['price_min'] !== '') {
             $sql .= " AND l.price >= ?";
-            $params[] = (float)$filters['price_min'];
+            $params[] = (float) $filters['price_min'];
         }
 
         if (isset($filters['price_max']) && $filters['price_max'] !== '') {
             $sql .= " AND l.price <= ?";
-            $params[] = (float)$filters['price_max'];
+            $params[] = (float) $filters['price_max'];
         }
 
         // Area range
         if (isset($filters['area_min']) && $filters['area_min'] !== '') {
             $sql .= " AND l.area_sqm >= ?";
-            $params[] = (float)$filters['area_min'];
+            $params[] = (float) $filters['area_min'];
         }
 
         if (isset($filters['area_max']) && $filters['area_max'] !== '') {
             $sql .= " AND l.area_sqm <= ?";
-            $params[] = (float)$filters['area_max'];
+            $params[] = (float) $filters['area_max'];
+        }
+
+        // Floor range
+        if (isset($filters['floor_min']) && $filters['floor_min'] !== '') {
+            $sql .= " AND l.floor >= ?";
+            $params[] = (int) $filters['floor_min'];
+        }
+
+        if (isset($filters['floor_max']) && $filters['floor_max'] !== '') {
+            $sql .= " AND l.floor <= ?";
+            $params[] = (int) $filters['floor_max'];
+        }
+
+        // Year built range
+        if (isset($filters['year_min']) && $filters['year_min'] !== '') {
+            $sql .= " AND l.year_built >= ?";
+            $params[] = (int) $filters['year_min'];
+        }
+
+        if (isset($filters['year_max']) && $filters['year_max'] !== '') {
+            $sql .= " AND l.year_built <= ?";
+            $params[] = (int) $filters['year_max'];
+        }
+
+        // Energy class
+        if (!empty($filters['energy_class'])) {
+            $sql .= " AND UPPER(l.energy_class) = UPPER(?)";
+            $params[] = $filters['energy_class'];
         }
 
         if (!empty($filters['q'])) {
@@ -109,7 +137,8 @@ class Listing extends Model
 
         // Extras (JSON search)
         if (!empty($filters['extras'])) {
-            foreach ($filters['extras'] as $extra) {
+            $extras = is_array($filters['extras']) ? $filters['extras'] : [$filters['extras']];
+            foreach ($extras as $extra) {
                 $sql .= " AND JSON_EXTRACT(l.extras, '$." . $extra . "') = 1";
             }
         }
@@ -117,22 +146,22 @@ class Listing extends Model
         // Geographic bounds (map search)
         if (isset($filters['lat_min']) && $filters['lat_min'] !== '') {
             $sql .= " AND l.latitude >= ?";
-            $params[] = (float)$filters['lat_min'];
+            $params[] = (float) $filters['lat_min'];
         }
 
         if (isset($filters['lat_max']) && $filters['lat_max'] !== '') {
             $sql .= " AND l.latitude <= ?";
-            $params[] = (float)$filters['lat_max'];
+            $params[] = (float) $filters['lat_max'];
         }
 
         if (isset($filters['lng_min']) && $filters['lng_min'] !== '') {
             $sql .= " AND l.longitude >= ?";
-            $params[] = (float)$filters['lng_min'];
+            $params[] = (float) $filters['lng_min'];
         }
 
         if (isset($filters['lng_max']) && $filters['lng_max'] !== '') {
             $sql .= " AND l.longitude <= ?";
-            $params[] = (float)$filters['lng_max'];
+            $params[] = (float) $filters['lng_max'];
         }
 
         // Sorting
@@ -161,22 +190,22 @@ class Listing extends Model
 
         // Apply same filters as getActive
         if (!empty($filters['region'])) {
-            $sql .= " AND region = ?";
+            $sql .= " AND LOWER(region) = LOWER(?)";
             $params[] = $filters['region'];
         }
 
         if (!empty($filters['settlement'])) {
-            $sql .= " AND settlement = ?";
+            $sql .= " AND LOWER(settlement) = LOWER(?)";
             $params[] = $filters['settlement'];
         }
 
         if (!empty($filters['category'])) {
-            $sql .= " AND category = ?";
+            $sql .= " AND LOWER(category) = LOWER(?)";
             $params[] = $filters['category'];
         }
 
         if (!empty($filters['deal_type'])) {
-            $sql .= " AND deal_type = ?";
+            $sql .= " AND LOWER(deal_type) = LOWER(?)";
             $params[] = $filters['deal_type'];
         }
 
@@ -189,38 +218,74 @@ class Listing extends Model
         }
 
         if (!empty($filters['condition'])) {
-            $sql .= " AND condition = ?";
+            $sql .= " AND LOWER(condition) = LOWER(?)";
             $params[] = $filters['condition'];
         }
 
         if (isset($filters['rooms_min']) && $filters['rooms_min'] !== '') {
             $sql .= " AND rooms >= ?";
-            $params[] = (int)$filters['rooms_min'];
+            $params[] = (int) $filters['rooms_min'];
         }
 
         if (isset($filters['rooms_max']) && $filters['rooms_max'] !== '') {
             $sql .= " AND rooms <= ?";
-            $params[] = (int)$filters['rooms_max'];
+            $params[] = (int) $filters['rooms_max'];
         }
 
         if (isset($filters['price_min']) && $filters['price_min'] !== '') {
             $sql .= " AND price >= ?";
-            $params[] = (float)$filters['price_min'];
+            $params[] = (float) $filters['price_min'];
         }
 
         if (isset($filters['price_max']) && $filters['price_max'] !== '') {
             $sql .= " AND price <= ?";
-            $params[] = (float)$filters['price_max'];
+            $params[] = (float) $filters['price_max'];
         }
 
         if (isset($filters['area_min']) && $filters['area_min'] !== '') {
             $sql .= " AND area_sqm >= ?";
-            $params[] = (float)$filters['area_min'];
+            $params[] = (float) $filters['area_min'];
         }
 
         if (isset($filters['area_max']) && $filters['area_max'] !== '') {
             $sql .= " AND area_sqm <= ?";
-            $params[] = (float)$filters['area_max'];
+            $params[] = (float) $filters['area_max'];
+        }
+
+        // Floor range
+        if (isset($filters['floor_min']) && $filters['floor_min'] !== '') {
+            $sql .= " AND floor >= ?";
+            $params[] = (int) $filters['floor_min'];
+        }
+
+        if (isset($filters['floor_max']) && $filters['floor_max'] !== '') {
+            $sql .= " AND floor <= ?";
+            $params[] = (int) $filters['floor_max'];
+        }
+
+        // Year built range
+        if (isset($filters['year_min']) && $filters['year_min'] !== '') {
+            $sql .= " AND year_built >= ?";
+            $params[] = (int) $filters['year_min'];
+        }
+
+        if (isset($filters['year_max']) && $filters['year_max'] !== '') {
+            $sql .= " AND year_built <= ?";
+            $params[] = (int) $filters['year_max'];
+        }
+
+        // Energy class
+        if (!empty($filters['energy_class'])) {
+            $sql .= " AND UPPER(energy_class) = UPPER(?)";
+            $params[] = $filters['energy_class'];
+        }
+
+        // Extras (JSON search) - CRITICAL: Was completely missing
+        if (!empty($filters['extras'])) {
+            $extras = is_array($filters['extras']) ? $filters['extras'] : [$filters['extras']];
+            foreach ($extras as $extra) {
+                $sql .= " AND JSON_EXTRACT(extras, '$." . $extra . "') = 1";
+            }
         }
 
         if (!empty($filters['q'])) {
@@ -235,27 +300,27 @@ class Listing extends Model
         // Geographic bounds (map search)
         if (isset($filters['lat_min']) && $filters['lat_min'] !== '') {
             $sql .= " AND latitude >= ?";
-            $params[] = (float)$filters['lat_min'];
+            $params[] = (float) $filters['lat_min'];
         }
 
         if (isset($filters['lat_max']) && $filters['lat_max'] !== '') {
             $sql .= " AND latitude <= ?";
-            $params[] = (float)$filters['lat_max'];
+            $params[] = (float) $filters['lat_max'];
         }
 
         if (isset($filters['lng_min']) && $filters['lng_min'] !== '') {
             $sql .= " AND longitude >= ?";
-            $params[] = (float)$filters['lng_min'];
+            $params[] = (float) $filters['lng_min'];
         }
 
         if (isset($filters['lng_max']) && $filters['lng_max'] !== '') {
             $sql .= " AND longitude <= ?";
-            $params[] = (float)$filters['lng_max'];
+            $params[] = (float) $filters['lng_max'];
         }
 
         $result = self::query($sql, $params);
         $row = $result->fetch();
-        return (int)($row['count'] ?? 0);
+        return (int) ($row['count'] ?? 0);
     }
 
     public static function getByUser(int $userId, ?string $status = null): array
@@ -319,7 +384,7 @@ class Listing extends Model
 
         if (!empty($query)) {
             $sql .= " AND (l.id = ? OR l.title LIKE ? OR u.full_name LIKE ?)";
-            $params[] = is_numeric($query) ? (int)$query : 0;
+            $params[] = is_numeric($query) ? (int) $query : 0;
             $params[] = "%{$query}%";
             $params[] = "%{$query}%";
         }

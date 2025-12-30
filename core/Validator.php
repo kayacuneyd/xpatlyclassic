@@ -77,13 +77,13 @@ class Validator
                 break;
 
             case 'min':
-                if ($value && strlen($value) < (int)$params) {
+                if ($value && strlen($value) < (int) $params) {
                     $this->addError($field, $ruleName, ['min' => $params]);
                 }
                 break;
 
             case 'max':
-                if ($value && strlen($value) > (int)$params) {
+                if ($value && strlen($value) > (int) $params) {
                     $this->addError($field, $ruleName, ['max' => $params]);
                 }
                 break;
@@ -101,13 +101,13 @@ class Validator
                 break;
 
             case 'min_value':
-                if ($value !== null && $value !== '' && (float)$value < (float)$params) {
+                if ($value !== null && $value !== '' && (float) $value < (float) $params) {
                     $this->addError($field, $ruleName, ['min' => $params]);
                 }
                 break;
 
             case 'max_value':
-                if ($value !== null && $value !== '' && (float)$value > (float)$params) {
+                if ($value !== null && $value !== '' && (float) $value > (float) $params) {
                     $this->addError($field, $ruleName, ['max' => $params]);
                 }
                 break;
@@ -245,7 +245,7 @@ class Validator
         return $this->errors;
     }
 
-    public function firstError(string $field = null): ?string
+    public function firstError(?string $field = null): ?string
     {
         if ($field) {
             return $this->errors[$field][0] ?? null;

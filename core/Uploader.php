@@ -53,6 +53,87 @@ class Uploader
         ];
     }
 
+    /**
+     * Upload a single file using StorageManager for hybrid R2/local storage
+     */
+    public function uploadWithStorage(array $file, string $remotePath, string $prefix = ''): ?array
+    {
+        $this->errors = [];
+
+        // Validate file
+        if (!$this->validate($file)) {
+            return null;
+        }
+
+        // Create temporary directory for processing
+        $tempDir = sys_get_temp_dir() . '/xpatly_uploads';
+        if (!is_dir($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+
+        // Generate unique filename
+        $extension = $this->getExtension($file['name']);
+        $filename = $prefix . time() . '_' . bin2hex(random_bytes(8)) . '.jpg'; // Always save as JPEG
+        $tempFilePath = $tempDir . '/' . $filename;
+
+        // Process and save image to temp
+        if (!$this->processImage($file['tmp_name'], $tempFilePath)) {
+            return null;
+        }
+
+        // Generate thumbnail
+        $thumbnailFilename = $prefix . time() . '_' . bin2hex(random_bytes(8)) . '_thumb.jpg';
+        $tempThumbPath = $tempDir . '/' . $thumbnailFilename;
+        $this->createThumbnail($tempFilePath, $tempThumbPath);
+
+        // Upload via StorageManager (R2 or local)
+        $finalPath = StorageManager::upload($tempFilePath, $remotePath . '/' . $filename);
+        $thumbPath = StorageManager::upload($tempThumbPath, $remotePath . '/' . $thumbnailFilename);
+
+        // Clean up temp files
+        @unlink($tempFilePath);
+        @unlink($tempThumbPath);
+
+        return [
+            'filename' => $filename,
+            'thumbnail' => $thumbnailFilename,
+            'original_name' => $file['name'],
+            'size' => filesize($tempFilePath) ?: 0,
+            'path' => $finalPath,
+            'thumb_path' => $thumbPath
+        ];
+    }
+
+    /**
+     * Upload multiple files using StorageManager
+     */
+    public function uploadMultipleWithStorage(array $files, string $remotePath, string $prefix = '', int $maxFiles = 40): array
+    {
+        $uploaded = [];
+
+        // Normalize files array
+        $normalizedFiles = $this->normalizeFilesArray($files);
+
+        $count = 0;
+        foreach ($normalizedFiles as $file) {
+            if ($count >= $maxFiles) {
+                break;
+            }
+
+            if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+
+            $result = $this->uploadWithStorage($file, $remotePath, $prefix);
+            if ($result) {
+                $uploaded[] = $result;
+                $count++;
+            }
+        }
+
+        return $uploaded;
+    }
+
     public function uploadMultiple(array $files, string $directory, string $prefix = '', int $maxFiles = 40): array
     {
         $uploaded = [];
@@ -146,7 +227,7 @@ class Uploader
         // Resize if necessary
         if ($width > self::MAX_WIDTH) {
             $newWidth = self::MAX_WIDTH;
-            $newHeight = (int)($height * (self::MAX_WIDTH / $width));
+            $newHeight = (int) ($height * (self::MAX_WIDTH / $width));
 
             $resized = imagecreatetruecolor($newWidth, $newHeight);
 
@@ -188,16 +269,16 @@ class Uploader
 
         if ($sourceAspect > $thumbAspect) {
             // Source is wider
-            $newWidth = (int)($height * $thumbAspect);
+            $newWidth = (int) ($height * $thumbAspect);
             $newHeight = $height;
-            $srcX = (int)(($width - $newWidth) / 2);
+            $srcX = (int) (($width - $newWidth) / 2);
             $srcY = 0;
         } else {
             // Source is taller
             $newWidth = $width;
-            $newHeight = (int)($width / $thumbAspect);
+            $newHeight = (int) ($width / $thumbAspect);
             $srcX = 0;
-            $srcY = (int)(($height - $newHeight) / 2);
+            $srcY = (int) (($height - $newHeight) / 2);
         }
 
         $image = imagecreatefromjpeg($source);
@@ -206,8 +287,10 @@ class Uploader
         imagecopyresampled(
             $thumbnail,
             $image,
-            0, 0,
-            $srcX, $srcY,
+            0,
+            0,
+            $srcX,
+            $srcY,
             self::THUMBNAIL_WIDTH,
             self::THUMBNAIL_HEIGHT,
             $newWidth,

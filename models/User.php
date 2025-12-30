@@ -127,6 +127,15 @@ class User extends Model
         $sql = "SELECT COUNT(*) as count FROM listings WHERE user_id = ?";
         $result = self::query($sql, [$userId]);
         $row = $result->fetch();
-        return (int)($row['count'] ?? 0);
+        return (int) ($row['count'] ?? 0);
+    }
+
+    /**
+     * Check if user's email is verified
+     */
+    public static function isEmailVerified(int $userId): bool
+    {
+        $user = self::find($userId);
+        return $user && (bool) ($user['email_verified'] ?? false);
     }
 }

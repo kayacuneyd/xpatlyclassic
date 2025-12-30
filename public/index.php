@@ -1,5 +1,13 @@
 <?php
 
+// Serve static files directly in PHP built-in server
+if (php_sapi_name() === 'cli-server') {
+    $file = __DIR__ . $_SERVER['REQUEST_URI'];
+    if (is_file($file)) {
+        return false; // Serve the file directly
+    }
+}
+
 // Error reporting (disable in production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -36,6 +44,7 @@ use Controllers\UserController;
 use Controllers\MessageController;
 use Controllers\AdminController;
 use Controllers\PageController;
+use Controllers\BlogController;
 
 // Initialize session
 Session::start();
@@ -60,7 +69,11 @@ $router->get('/about', [PageController::class, 'about']);
 $router->get('/imprint', [PageController::class, 'imprint']);
 $router->get('/privacy', [PageController::class, 'privacy']);
 $router->get('/contact', [PageController::class, 'contact']);
-$router->get('/blog', [PageController::class, 'blog']);
+
+// Blog routes
+$router->get('/blog', [BlogController::class, 'index']);
+$router->get('/blog/{slug}', [BlogController::class, 'show']);
+$router->post('/blog/{slug}/comment', [BlogController::class, 'addComment']);
 
 // Auth routes
 $router->get('/register', [AuthController::class, 'showRegister']);
@@ -103,6 +116,14 @@ $router->post('/admin/reports/{id}/review', [AdminController::class, 'reviewRepo
 $router->get('/admin/logs', [AdminController::class, 'logs']);
 $router->get('/admin/settings', [AdminController::class, 'settings']);
 $router->post('/admin/settings', [AdminController::class, 'updateSettings']);
+
+// Admin Blog routes
+$router->get('/admin/blog', [BlogController::class, 'adminIndex']);
+$router->get('/admin/blog/create', [BlogController::class, 'create']);
+$router->post('/admin/blog', [BlogController::class, 'store']);
+$router->get('/admin/blog/{id}/edit', [BlogController::class, 'edit']);
+$router->post('/admin/blog/{id}', [BlogController::class, 'update']);
+$router->post('/admin/blog/{id}/delete', [BlogController::class, 'delete']);
 
 // Resolve route
 try {
