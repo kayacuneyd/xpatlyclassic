@@ -58,9 +58,11 @@ class User extends Model
     public static function createVerificationToken(int $userId): string
     {
         $token = bin2hex(random_bytes(32));
+        $expires = date('Y-m-d H:i:s', strtotime('+24 hours'));
 
         self::update($userId, [
-            'verification_token' => $token
+            'verification_token' => $token,
+            'verification_expires' => $expires
         ]);
 
         return $token;
@@ -94,29 +96,37 @@ class User extends Model
         return $user && $user['email_verified'] && $user['phone_verified'];
     }
 
-    public static function search(string $query, array $filters = []): array
+    public static function search(string $query = '', array $filters = []): array
     {
-        $sql = "SELECT * FROM " . self::$table . " WHERE 1=1";
+        $sql = "SELECT u.id, u.full_name, u.email, u.phone, u.role, u.locale,
+                       u.email_verified, u.phone_verified, u.created_at, u.updated_at,
+                       COUNT(l.id) as listing_count
+                FROM " . self::$table . " u
+                LEFT JOIN listings l ON u.id = l.user_id
+                WHERE 1=1";
         $params = [];
 
         if (!empty($query)) {
-            $sql .= " AND (full_name LIKE ? OR email LIKE ? OR phone LIKE ?)";
+            $sql .= " AND (u.full_name LIKE ? OR u.email LIKE ? OR u.phone LIKE ?)";
             $params[] = "%{$query}%";
             $params[] = "%{$query}%";
             $params[] = "%{$query}%";
         }
 
         if (!empty($filters['role'])) {
-            $sql .= " AND role = ?";
+            $sql .= " AND u.role = ?";
             $params[] = $filters['role'];
         }
 
-        if (isset($filters['verified'])) {
-            $sql .= " AND is_verified = ?";
+        if (isset($filters['verified']) && $filters['verified'] !== '') {
+            $sql .= " AND u.email_verified = ? AND u.phone_verified = ?";
+            $params[] = $filters['verified'];
             $params[] = $filters['verified'];
         }
 
-        $sql .= " ORDER BY created_at DESC";
+        $sql .= " GROUP BY u.id, u.full_name, u.email, u.phone, u.role, u.locale,
+                          u.email_verified, u.phone_verified, u.created_at, u.updated_at
+                  ORDER BY u.created_at DESC";
 
         $result = self::query($sql, $params);
         return $result->fetchAll();
@@ -137,5 +147,21 @@ class User extends Model
     {
         $user = self::find($userId);
         return $user && (bool) ($user['email_verified'] ?? false);
+    }
+
+    /**
+     * Get user statistics for admin dashboard
+     */
+    public static function getStats(): array
+    {
+        $sql = "SELECT
+                COUNT(*) as total_users,
+                SUM(CASE WHEN role = 'owner' THEN 1 ELSE 0 END) as total_owners,
+                SUM(CASE WHEN role = 'user' THEN 1 ELSE 0 END) as regular_users,
+                SUM(CASE WHEN email_verified = 1 AND phone_verified = 1 THEN 1 ELSE 0 END) as verified_users
+                FROM " . self::$table;
+
+        $result = self::query($sql);
+        return $result->fetch();
     }
 }

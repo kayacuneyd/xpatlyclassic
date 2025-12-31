@@ -68,6 +68,7 @@ $router->post('/listings/{id}/report', [ListingController::class, 'report']);
 $router->get('/about', [PageController::class, 'about']);
 $router->get('/imprint', [PageController::class, 'imprint']);
 $router->get('/privacy', [PageController::class, 'privacy']);
+$router->get('/terms', [PageController::class, 'terms']);
 $router->get('/contact', [PageController::class, 'contact']);
 
 // Blog routes

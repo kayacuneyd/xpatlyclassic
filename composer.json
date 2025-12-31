@@ -4,11 +4,12 @@
     "type": "project",
     "require": {
         "php": "^8.2",
-        "ext-pdo": "*",
         "ext-gd": "*",
-        "ext-mbstring": "*",
         "ext-json": "*",
-        "phpmailer/phpmailer": "^6.8"
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "phpmailer/phpmailer": "^6.8",
+        "resend/resend-php": "^1.1"
     },
     "autoload": {
         "psr-4": {

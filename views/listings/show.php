@@ -248,13 +248,55 @@ require __DIR__ . '/../layouts/header.php';
                         Share
                     </button>
 
-                    <button @click="$refs.reportModal.classList.remove('hidden')"
-                            class="w-full py-3 px-4 border border-red-200 rounded-xl text-red-600 font-medium hover:bg-red-50 transition-colors flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
-                        </svg>
-                        Report Listing
-                    </button>
+                    <!-- Report Button with Alpine.js State -->
+                    <div x-data="{ showReportModal: false }">
+                        <button @click="showReportModal = true"
+                                class="w-full py-3 px-4 border border-red-200 rounded-xl text-red-600 font-medium hover:bg-red-50 transition-colors flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+                            </svg>
+                            <?= __('listing.report') ?? 'Report Listing' ?>
+                        </button>
+
+                        <!-- Report Modal -->
+                        <div x-show="showReportModal"
+                             x-cloak
+                             @keydown.escape.window="showReportModal = false"
+                             class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+                             style="display: none;">
+                            <div @click.away="showReportModal = false"
+                                 x-transition
+                                 class="bg-white rounded-lg max-w-md w-full p-6">
+                                <h2 class="text-2xl font-bold mb-4"><?= __('listing.report') ?? 'Report Listing' ?></h2>
+
+                                <form method="POST" action="/listings/<?= $listing['id'] ?>/report">
+                                    <input type="hidden" name="_token" value="<?= Core\Session::getCsrfToken() ?>">
+
+                                    <div class="mb-4">
+                                        <label class="label"><?= __('listing.reporter_email') ?? 'Your Email (Optional)' ?></label>
+                                        <input type="email" name="email" class="input">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="label"><?= __('listing.report_reason') ?? 'Reason for Reporting' ?> *</label>
+                                        <textarea name="reason" required rows="4" class="input"
+                                                  placeholder="<?= __('listing.report_placeholder') ?? 'Please describe why you\'re reporting this listing...' ?>"></textarea>
+                                        <p class="text-xs text-gray-500 mt-1"><?= __('listing.report_note') ?? 'Minimum 10 characters' ?></p>
+                                    </div>
+
+                                    <div class="flex gap-2">
+                                        <button type="button" @click="showReportModal = false"
+                                                class="btn btn-secondary flex-1">
+                                            <?= __('common.cancel') ?? 'Cancel' ?>
+                                        </button>
+                                        <button type="submit" class="btn btn-danger flex-1">
+                                            <?= __('common.submit') ?? 'Submit Report' ?>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Owner Info -->
@@ -267,38 +309,6 @@ require __DIR__ . '/../layouts/header.php';
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Report Modal -->
-<div x-ref="reportModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg max-w-md w-full p-6" @click.away="$refs.reportModal.classList.add('hidden')">
-        <h2 class="text-2xl font-bold mb-4">Report Listing</h2>
-
-        <form method="POST" action="/listings/<?= $listing['id'] ?>/report">
-            <input type="hidden" name="_token" value="<?= Core\Session::getCsrfToken() ?>">
-
-            <div class="mb-4">
-                <label class="label">Your Email (Optional)</label>
-                <input type="email" name="email" class="input">
-            </div>
-
-            <div class="mb-4">
-                <label class="label">Reason for Reporting *</label>
-                <textarea name="reason" required rows="4" class="input"
-                          placeholder="Please describe why you're reporting this listing..."></textarea>
-            </div>
-
-            <div class="flex gap-2">
-                <button type="button" @click="$refs.reportModal.classList.add('hidden')"
-                        class="btn btn-secondary flex-1">
-                    Cancel
-                </button>
-                <button type="submit" class="btn btn-danger flex-1">
-                    Submit Report
-                </button>
-            </div>
-        </form>
     </div>
 </div>
 

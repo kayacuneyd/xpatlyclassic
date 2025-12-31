@@ -171,8 +171,14 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="/" class="text-2xl font-bold text-primary-600">
-                        Xpatly
+                    <a href="/" class="flex items-center">
+                        <?php if (!empty(settings('site_logo'))): ?>
+                            <img src="<?= settings('site_logo') ?>" alt="<?= settings('site_name', 'Xpatly') ?>" class="h-10">
+                        <?php else: ?>
+                            <span class="text-2xl font-bold text-primary-600">
+                                <?= settings('site_name', 'Xpatly') ?>
+                            </span>
+                        <?php endif; ?>
                     </a>
                 </div>
 

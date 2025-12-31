@@ -64,10 +64,7 @@ if (!function_exists('csrf_token')) {
      */
     function csrf_token(): string
     {
-        if (!isset($_SESSION['_token'])) {
-            $_SESSION['_token'] = bin2hex(random_bytes(32));
-        }
-        return $_SESSION['_token'];
+        return Core\Session::getCsrfToken();
     }
 }
 

@@ -21,7 +21,7 @@
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <?php endif; ?>
                             <?php if ($listing['expat_friendly']): ?>
-                                <span class="absolute top-2 right-2 badge-expat">✓ Expat-Friendly</span>
+                                <span class="absolute top-2 right-2 badge-expat">Expat-Friendly</span>
                             <?php endif; ?>
                         </div>
                         <div class="p-4 space-y-2">

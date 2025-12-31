@@ -464,9 +464,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 ` : ''}
                 <h3 class="font-semibold text-gray-900 mb-1">${listing.title}</h3>
                 <p class="text-sm text-gray-600 mb-2">
-                    📍 ${listing.settlement}, ${listing.region}
+                    ${listing.settlement}, ${listing.region}
                 </p>
-                ${listing.expat_friendly ? '<p class="text-xs text-green-600 font-semibold mb-2">✓ Expat-Friendly</p>' : ''}
+                ${listing.expat_friendly ? '<p class="text-xs text-green-600 font-semibold mb-2">Expat-Friendly</p>' : ''}
                 <p class="text-lg font-bold text-blue-600 mb-2">
                     €${Number(listing.price).toLocaleString()}
                     <span class="text-xs text-gray-500">/${listing.deal_type === 'rent' ? 'mo' : 'total'}</span>

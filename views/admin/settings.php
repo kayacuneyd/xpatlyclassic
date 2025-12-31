@@ -102,7 +102,7 @@
                                     Otherwise, images are stored on the local server.
                                 </p>
                                 <?php if (\Core\StorageManager::isR2Available()): ?>
-                                    <p class="text-sm text-green-700 mt-2 font-medium">✓ Currently using: Cloudflare R2</p>
+                                    <p class="text-sm text-green-700 mt-2 font-medium">Currently using: Cloudflare R2</p>
                                 <?php else: ?>
                                     <p class="text-sm text-gray-600 mt-2">Currently using: Local Storage</p>
                                 <?php endif; ?>
@@ -155,6 +155,75 @@
                                     placeholder="https://images.yourdomain.com">
                                 <p class="text-xs text-gray-500 mt-1">The public URL for accessing your R2 bucket (custom
                                     domain or r2.dev URL)</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Email Settings (Super Admin Only) -->
+                    <?php if (Core\Auth::isSuperAdmin()): ?>
+                        <div class="border-b pb-6">
+                            <h3 class="text-lg font-semibold mb-4">
+                                <svg class="w-5 h-5 inline mr-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                Email Settings (Resend API)
+                            </h3>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                <p class="text-sm text-blue-800">
+                                    <strong>Note:</strong> Configure Resend API to send verification emails to new users.
+                                    Get your API key from <a href="https://resend.com/api-keys" target="_blank" class="underline font-semibold">resend.com/api-keys</a>
+                                </p>
+                                <?php if (settings('email_enabled') === '1' && !empty(settings('resend_api_key'))): ?>
+                                    <p class="text-sm text-green-700 mt-2 font-medium">Email sending is enabled</p>
+                                <?php else: ?>
+                                    <p class="text-sm text-gray-600 mt-2">Email sending is disabled</p>
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- Enable Email Sending -->
+                            <div class="mb-4">
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="email_enabled" value="1"
+                                           <?= settings('email_enabled') === '1' ? 'checked' : '' ?>
+                                           class="rounded">
+                                    <span class="ml-2 text-sm font-medium text-gray-700">Enable Email Sending</span>
+                                </label>
+                                <p class="text-xs text-gray-500 mt-1 ml-6">When enabled, verification emails will be sent to new users</p>
+                            </div>
+
+                            <!-- Resend API Key -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Resend API Key <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" name="resend_api_key"
+                                       value="<?= htmlspecialchars(settings('resend_api_key', '')) ?>"
+                                       class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600 font-mono text-sm"
+                                       placeholder="re_...">
+                                <p class="text-xs text-gray-500 mt-1">
+                                    Get your API key from <a href="https://resend.com/api-keys" target="_blank" class="text-blue-600 hover:underline">resend.com/api-keys</a>
+                                </p>
+                            </div>
+
+                            <!-- From Email Address -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">From Email Address</label>
+                                <input type="email" name="email_from_address"
+                                       value="<?= htmlspecialchars(settings('email_from_address', 'noreply@xpatly.com')) ?>"
+                                       class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                       placeholder="noreply@xpatly.com">
+                                <p class="text-xs text-gray-500 mt-1">The email address that will appear as sender</p>
+                            </div>
+
+                            <!-- From Name -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
+                                <input type="text" name="email_from_name"
+                                       value="<?= htmlspecialchars(settings('email_from_name', 'Xpatly')) ?>"
+                                       class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                       placeholder="Xpatly">
+                                <p class="text-xs text-gray-500 mt-1">The name that will appear as sender</p>
                             </div>
                         </div>
                     <?php endif; ?>

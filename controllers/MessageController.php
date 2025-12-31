@@ -13,12 +13,24 @@ class MessageController
     public function index(): void
     {
         Auth::requireAuth();
+        $userId = Auth::id();
 
-        $messages = Message::getByOwner(Auth::id());
+        // BLUE category: Messages received about user's listings
+        $receivedMessages = Message::getReceivedByUser($userId);
+
+        // ORANGE category: Messages user sent to other listings
+        $sentMessages = Message::getSentByUser($userId);
+
+        // Unread counts
+        $unreadReceived = Message::getUnreadCount($userId);
+        $unreadSent = Message::getUnreadSentCount($userId);
 
         $this->view('messages/index', [
             'title' => __('messages.title'),
-            'messages' => $messages
+            'receivedMessages' => $receivedMessages,
+            'sentMessages' => $sentMessages,
+            'unreadReceived' => $unreadReceived,
+            'unreadSent' => $unreadSent
         ]);
     }
 
@@ -43,11 +55,18 @@ class MessageController
             exit;
         }
 
+        // Track sender_user_id if user is authenticated
+        $senderUserId = null;
+        if (Auth::check()) {
+            $senderUserId = Auth::id();
+        }
+
         Message::send(
             $listingId,
             $_POST['sender_email'],
             $_POST['message'],
-            $_POST['sender_name'] ?? null
+            $_POST['sender_name'] ?? null,
+            $senderUserId
         );
 
         // TODO: Send email notification to listing owner

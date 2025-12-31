@@ -19,7 +19,12 @@ class AdminController
 
     public function dashboard(): void
     {
-        $stats = Listing::getStats();
+        $listingStats = Listing::getStats();
+        $userStats = User::getStats();
+
+        // Merge both stats arrays
+        $stats = array_merge($listingStats, $userStats);
+
         $pendingListings = count(Listing::getPending());
         $pendingReports = Report::countPending();
 
@@ -431,6 +436,24 @@ class AdminController
         foreach ($textareaSettings as $key) {
             if (isset($_POST[$key])) {
                 \Models\SiteSettings::set($key, $_POST[$key], 'textarea');
+            }
+        }
+
+        // Update R2 Storage settings
+        $r2Settings = ['r2_access_key_id', 'r2_secret_access_key', 'r2_bucket_name', 'r2_endpoint', 'r2_public_url'];
+        foreach ($r2Settings as $key) {
+            if (isset($_POST[$key])) {
+                \Models\SiteSettings::set($key, $_POST[$key], 'text');
+            }
+        }
+
+        // Update Email settings
+        \Models\SiteSettings::set('email_enabled', isset($_POST['email_enabled']) ? '1' : '0', 'text');
+
+        $emailSettings = ['resend_api_key', 'email_from_address', 'email_from_name'];
+        foreach ($emailSettings as $key) {
+            if (isset($_POST[$key])) {
+                \Models\SiteSettings::set($key, $_POST[$key], 'text');
             }
         }
 

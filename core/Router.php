@@ -50,6 +50,11 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
 
+        // Validate CSRF token for state-changing requests
+        if (in_array($method, ['POST', 'PUT', 'DELETE', 'PATCH'])) {
+            $this->validateCsrfToken();
+        }
+
         // Remove query string
         $uri = parse_url($uri, PHP_URL_PATH);
 
@@ -79,6 +84,24 @@ class Router
         http_response_code(404);
         require __DIR__ . '/../views/errors/404.php';
         exit;
+    }
+
+    private function validateCsrfToken(): void
+    {
+        $token = $_POST['_token'] ?? $_POST['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
+
+        if (!$token || !Session::verifyCsrfToken($token)) {
+            http_response_code(403);
+            Flash::error('CSRF token validation failed. Please try again.');
+
+            // Redirect back or show error page
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            } else {
+                echo '<h1>403 Forbidden</h1><p>CSRF token validation failed.</p>';
+            }
+            exit;
+        }
     }
 
     private function extractLocale(string &$uri): void

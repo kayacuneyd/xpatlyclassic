@@ -47,13 +47,25 @@ class SiteSettings
         $db = new Database();
         $conn = $db->getPDO();
 
-        $stmt = $conn->prepare("
-            INSERT INTO site_settings (setting_key, setting_value, setting_type)
-            VALUES (?, ?, ?)
-            ON DUPLICATE KEY UPDATE setting_value = ?, updated_at = CURRENT_TIMESTAMP
-        ");
+        // Check if MySQL or SQLite
+        $config = require __DIR__ . '/../config/database.php';
+        $isMysql = $config['connection'] === 'mysql';
 
-        $result = $stmt->execute([$key, $value, $type, $value]);
+        if ($isMysql) {
+            $stmt = $conn->prepare("
+                INSERT INTO site_settings (setting_key, setting_value, setting_type)
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE setting_value = ?, updated_at = CURRENT_TIMESTAMP
+            ");
+            $result = $stmt->execute([$key, $value, $type, $value]);
+        } else {
+            // SQLite: Use INSERT OR REPLACE
+            $stmt = $conn->prepare("
+                INSERT OR REPLACE INTO site_settings (setting_key, setting_value, setting_type, updated_at)
+                VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+            ");
+            $result = $stmt->execute([$key, $value, $type]);
+        }
 
         // Clear cache
         self::$cache = null;

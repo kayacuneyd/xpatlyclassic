@@ -427,10 +427,10 @@ class Listing extends Model
     public static function getStats(): array
     {
         $sql = "SELECT
-                COUNT(*) as total,
-                SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) as active,
-                SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,
-                SUM(CASE WHEN status = 'paused' THEN 1 ELSE 0 END) as paused,
+                COUNT(*) as total_listings,
+                SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) as active_listings,
+                SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending_listings,
+                SUM(CASE WHEN status = 'paused' THEN 1 ELSE 0 END) as paused_listings,
                 SUM(CASE WHEN expat_friendly = 1 THEN 1 ELSE 0 END) as expat_friendly
                 FROM " . self::$table;
 

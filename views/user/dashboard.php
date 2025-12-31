@@ -77,18 +77,18 @@
             <div class="flex items-center justify-between">
                 <span class="text-gray-600">Email Verification</span>
                 <?php if ($user['email_verified']): ?>
-                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">✓ Verified</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Verified</span>
                 <?php else: ?>
-                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">⚠ Pending</span>
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Pending</span>
                 <?php endif; ?>
             </div>
 
             <div class="flex items-center justify-between">
                 <span class="text-gray-600">Phone Verification</span>
                 <?php if ($user['phone_verified']): ?>
-                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">✓ Verified</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Verified</span>
                 <?php else: ?>
-                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">⚠ Pending</span>
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Pending</span>
                 <?php endif; ?>
             </div>
 
@@ -108,7 +108,7 @@
         <?php if (!$user['email_verified'] || !$user['phone_verified']): ?>
             <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p class="text-sm text-yellow-800">
-                    ⚠️ <strong>Verification Required:</strong> You need to verify both your email and phone number before you can publish listings.
+                    <strong>Verification Required:</strong> You need to verify both your email and phone number before you can publish listings.
                 </p>
             </div>
         <?php endif; ?>

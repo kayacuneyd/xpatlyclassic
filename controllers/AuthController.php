@@ -56,10 +56,19 @@ class AuthController
         // Generate verification token
         $token = User::createVerificationToken($userId);
 
-        // Send verification email (implement email sending)
-        // TODO: Send email with verification link
+        // Send verification email
+        $emailSent = \Core\Email::sendVerificationEmail(
+            $_POST['email'],
+            $token,
+            $_POST['full_name']
+        );
 
-        Flash::success(__('auth.registration_success'));
+        if ($emailSent) {
+            Flash::success(__('auth.register_success_check_email'));
+        } else {
+            Flash::warning(__('auth.register_success_but_email_failed'));
+        }
+
         header('Location: /login');
         exit;
     }
@@ -114,6 +123,13 @@ class AuthController
 
     public function logout(): void
     {
+        // CSRF token doğrulama
+        if (!Session::verifyCsrfToken($_POST['_token'] ?? '')) {
+            Flash::error('CSRF token validation failed. Please try again.');
+            header('Location: /');
+            exit;
+        }
+
         Auth::logout();
         Flash::success(__('auth.logout_success'));
         header('Location: /');
@@ -135,6 +151,13 @@ class AuthController
         if (!$user) {
             Flash::error(__('auth.invalid_token'));
             header('Location: /');
+            exit;
+        }
+
+        // Check if token has expired
+        if ($user['verification_expires'] && strtotime($user['verification_expires']) < time()) {
+            Flash::error(__('auth.token_expired'));
+            header('Location: /login');
             exit;
         }
 
