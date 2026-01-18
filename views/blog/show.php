@@ -53,7 +53,7 @@
                     <!-- Featured Image -->
                     <?php if (!empty($post['featured_image'])): ?>
                         <img src="<?= $post['featured_image'] ?>" alt="<?= htmlspecialchars($post['title']) ?>"
-                            class="w-full h-64 md:h-96 object-cover" loading="lazy">
+                            class="w-full h-64 md:h-96 object-cover" loading="lazy" width="1280" height="720">
                     <?php endif; ?>
 
                     <!-- Article Content -->

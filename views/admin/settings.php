@@ -63,7 +63,7 @@
 
                     <!-- SEO Settings -->
                     <div class="border-b pb-6">
-                        <h3 class="text-lg font-semibold mb-4">SEO & Met a Tags</h3>
+                        <h3 class="text-lg font-semibold mb-4">SEO & Meta Tags</h3>
 
                         <!-- Meta Description -->
                         <div class="mb-4">
@@ -79,6 +79,20 @@
                             <textarea name="meta_keywords" rows="2"
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"><?= htmlspecialchars(settings('meta_keywords', '')) ?></textarea>
                             <p class="text-xs text-gray-500 mt-1">Comma-separated keywords</p>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Settings -->
+                    <div class="border-b pb-6">
+                        <h3 class="text-lg font-semibold mb-4">Analytics</h3>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Google Analytics 4 Measurement ID</label>
+                            <input type="text" name="ga4_measurement_id"
+                                value="<?= htmlspecialchars(settings('ga4_measurement_id', '')) ?>"
+                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600 font-mono text-sm"
+                                placeholder="G-XXXXXXXXXX">
+                            <p class="text-xs text-gray-500 mt-1">Leave blank to disable tracking. Example: G-123ABC4567</p>
                         </div>
                     </div>
 
@@ -258,6 +272,58 @@
                 </div>
             </form>
         </div>
+
+        <?php if (Core\Auth::isSuperAdmin()): ?>
+            <div class="bg-white rounded-lg shadow mt-8">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-2xl font-bold text-red-700">Ownership Transfer</h2>
+                    <p class="text-sm text-gray-600 mt-1">Move super admin access to a client email address.</p>
+                </div>
+
+                <form action="<?= url('admin/transfer-ownership') ?>" method="POST">
+                    <?= csrf_field() ?>
+
+                    <div class="p-6 space-y-6">
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                            <p class="text-sm text-red-800">
+                                Be careful: transferring ownership changes who has full control of the platform.
+                            </p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Client Email Address</label>
+                            <input type="email" name="transfer_email" required
+                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                placeholder="client@company.com">
+                            <p class="text-xs text-gray-500 mt-1">If the user does not exist, a new super admin will be created.</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Client Name (optional)</label>
+                            <input type="text" name="transfer_name"
+                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-600"
+                                placeholder="Client Admin">
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="keep_current_super_admin" value="1" class="rounded">
+                                <span class="ml-2 text-sm font-medium text-gray-700">Keep my account as super admin</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="send_setup_email" value="1" checked class="rounded">
+                                <span class="ml-2 text-sm font-medium text-gray-700">Send password setup email</span>
+                            </label>
+                            <p class="text-xs text-gray-500">If unchecked, the new admin can still use "Forgot password".</p>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 border-t border-gray-200 flex justify-end space-x-3">
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Transfer Ownership</button>
+                    </div>
+                </form>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

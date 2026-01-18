@@ -48,6 +48,8 @@ class Router
     public function resolve(): mixed
     {
         $method = $_SERVER['REQUEST_METHOD'];
+        // Treat HEAD like GET for routing so uptime checks don't 404
+        $routeMethod = $method === 'HEAD' ? 'GET' : $method;
         $uri = $_SERVER['REQUEST_URI'];
 
         // Validate CSRF token for state-changing requests
@@ -67,7 +69,7 @@ class Router
         }
 
         foreach ($this->routes as $route) {
-            if ($route['method'] !== $method) {
+            if ($route['method'] !== $routeMethod) {
                 continue;
             }
 
@@ -88,9 +90,33 @@ class Router
 
     private function validateCsrfToken(): void
     {
+        $honeypotField = Session::getHoneypotFieldName();
+        $honeypot = $_POST[$honeypotField] ?? '';
+        if (is_string($honeypot) && trim($honeypot) !== '') {
+            if (function_exists('auth_log')) {
+                auth_log('Honeypot triggered: path=' . ($_SERVER['REQUEST_URI'] ?? ''));
+            }
+            http_response_code(403);
+            Flash::error('Invalid request. Please try again.');
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            } else {
+                echo '<h1>403 Forbidden</h1><p>Invalid request.</p>';
+            }
+            exit;
+        }
+
         $token = $_POST['_token'] ?? $_POST['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
 
         if (!$token || !Session::verifyCsrfToken($token)) {
+            if (function_exists('auth_log')) {
+                $tokenHash = $token ? substr(hash('sha256', $token), 0, 10) : 'none';
+                $cookieHash = !empty($_COOKIE['csrf_token']) ? substr(hash('sha256', $_COOKIE['csrf_token']), 0, 10) : 'none';
+                $sessionToken = Session::get('csrf_token', '');
+                $sessionHash = $sessionToken ? substr(hash('sha256', $sessionToken), 0, 10) : 'none';
+                auth_log('CSRF failed: path=' . ($_SERVER['REQUEST_URI'] ?? '') . ' | has_token=' . (int) (bool) $token . ' | token=' . $tokenHash . ' | cookie=' . $cookieHash . ' | session=' . $sessionHash . ' | sid=' . session_id());
+            }
             http_response_code(403);
             Flash::error('CSRF token validation failed. Please try again.');
 

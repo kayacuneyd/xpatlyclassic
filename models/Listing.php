@@ -24,7 +24,7 @@ class Listing extends Model
         $offset = ($page - 1) * $perPage;
 
         $sql = "SELECT l.*, u.full_name as owner_name,
-                (SELECT filename FROM listing_images WHERE listing_id = l.id AND is_primary = 1 LIMIT 1) as primary_image
+                (SELECT filename FROM listing_images WHERE listing_id = l.id ORDER BY is_primary DESC, sort_order ASC, id ASC LIMIT 1) as primary_image
                 FROM " . self::$table . " l
                 LEFT JOIN users u ON l.user_id = u.id
                 WHERE l.status = 'active' AND l.is_available = 1";
@@ -326,7 +326,7 @@ class Listing extends Model
     public static function getByUser(int $userId, ?string $status = null): array
     {
         $sql = "SELECT l.*,
-                (SELECT filename FROM listing_images WHERE listing_id = l.id AND is_primary = 1 LIMIT 1) as primary_image
+                (SELECT filename FROM listing_images WHERE listing_id = l.id ORDER BY is_primary DESC, sort_order ASC, id ASC LIMIT 1) as primary_image
                 FROM " . self::$table . " l
                 WHERE l.user_id = ?";
 
@@ -361,7 +361,7 @@ class Listing extends Model
     public static function getPending(): array
     {
         $sql = "SELECT l.*, u.full_name as owner_name,
-                (SELECT filename FROM listing_images WHERE listing_id = l.id AND is_primary = 1 LIMIT 1) as primary_image
+                (SELECT filename FROM listing_images WHERE listing_id = l.id ORDER BY is_primary DESC, sort_order ASC, id ASC LIMIT 1) as primary_image
                 FROM " . self::$table . " l
                 LEFT JOIN users u ON l.user_id = u.id
                 WHERE l.status = 'pending'
@@ -375,7 +375,7 @@ class Listing extends Model
     public static function adminSearch(string $query = '', array $filters = []): array
     {
         $sql = "SELECT l.*, u.full_name as owner_name, u.email as owner_email,
-                (SELECT filename FROM listing_images WHERE listing_id = l.id AND is_primary = 1 LIMIT 1) as primary_image
+                (SELECT filename FROM listing_images WHERE listing_id = l.id ORDER BY is_primary DESC, sort_order ASC, id ASC LIMIT 1) as primary_image
                 FROM " . self::$table . " l
                 LEFT JOIN users u ON l.user_id = u.id
                 WHERE 1=1";
@@ -394,7 +394,7 @@ class Listing extends Model
             $params[] = $filters['status'];
         }
 
-        if (isset($filters['expat_friendly'])) {
+        if (isset($filters['expat_friendly']) && $filters['expat_friendly'] !== '') {
             $sql .= " AND l.expat_friendly = ?";
             $params[] = $filters['expat_friendly'];
         }
@@ -413,9 +413,18 @@ class Listing extends Model
     public static function toggleAvailability(int $id): int
     {
         $listing = self::find($id);
-        $newStatus = $listing['is_available'] ? 0 : 1;
+        $newIsAvailable = $listing['is_available'] ? 0 : 1;
+        $updates = ['is_available' => $newIsAvailable];
 
-        return self::update($id, ['is_available' => $newStatus]);
+        if ($newIsAvailable === 0) {
+            if (!in_array($listing['status'], ['archived', 'draft'], true)) {
+                $updates['status'] = 'paused';
+            }
+        } elseif ($listing['status'] === 'paused') {
+            $updates['status'] = 'active';
+        }
+
+        return self::update($id, $updates);
     }
 
     public static function incrementViews(int $id): void

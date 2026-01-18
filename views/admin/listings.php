@@ -78,20 +78,58 @@ require __DIR__ . '/../layouts/header.php';
                                     <?= ucfirst($listing['status']) ?>
                                 </span>
                             </td>
-                            <td class="px-6 py-4 text-sm space-x-2">
-                                <a href="<?= url("listings/{$listing['id']}") ?>"
-                                   target="_blank"
-                                   class="text-blue-600 hover:text-blue-900">View</a>
-                                <a href="<?= url("admin/listings/{$listing['id']}/edit") ?>"
-                                   class="text-green-600 hover:text-green-900">Edit</a>
+                            <td class="px-6 py-4 text-sm">
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex gap-2">
+                                        <a href="<?= url("listings/{$listing['id']}") ?>"
+                                           target="_blank"
+                                           class="text-blue-600 hover:text-blue-900">View</a>
+                                        <span class="text-gray-300">|</span>
+                                        <a href="<?= url("admin/listings/{$listing['id']}/edit") ?>"
+                                           class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    </div>
 
-                                <?php if ($listing['status'] === 'pending'): ?>
-                                <form method="POST" action="<?= url("admin/listings/{$listing['id']}/status") ?>" class="inline">
-                                    <?= csrf_field() ?>
-                                    <input type="hidden" name="status" value="active">
-                                    <button type="submit" class="text-green-600 hover:text-green-900">Approve</button>
-                                </form>
-                                <?php endif; ?>
+                                    <?php if ($listing['status'] === 'pending'): ?>
+                                    <div class="flex gap-2">
+                                        <form method="POST" action="<?= url("admin/listings/{$listing['id']}/status") ?>" class="inline">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="status" value="active">
+                                            <button type="submit" class="text-green-600 hover:text-green-900 font-semibold">✓ Approve</button>
+                                        </form>
+                                        <span class="text-gray-300">|</span>
+                                        <form method="POST" action="<?= url("admin/listings/{$listing['id']}/status") ?>" class="inline">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="status" value="archived">
+                                            <button type="submit" class="text-red-600 hover:text-red-900 font-semibold">✗ Reject</button>
+                                        </form>
+                                    </div>
+                                    <?php elseif ($listing['status'] === 'active'): ?>
+                                    <div class="flex gap-2">
+                                        <form method="POST" action="<?= url("admin/listings/{$listing['id']}/status") ?>" class="inline">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="status" value="paused">
+                                            <button type="submit" class="text-orange-600 hover:text-orange-900">Pause</button>
+                                        </form>
+                                    </div>
+                                    <?php elseif ($listing['status'] === 'paused'): ?>
+                                    <div class="flex gap-2">
+                                        <form method="POST" action="<?= url("admin/listings/{$listing['id']}/status") ?>" class="inline">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="status" value="active">
+                                            <button type="submit" class="text-green-600 hover:text-green-900">Activate</button>
+                                        </form>
+                                    </div>
+                                    <?php endif; ?>
+
+                                    <div>
+                                        <form method="POST" action="<?= url("admin/listings/{$listing['id']}/delete") ?>"
+                                              class="inline"
+                                              onsubmit="return confirm('Are you sure you want to delete this listing? This action cannot be undone.');">
+                                            <?= csrf_field() ?>
+                                            <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <?php endforeach; ?>

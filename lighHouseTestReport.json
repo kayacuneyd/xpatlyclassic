@@ -1,0 +1,4994 @@
+{
+  "bundle": {
+    "executiveSummary": {
+      "overall": "Your site shows consistent Lighthouse performance across key pages with clear opportunities for optimization.",
+      "topFindings": [
+        "Largest Contentful Paint",
+        "Reduce unused JavaScript",
+        "Eliminate render-blocking resources"
+      ],
+      "quickWins": [],
+      "scoresTable": {
+        "performance": 27,
+        "seo": 61.53846153846154,
+        "accessibility": 56.61538461538461,
+        "bestPractices": 65.38461538461539,
+        "pwa": 0
+      }
+    },
+    "cwvSummary": { "lcpMs": 5466, "cls": 0.118, "inpMs": null },
+    "topIssues": [
+      {
+        "issueId": "b340e021c830b235",
+        "auditId": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+        "category": "performance",
+        "topic": "LCP (Largest Contentful Paint)",
+        "severity": "high",
+        "severityScore": 0.794,
+        "impactScore": 0.9,
+        "frequencyScore": 0.72,
+        "confidenceScore": 0.64,
+        "effort": "high",
+        "recommendation": {
+          "summary": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "4.5 s",
+          "detailsSnippet": null,
+          "numericValue": 4525.437,
+          "score": 0.36
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "0de41c1dcf62f807",
+        "auditId": "unused-javascript",
+        "title": "Reduce unused JavaScript",
+        "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+        "category": "performance",
+        "topic": "Unused JavaScript Payload",
+        "severity": "high",
+        "severityScore": 0.7909999999999999,
+        "impactScore": 0.75,
+        "frequencyScore": 0.72,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to red",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Est savings of 63 KiB",
+          "detailsSnippet": "{\"url\":\"https://cdn.tailwindcss.com/?plugins=forms,typography\",\"totalBytes\":145527,\"wastedBytes\":40564,\"wastedPercent\":27.87404600355623}",
+          "numericValue": 630,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "cc1c908dbd31f11a",
+        "auditId": "render-blocking-resources",
+        "title": "Eliminate render-blocking resources",
+        "description": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [Learn how to eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).",
+        "category": "performance",
+        "topic": "Render Blocking Resources",
+        "severity": "high",
+        "severityScore": 0.756,
+        "impactScore": 0.8,
+        "frequencyScore": 0.52,
+        "confidenceScore": 1,
+        "effort": "high",
+        "recommendation": {
+          "summary": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [L",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Est savings of 2,330 ms",
+          "detailsSnippet": "{\"url\":\"https://cdn.tailwindcss.com/3.4.17?plugins=forms@0.5.10,typography@0.5.16\",\"totalBytes\":493,\"wastedMs\":764}",
+          "numericValue": 2329,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "ce9b82b8050363d8",
+        "auditId": "cumulative-layout-shift",
+        "title": "Cumulative Layout Shift",
+        "description": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric](https://web.dev/articles/cls).",
+        "category": "performance",
+        "topic": "CLS (Layout Shift)",
+        "severity": "high",
+        "severityScore": 0.6940000000000001,
+        "impactScore": 0.9,
+        "frequencyScore": 0.68,
+        "confidenceScore": 0.2,
+        "effort": "high",
+        "recommendation": {
+          "summary": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric]",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "0.108",
+          "detailsSnippet": "{\"cumulativeLayoutShiftMainFrame\":0.10842589051996888,\"newEngineResult\":{\"cumulativeLayoutShift\":0.10842589051996888,\"cumulativeLayoutShiftMainFrame\":0.10842589051996888},\"newEngineResultDiffered\":false}",
+          "numericValue": 0.10842589051996888,
+          "score": 0.87
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "38344598693b5c87",
+        "auditId": "uses-optimized-images",
+        "title": "Efficiently encode images",
+        "description": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).",
+        "category": "performance",
+        "topic": "Image Optimization",
+        "severity": "high",
+        "severityScore": 0.6819999999999999,
+        "impactScore": 0.7,
+        "frequencyScore": 0.44,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/ligh",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Est savings of 7 KiB",
+          "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-6-IMG\",\"path\":\"1,HTML,1,BODY,7,MAIN,0,DIV,0,DIV,1,DIV,1,DIV,1,DIV,1,IMG\",\"selector\":\"div.lg:col-span-2 > div.bg-white > div.relative > img.w-full\",\"boundingRect\":{\"top\":192,\"bottom\":576,\"",
+          "numericValue": 30,
+          "score": 0
+        },
+        "occurrences": [
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "45b8a3e8463da28e",
+        "auditId": "mainthread-work-breakdown",
+        "title": "Minimize main-thread work",
+        "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)",
+        "category": "performance",
+        "topic": "General Optimization",
+        "severity": "high",
+        "severityScore": 0.6659999999999999,
+        "impactScore": 0.5,
+        "frequencyScore": 0.72,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn ho",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "3.8 s",
+          "detailsSnippet": "{\"group\":\"scriptEvaluation\",\"groupLabel\":\"Script Evaluation\",\"duration\":2090.947999999975}",
+          "numericValue": 3828.059999999972,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      }
+    ],
+    "quickWinsDetailed": [],
+    "globalIssues": [
+      {
+        "issueId": "b340e021c830b235",
+        "auditId": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+        "category": "performance",
+        "topic": "LCP (Largest Contentful Paint)",
+        "severity": "high",
+        "severityScore": 0.794,
+        "impactScore": 0.9,
+        "frequencyScore": 0.72,
+        "confidenceScore": 0.64,
+        "effort": "high",
+        "recommendation": {
+          "summary": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "4.5 s",
+          "detailsSnippet": null,
+          "numericValue": 4525.437,
+          "score": 0.36
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "0de41c1dcf62f807",
+        "auditId": "unused-javascript",
+        "title": "Reduce unused JavaScript",
+        "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+        "category": "performance",
+        "topic": "Unused JavaScript Payload",
+        "severity": "high",
+        "severityScore": 0.7909999999999999,
+        "impactScore": 0.75,
+        "frequencyScore": 0.72,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to red",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Est savings of 63 KiB",
+          "detailsSnippet": "{\"url\":\"https://cdn.tailwindcss.com/?plugins=forms,typography\",\"totalBytes\":145527,\"wastedBytes\":40564,\"wastedPercent\":27.87404600355623}",
+          "numericValue": 630,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "cc1c908dbd31f11a",
+        "auditId": "render-blocking-resources",
+        "title": "Eliminate render-blocking resources",
+        "description": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [Learn how to eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).",
+        "category": "performance",
+        "topic": "Render Blocking Resources",
+        "severity": "high",
+        "severityScore": 0.756,
+        "impactScore": 0.8,
+        "frequencyScore": 0.52,
+        "confidenceScore": 1,
+        "effort": "high",
+        "recommendation": {
+          "summary": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [L",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Est savings of 2,330 ms",
+          "detailsSnippet": "{\"url\":\"https://cdn.tailwindcss.com/3.4.17?plugins=forms@0.5.10,typography@0.5.16\",\"totalBytes\":493,\"wastedMs\":764}",
+          "numericValue": 2329,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "ce9b82b8050363d8",
+        "auditId": "cumulative-layout-shift",
+        "title": "Cumulative Layout Shift",
+        "description": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric](https://web.dev/articles/cls).",
+        "category": "performance",
+        "topic": "CLS (Layout Shift)",
+        "severity": "high",
+        "severityScore": 0.6940000000000001,
+        "impactScore": 0.9,
+        "frequencyScore": 0.68,
+        "confidenceScore": 0.2,
+        "effort": "high",
+        "recommendation": {
+          "summary": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric]",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "0.108",
+          "detailsSnippet": "{\"cumulativeLayoutShiftMainFrame\":0.10842589051996888,\"newEngineResult\":{\"cumulativeLayoutShift\":0.10842589051996888,\"cumulativeLayoutShiftMainFrame\":0.10842589051996888},\"newEngineResultDiffered\":false}",
+          "numericValue": 0.10842589051996888,
+          "score": 0.87
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "38344598693b5c87",
+        "auditId": "uses-optimized-images",
+        "title": "Efficiently encode images",
+        "description": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).",
+        "category": "performance",
+        "topic": "Image Optimization",
+        "severity": "high",
+        "severityScore": 0.6819999999999999,
+        "impactScore": 0.7,
+        "frequencyScore": 0.44,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/ligh",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Est savings of 7 KiB",
+          "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-6-IMG\",\"path\":\"1,HTML,1,BODY,7,MAIN,0,DIV,0,DIV,1,DIV,1,DIV,1,DIV,1,IMG\",\"selector\":\"div.lg:col-span-2 > div.bg-white > div.relative > img.w-full\",\"boundingRect\":{\"top\":192,\"bottom\":576,\"",
+          "numericValue": 30,
+          "score": 0
+        },
+        "occurrences": [
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "45b8a3e8463da28e",
+        "auditId": "mainthread-work-breakdown",
+        "title": "Minimize main-thread work",
+        "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)",
+        "category": "performance",
+        "topic": "General Optimization",
+        "severity": "high",
+        "severityScore": 0.6659999999999999,
+        "impactScore": 0.5,
+        "frequencyScore": 0.72,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn ho",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "3.8 s",
+          "detailsSnippet": "{\"group\":\"scriptEvaluation\",\"groupLabel\":\"Script Evaluation\",\"duration\":2090.947999999975}",
+          "numericValue": 3828.059999999972,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "24328290c257dd96",
+        "auditId": "bootup-time",
+        "title": "Reduce JavaScript execution time",
+        "description": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/).",
+        "category": "performance",
+        "topic": "General Optimization",
+        "severity": "high",
+        "severityScore": 0.6659999999999999,
+        "impactScore": 0.5,
+        "frequencyScore": 0.72,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn h",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "2.2 s",
+          "detailsSnippet": "{\"url\":\"https://unpkg.com/leaflet@1.9.4/dist/leaflet.js\",\"total\":1669.7919999999958,\"scripting\":1114.6559999999959,\"scriptParseCompile\":26.560000000000002}",
+          "numericValue": 2216.4799999999964,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "e668ab7a3ba0bcdd",
+        "auditId": "third-party-summary",
+        "title": "Reduce the impact of third-party code",
+        "description": "Third-party code can significantly impact load performance. Limit the number of redundant third-party providers and try to load third-party code after your page has primarily finished loading. [Learn how to minimize third-party impact](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/).",
+        "category": "performance",
+        "topic": "General Optimization",
+        "severity": "high",
+        "severityScore": 0.6659999999999999,
+        "impactScore": 0.5,
+        "frequencyScore": 0.72,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Third-party code can significantly impact load performance. Limit the number of redundant third-party providers and try to load third-party ",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Third-party code blocked the main thread for 1,710 ms",
+          "detailsSnippet": "{\"mainThreadTime\":1669.791999999997,\"blockingTime\":1284.6252524497097,\"transferSize\":52820,\"tbtImpact\":92.49311658226236,\"entity\":\"Unpkg\",\"subItems\":{\"type\":\"subitems\",\"items\":[{\"url\":\"https://unpkg.com/leaflet@1.9.4/dis",
+          "numericValue": null,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "ccb5d92e68cdef81",
+        "auditId": "largest-contentful-paint-element",
+        "title": "Largest Contentful Paint element",
+        "description": "This is the largest contentful element painted within the viewport. [Learn more about the Largest Contentful Paint element](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+        "category": "performance",
+        "topic": "General Optimization",
+        "severity": "high",
+        "severityScore": 0.6659999999999999,
+        "impactScore": 0.5,
+        "frequencyScore": 0.72,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "This is the largest contentful element painted within the viewport. [Learn more about the Largest Contentful Paint element](https://develope",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "4,530 ms",
+          "detailsSnippet": "{\"type\":\"table\",\"headings\":[{\"key\":\"node\",\"valueType\":\"node\",\"label\":\"Element\"}],\"items\":[{\"node\":{\"type\":\"node\",\"lhId\":\"page-0-IMG\",\"path\":\"1,HTML,1,BODY,7,MAIN,0,DIV,0,DIV,1,DIV,1,DIV,1,DIV,1,IMG\",\"selector\":\"div.lg:co",
+          "numericValue": null,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "5c671bc2fe89c2b1",
+        "auditId": "button-name",
+        "title": "Buttons do not have an accessible name",
+        "description": "When a button doesn't have an accessible name, screen readers announce it as \"button\", making it unusable for users who rely on screen readers. [Learn how to make buttons more accessible](https://dequeuniversity.com/rules/axe/4.10/button-name).",
+        "category": "accessibility",
+        "topic": "General Optimization",
+        "severity": "high",
+        "severityScore": 0.642,
+        "impactScore": 0.5,
+        "frequencyScore": 0.64,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "When a button doesn't have an accessible name, screen readers announce it as \"button\", making it unusable for users who rely on screen reade",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": null,
+          "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-0-BUTTON\",\"path\":\"1,HTML,1,BODY,5,NAV,0,DIV,0,DIV,7,DIV,1,DIV,0,BUTTON\",\"selector\":\"div.flex > div.flex > div.relative > button.text-gray-700\",\"boundingRect\":{\"top\":113,\"bottom\":143,\"left",
+          "numericValue": null,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "12bdd7f9406e19db",
+        "auditId": "modern-image-formats",
+        "title": "Serve images in next-gen formats",
+        "description": "Image formats like WebP and AVIF often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. [Learn more about modern image formats](https://developer.chrome.com/docs/lighthouse/performance/uses-webp-images/).",
+        "category": "performance",
+        "topic": "Modern Image Formats",
+        "severity": "high",
+        "severityScore": 0.642,
+        "impactScore": 0.5,
+        "frequencyScore": 0.64,
+        "confidenceScore": 1,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "Image formats like WebP and AVIF often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. ",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "Est savings of 76 KiB",
+          "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-61-IMG\",\"path\":\"1,HTML,1,BODY,5,NAV,0,DIV,0,DIV,1,DIV,0,A,0,IMG\",\"selector\":\"div.flex > div.flex-shrink-0 > a.flex > img.h-10\",\"boundingRect\":{\"top\":108,\"bottom\":148,\"left\":16,\"right\":96,",
+          "numericValue": 90,
+          "score": 0
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      },
+      {
+        "issueId": "5f5a9e99db5976f4",
+        "auditId": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "description": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum Potential First Input Delay metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/).",
+        "category": "performance",
+        "topic": "General Optimization",
+        "severity": "high",
+        "severityScore": 0.64,
+        "impactScore": 0.5,
+        "frequencyScore": 0.72,
+        "confidenceScore": 0.87,
+        "effort": "medium",
+        "recommendation": {
+          "summary": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum ",
+          "steps": [
+            "Identify affected resources",
+            "Apply fix on key templates",
+            "Re-run audit to confirm"
+          ],
+          "tools": ["Lighthouse", "Chrome DevTools"]
+        },
+        "evidence": {
+          "displayValue": "430 ms",
+          "detailsSnippet": null,
+          "numericValue": 434.9999999999991,
+          "score": 0.13
+        },
+        "occurrences": [
+          {
+            "url": "https://xpatly.eu/en/about",
+            "path": "/en/about",
+            "context": null
+          },
+          { "url": "https://xpatly.eu/", "path": "/", "context": null },
+          {
+            "url": "https://xpatly.eu/en/listings",
+            "path": "/en/listings",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/faq",
+            "path": "/en/faq",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/privacy",
+            "path": "/en/privacy",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/imprint",
+            "path": "/en/imprint",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/create",
+            "path": "/en/listings/create",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/4",
+            "path": "/en/listings/4",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/2",
+            "path": "/en/listings/2",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/5",
+            "path": "/en/listings/5",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/3",
+            "path": "/en/listings/3",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/6",
+            "path": "/en/listings/6",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/8",
+            "path": "/en/listings/8",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/7",
+            "path": "/en/listings/7",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/13",
+            "path": "/en/listings/13",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/9",
+            "path": "/en/listings/9",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/11",
+            "path": "/en/listings/11",
+            "context": null
+          },
+          {
+            "url": "https://xpatly.eu/en/listings/15",
+            "path": "/en/listings/15",
+            "context": null
+          }
+        ],
+        "isGlobal": true
+      }
+    ],
+    "pageSpecificIssues": {
+      "/en/listings/create": [
+        {
+          "issueId": "a546494b98285b7e",
+          "auditId": "redirects",
+          "title": "Avoid multiple page redirects",
+          "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.462,
+          "impactScore": 0.5,
+          "frequencyScore": 0.04,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/l",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 780 ms",
+            "detailsSnippet": "{\"url\":\"https://xpatly.eu/en/listings/create\",\"wastedMs\":781.456}",
+            "numericValue": 781.456,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            }
+          ],
+          "isGlobal": false
+        }
+      ]
+    },
+    "categorySections": {
+      "performance": [
+        {
+          "issueId": "b340e021c830b235",
+          "auditId": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "category": "performance",
+          "topic": "LCP (Largest Contentful Paint)",
+          "severity": "high",
+          "severityScore": 0.794,
+          "impactScore": 0.9,
+          "frequencyScore": 0.72,
+          "confidenceScore": 0.64,
+          "effort": "high",
+          "recommendation": {
+            "summary": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "4.5 s",
+            "detailsSnippet": null,
+            "numericValue": 4525.437,
+            "score": 0.36
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "0de41c1dcf62f807",
+          "auditId": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "category": "performance",
+          "topic": "Unused JavaScript Payload",
+          "severity": "high",
+          "severityScore": 0.7909999999999999,
+          "impactScore": 0.75,
+          "frequencyScore": 0.72,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to red",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 63 KiB",
+            "detailsSnippet": "{\"url\":\"https://cdn.tailwindcss.com/?plugins=forms,typography\",\"totalBytes\":145527,\"wastedBytes\":40564,\"wastedPercent\":27.87404600355623}",
+            "numericValue": 630,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "cc1c908dbd31f11a",
+          "auditId": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "description": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [Learn how to eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).",
+          "category": "performance",
+          "topic": "Render Blocking Resources",
+          "severity": "high",
+          "severityScore": 0.756,
+          "impactScore": 0.8,
+          "frequencyScore": 0.52,
+          "confidenceScore": 1,
+          "effort": "high",
+          "recommendation": {
+            "summary": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [L",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 2,330 ms",
+            "detailsSnippet": "{\"url\":\"https://cdn.tailwindcss.com/3.4.17?plugins=forms@0.5.10,typography@0.5.16\",\"totalBytes\":493,\"wastedMs\":764}",
+            "numericValue": 2329,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "ce9b82b8050363d8",
+          "auditId": "cumulative-layout-shift",
+          "title": "Cumulative Layout Shift",
+          "description": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric](https://web.dev/articles/cls).",
+          "category": "performance",
+          "topic": "CLS (Layout Shift)",
+          "severity": "high",
+          "severityScore": 0.6940000000000001,
+          "impactScore": 0.9,
+          "frequencyScore": 0.68,
+          "confidenceScore": 0.2,
+          "effort": "high",
+          "recommendation": {
+            "summary": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric]",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "0.108",
+            "detailsSnippet": "{\"cumulativeLayoutShiftMainFrame\":0.10842589051996888,\"newEngineResult\":{\"cumulativeLayoutShift\":0.10842589051996888,\"cumulativeLayoutShiftMainFrame\":0.10842589051996888},\"newEngineResultDiffered\":false}",
+            "numericValue": 0.10842589051996888,
+            "score": 0.87
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "38344598693b5c87",
+          "auditId": "uses-optimized-images",
+          "title": "Efficiently encode images",
+          "description": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).",
+          "category": "performance",
+          "topic": "Image Optimization",
+          "severity": "high",
+          "severityScore": 0.6819999999999999,
+          "impactScore": 0.7,
+          "frequencyScore": 0.44,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/ligh",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 7 KiB",
+            "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-6-IMG\",\"path\":\"1,HTML,1,BODY,7,MAIN,0,DIV,0,DIV,1,DIV,1,DIV,1,DIV,1,IMG\",\"selector\":\"div.lg:col-span-2 > div.bg-white > div.relative > img.w-full\",\"boundingRect\":{\"top\":192,\"bottom\":576,\"",
+            "numericValue": 30,
+            "score": 0
+          },
+          "occurrences": [
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "45b8a3e8463da28e",
+          "auditId": "mainthread-work-breakdown",
+          "title": "Minimize main-thread work",
+          "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.6659999999999999,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn ho",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "3.8 s",
+            "detailsSnippet": "{\"group\":\"scriptEvaluation\",\"groupLabel\":\"Script Evaluation\",\"duration\":2090.947999999975}",
+            "numericValue": 3828.059999999972,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "24328290c257dd96",
+          "auditId": "bootup-time",
+          "title": "Reduce JavaScript execution time",
+          "description": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.6659999999999999,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn h",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "2.2 s",
+            "detailsSnippet": "{\"url\":\"https://unpkg.com/leaflet@1.9.4/dist/leaflet.js\",\"total\":1669.7919999999958,\"scripting\":1114.6559999999959,\"scriptParseCompile\":26.560000000000002}",
+            "numericValue": 2216.4799999999964,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "e668ab7a3ba0bcdd",
+          "auditId": "third-party-summary",
+          "title": "Reduce the impact of third-party code",
+          "description": "Third-party code can significantly impact load performance. Limit the number of redundant third-party providers and try to load third-party code after your page has primarily finished loading. [Learn how to minimize third-party impact](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.6659999999999999,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Third-party code can significantly impact load performance. Limit the number of redundant third-party providers and try to load third-party ",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Third-party code blocked the main thread for 1,710 ms",
+            "detailsSnippet": "{\"mainThreadTime\":1669.791999999997,\"blockingTime\":1284.6252524497097,\"transferSize\":52820,\"tbtImpact\":92.49311658226236,\"entity\":\"Unpkg\",\"subItems\":{\"type\":\"subitems\",\"items\":[{\"url\":\"https://unpkg.com/leaflet@1.9.4/dis",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "ccb5d92e68cdef81",
+          "auditId": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "description": "This is the largest contentful element painted within the viewport. [Learn more about the Largest Contentful Paint element](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.6659999999999999,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "This is the largest contentful element painted within the viewport. [Learn more about the Largest Contentful Paint element](https://develope",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "4,530 ms",
+            "detailsSnippet": "{\"type\":\"table\",\"headings\":[{\"key\":\"node\",\"valueType\":\"node\",\"label\":\"Element\"}],\"items\":[{\"node\":{\"type\":\"node\",\"lhId\":\"page-0-IMG\",\"path\":\"1,HTML,1,BODY,7,MAIN,0,DIV,0,DIV,1,DIV,1,DIV,1,DIV,1,IMG\",\"selector\":\"div.lg:co",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "12bdd7f9406e19db",
+          "auditId": "modern-image-formats",
+          "title": "Serve images in next-gen formats",
+          "description": "Image formats like WebP and AVIF often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. [Learn more about modern image formats](https://developer.chrome.com/docs/lighthouse/performance/uses-webp-images/).",
+          "category": "performance",
+          "topic": "Modern Image Formats",
+          "severity": "high",
+          "severityScore": 0.642,
+          "impactScore": 0.5,
+          "frequencyScore": 0.64,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Image formats like WebP and AVIF often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. ",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 76 KiB",
+            "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-61-IMG\",\"path\":\"1,HTML,1,BODY,5,NAV,0,DIV,0,DIV,1,DIV,0,A,0,IMG\",\"selector\":\"div.flex > div.flex-shrink-0 > a.flex > img.h-10\",\"boundingRect\":{\"top\":108,\"bottom\":148,\"left\":16,\"right\":96,",
+            "numericValue": 90,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "5f5a9e99db5976f4",
+          "auditId": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "description": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum Potential First Input Delay metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.64,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 0.87,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum ",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "430 ms",
+            "detailsSnippet": null,
+            "numericValue": 434.9999999999991,
+            "score": 0.13
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "de0a2f5644029882",
+          "auditId": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "description": "First Contentful Paint marks the time at which the first text or image is painted. [Learn more about the First Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.63,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 0.8200000000000001,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "First Contentful Paint marks the time at which the first text or image is painted. [Learn more about the First Contentful Paint metric](http",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "4.3 s",
+            "detailsSnippet": null,
+            "numericValue": 4311.647,
+            "score": 0.18
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "7b32aaf5027e4c17",
+          "auditId": "layout-shifts",
+          "title": "Avoid large layout shifts",
+          "description": "These are the largest layout shifts observed on the page. Each table item represents a single layout shift, and shows the element that shifted the most. Below each item are possible root causes that led to the layout shift. Some of these layout shifts may not be included in the CLS metric value due to [windowing](https://web.dev/articles/cls#what_is_cls). [Learn how to improve CLS](https://web.dev/articles/optimize-cls)",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.6060000000000001,
+          "impactScore": 0.5,
+          "frequencyScore": 0.52,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "These are the largest layout shifts observed on the page. Each table item represents a single layout shift, and shows the element that shift",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "1 layout shift found",
+            "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"page-1-MAIN\",\"path\":\"1,HTML,1,BODY,7,MAIN\",\"selector\":\"body.bg-gray-50 > main\",\"boundingRect\":{\"top\":160,\"bottom\":3027,\"left\":0,\"right\":412,\"width\":412,\"height\":2867},\"snippet\":\"<main>\",\"no",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "c0f2b2fb478fd285",
+          "auditId": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load.",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.6060000000000001,
+          "impactScore": 0.5,
+          "frequencyScore": 0.52,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "[Avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains) by reducing the length ",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": null,
+            "detailsSnippet": "{\"type\":\"list-section\",\"value\":{\"type\":\"network-tree\",\"chains\":{\"77F8A9A012B5334FA56B7ADC869B81AC\":{\"url\":\"https://xpatly.eu/en/listings/15\",\"navStartToEndTime\":159,\"transferSize\":12472,\"isLongest\":true,\"children\":{\"1849",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "b9c936f73688b1e7",
+          "auditId": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources) can move these network requests out of the critical path.",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.6060000000000001,
+          "impactScore": 0.5,
+          "frequencyScore": 0.52,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://web.dev/learn/performance/understandin",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 2,480 ms",
+            "detailsSnippet": "{\"url\":\"https://cdn.tailwindcss.com/3.4.17?plugins=forms@0.5.10,typography@0.5.16\",\"totalBytes\":145864,\"wastedMs\":762}",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "4c3d259be41d0814",
+          "auditId": "cls-culprits-insight",
+          "title": "Layout shift culprits",
+          "description": "Layout shifts occur when elements move absent any user interaction. [Investigate the causes of layout shifts](https://web.dev/articles/optimize-cls), such as elements being added, removed, or their fonts changing as the page loads.",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.5940000000000001,
+          "impactScore": 0.5,
+          "frequencyScore": 0.48,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Layout shifts occur when elements move absent any user interaction. [Investigate the causes of layout shifts](https://web.dev/articles/optim",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": null,
+            "detailsSnippet": "{\"type\":\"table\",\"headings\":[{\"key\":\"node\",\"valueType\":\"node\",\"subItemsHeading\":{\"key\":\"extra\"},\"label\":\"Element\"},{\"key\":\"score\",\"valueType\":\"numeric\",\"subItemsHeading\":{\"key\":\"cause\",\"valueType\":\"text\"},\"granularity\":0.",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "87177a11a12b859d",
+          "auditId": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.594,
+          "impactScore": 0.5,
+          "frequencyScore": 0.68,
+          "confidenceScore": 0.7,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about th",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "920 ms",
+            "detailsSnippet": null,
+            "numericValue": 919.0209999999997,
+            "score": 0.3
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "9bb18b13f044f74f",
+          "auditId": "prioritize-lcp-image",
+          "title": "Preload Largest Contentful Paint image",
+          "description": "If the LCP element is dynamically added to the page, you should preload the image in order to improve LCP. [Learn more about preloading LCP elements](https://web.dev/articles/optimize-lcp#optimize_when_the_resource_is_discovered).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.5820000000000001,
+          "impactScore": 0.5,
+          "frequencyScore": 0.44,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "If the LCP element is dynamically added to the page, you should preload the image in order to improve LCP. [Learn more about preloading LCP ",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 750 ms",
+            "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"page-0-IMG\",\"path\":\"1,HTML,1,BODY,7,MAIN,0,DIV,0,DIV,1,DIV,1,DIV,1,DIV,1,IMG\",\"selector\":\"div.lg:col-span-2 > div.bg-white > div.relative > img.w-full\",\"boundingRect\":{\"top\":192,\"bottom\":57",
+            "numericValue": 750,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "d1db788ab338575b",
+          "auditId": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "description": "Optimize LCP by making the LCP image [discoverable](https://web.dev/articles/optimize-lcp#1_eliminate_resource_load_delay) from the HTML immediately, and [avoiding lazy-loading](https://web.dev/articles/lcp-lazy-loading)",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.5700000000000001,
+          "impactScore": 0.5,
+          "frequencyScore": 0.4,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Optimize LCP by making the LCP image [discoverable](https://web.dev/articles/optimize-lcp#1_eliminate_resource_load_delay) from the HTML imm",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": null,
+            "detailsSnippet": "{\"type\":\"checklist\",\"items\":{\"priorityHinted\":{\"label\":\"fetchpriority=high should be applied\",\"value\":false},\"requestDiscoverable\":{\"label\":\"Request is discoverable in initial document\",\"value\":false},\"eagerlyLoaded\":{\"l",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "b83aa1f2ffee1d46",
+          "auditId": "uses-long-cache-ttl",
+          "title": "Serve static assets with an efficient cache policy",
+          "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about efficient cache policies](https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/).",
+          "category": "performance",
+          "topic": "Cache / TTL Optimization",
+          "severity": "medium",
+          "severityScore": 0.566,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 0.5,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "A long cache lifetime can speed up repeat visits to your page. [Learn more about efficient cache policies](https://developer.chrome.com/docs",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "3 resources found",
+            "detailsSnippet": "{\"url\":\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\",\"debugData\":{\"type\":\"debugdata\",\"public\":true,\"max-age\":604800,\"s-maxage\":\"43200\"},\"cacheLifetimeMs\":604800000,\"cacheHitProbability\":0.9,\"totalBytes\":1",
+            "numericValue": 1975.3212290502788,
+            "score": 0.5
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "7f35cd9519c53b22",
+          "auditId": "forced-reflow-insight",
+          "title": "Forced reflow",
+          "description": "A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have been invalidated by a change to the DOM state. This can result in poor performance. Learn more about [forced reflows](https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing#avoid-forced-synchronous-layouts) and possible mitigations.",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.558,
+          "impactScore": 0.5,
+          "frequencyScore": 0.36,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have been invalidated by a change to ",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": null,
+            "detailsSnippet": "{\"type\":\"table\",\"headings\":[{\"key\":\"source\",\"valueType\":\"source-location\",\"label\":\"Top function call\"},{\"key\":\"reflowTime\",\"valueType\":\"ms\",\"granularity\":1,\"label\":\"Total reflow time\"}],\"items\":[{\"source\":{\"type\":\"source",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "b2969f8d12751e15",
+          "auditId": "uses-responsive-images",
+          "title": "Properly size images",
+          "description": "Serve images that are appropriately-sized to save cellular data and improve load time. [Learn how to size images](https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.554,
+          "impactScore": 0.5,
+          "frequencyScore": 0.68,
+          "confidenceScore": 0.5,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Serve images that are appropriately-sized to save cellular data and improve load time. [Learn how to size images](https://developer.chrome.c",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 35 KiB",
+            "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-61-IMG\",\"path\":\"1,HTML,1,BODY,5,NAV,0,DIV,0,DIV,1,DIV,0,A,0,IMG\",\"selector\":\"div.flex > div.flex-shrink-0 > a.flex > img.h-10\",\"boundingRect\":{\"top\":108,\"bottom\":148,\"left\":16,\"right\":96,",
+            "numericValue": 0,
+            "score": 0.5
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "8906db11af3ee28c",
+          "auditId": "speed-index",
+          "title": "Speed Index",
+          "description": "Speed Index shows how quickly the contents of a page are visibly populated. [Learn more about the Speed Index metric](https://developer.chrome.com/docs/lighthouse/performance/speed-index/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.5399999999999999,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 0.37,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Speed Index shows how quickly the contents of a page are visibly populated. [Learn more about the Speed Index metric](https://developer.chro",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "5.0 s",
+            "detailsSnippet": null,
+            "numericValue": 5006.344434740778,
+            "score": 0.63
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "af15e49052069a86",
+          "auditId": "interactive",
+          "title": "Time to Interactive",
+          "description": "Time to Interactive is the amount of time it takes for the page to become fully interactive. [Learn more about the Time to Interactive metric](https://developer.chrome.com/docs/lighthouse/performance/interactive/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.506,
+          "impactScore": 0.5,
+          "frequencyScore": 0.72,
+          "confidenceScore": 0.2,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Time to Interactive is the amount of time it takes for the page to become fully interactive. [Learn more about the Time to Interactive metri",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "4.6 s",
+            "detailsSnippet": null,
+            "numericValue": 4608.915999999999,
+            "score": 0.81
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "70e1cf53ff429a56",
+          "auditId": "cache-insight",
+          "title": "Use efficient cache lifetimes",
+          "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more](https://web.dev/uses-long-cache-ttl/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.506,
+          "impactScore": 0.5,
+          "frequencyScore": 0.52,
+          "confidenceScore": 0.5,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "A long cache lifetime can speed up repeat visits to your page. [Learn more](https://web.dev/uses-long-cache-ttl/).",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 62 KiB",
+            "detailsSnippet": "{\"url\":\"https://b.tile.openstreetmap.org/15/18628/9642.png\",\"cacheLifetimeMs\":16554000,\"totalBytes\":27706,\"wastedBytes\":18508.53153333333}",
+            "numericValue": null,
+            "score": 0.5
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "1d0ca323c7e7cd06",
+          "auditId": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/)",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.506,
+          "impactScore": 0.5,
+          "frequencyScore": 0.52,
+          "confidenceScore": 0.5,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 95 KiB",
+            "detailsSnippet": "{\"url\":\"https://xpatly.eu/uploads/settings/logo_1767142471_logo-xpatly.png\",\"totalBytes\":38372,\"wastedBytes\":37839,\"subItems\":{\"type\":\"subitems\",\"items\":[{\"reason\":\"Using a modern image format (WebP, AVIF) or increasing ",
+            "numericValue": null,
+            "score": 0.5
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/3",
+              "path": "/en/listings/3",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/7",
+              "path": "/en/listings/7",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "a546494b98285b7e",
+          "auditId": "redirects",
+          "title": "Avoid multiple page redirects",
+          "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+          "category": "performance",
+          "topic": "General Optimization",
+          "severity": "medium",
+          "severityScore": 0.462,
+          "impactScore": 0.5,
+          "frequencyScore": 0.04,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/l",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": "Est savings of 780 ms",
+            "detailsSnippet": "{\"url\":\"https://xpatly.eu/en/listings/create\",\"wastedMs\":781.456}",
+            "numericValue": 781.456,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            }
+          ],
+          "isGlobal": false
+        }
+      ],
+      "accessibility": [
+        {
+          "issueId": "5c671bc2fe89c2b1",
+          "auditId": "button-name",
+          "title": "Buttons do not have an accessible name",
+          "description": "When a button doesn't have an accessible name, screen readers announce it as \"button\", making it unusable for users who rely on screen readers. [Learn how to make buttons more accessible](https://dequeuniversity.com/rules/axe/4.10/button-name).",
+          "category": "accessibility",
+          "topic": "General Optimization",
+          "severity": "high",
+          "severityScore": 0.642,
+          "impactScore": 0.5,
+          "frequencyScore": 0.64,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "When a button doesn't have an accessible name, screen readers announce it as \"button\", making it unusable for users who rely on screen reade",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": null,
+            "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-0-BUTTON\",\"path\":\"1,HTML,1,BODY,5,NAV,0,DIV,0,DIV,7,DIV,1,DIV,0,BUTTON\",\"selector\":\"div.flex > div.flex > div.relative > button.text-gray-700\",\"boundingRect\":{\"top\":113,\"bottom\":143,\"left",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/4",
+              "path": "/en/listings/4",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/2",
+              "path": "/en/listings/2",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/5",
+              "path": "/en/listings/5",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/6",
+              "path": "/en/listings/6",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/8",
+              "path": "/en/listings/8",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/9",
+              "path": "/en/listings/9",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/11",
+              "path": "/en/listings/11",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        },
+        {
+          "issueId": "b143f66b18f07af4",
+          "auditId": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.10/color-contrast).",
+          "category": "accessibility",
+          "topic": "Accessibility Contrast",
+          "severity": "high",
+          "severityScore": 0.633,
+          "impactScore": 0.65,
+          "frequencyScore": 0.36,
+          "confidenceScore": 1,
+          "effort": "medium",
+          "recommendation": {
+            "summary": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversit",
+            "steps": [
+              "Identify affected resources",
+              "Apply fix on key templates",
+              "Re-run audit to confirm"
+            ],
+            "tools": ["Lighthouse", "Chrome DevTools"]
+          },
+          "evidence": {
+            "displayValue": null,
+            "detailsSnippet": "{\"node\":{\"type\":\"node\",\"lhId\":\"1-1-SPAN\",\"path\":\"1,HTML,1,BODY,7,MAIN,0,DIV,0,DIV,1,DIV,3,DIV,1,DIV,0,SPAN\",\"selector\":\"div.lg:col-span-2 > div.bg-white > div.mb-6 > span.inline-flex\",\"boundingRect\":{\"top\":640,\"bottom\":6",
+            "numericValue": null,
+            "score": 0
+          },
+          "occurrences": [
+            {
+              "url": "https://xpatly.eu/en/about",
+              "path": "/en/about",
+              "context": null
+            },
+            { "url": "https://xpatly.eu/", "path": "/", "context": null },
+            {
+              "url": "https://xpatly.eu/en/listings",
+              "path": "/en/listings",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/faq",
+              "path": "/en/faq",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/privacy",
+              "path": "/en/privacy",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/imprint",
+              "path": "/en/imprint",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/create",
+              "path": "/en/listings/create",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/13",
+              "path": "/en/listings/13",
+              "context": null
+            },
+            {
+              "url": "https://xpatly.eu/en/listings/15",
+              "path": "/en/listings/15",
+              "context": null
+            }
+          ],
+          "isGlobal": true
+        }
+      ]
+    },
+    "actionPlan": {
+      "sprint1": [],
+      "sprint2": [
+        "Largest Contentful Paint",
+        "Reduce unused JavaScript",
+        "Eliminate render-blocking resources"
+      ],
+      "sprint3": [
+        "Largest Contentful Paint",
+        "Eliminate render-blocking resources",
+        "Cumulative Layout Shift"
+      ]
+    }
+  }
+}

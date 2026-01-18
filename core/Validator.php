@@ -129,9 +129,8 @@ class Validator
                 break;
 
             case 'password':
-                if (!$this->validatePassword($value)) {
-                    $this->addError($field, $ruleName);
-                }
+                // validatePassword now sets its own specific error message
+                $this->validatePassword($field, $value);
                 break;
 
             case 'no_discrimination':
@@ -154,35 +153,43 @@ class Validator
         }
     }
 
-    private function validatePassword(string $password): bool
+    private function validatePassword(string $field, string $password): bool
     {
-        // Minimum 12 characters
+        // Check minimum length
         if (strlen($password) < 12) {
+            $this->errors[$field] = 'Password must be at least 12 characters long';
             return false;
         }
 
-        // At least one uppercase
+        // Check for uppercase
         if (!preg_match('/[A-Z]/', $password)) {
+            $this->errors[$field] = 'Password must contain at least one uppercase letter (A-Z)';
             return false;
         }
 
-        // At least one lowercase
+        // Check for lowercase
         if (!preg_match('/[a-z]/', $password)) {
+            $this->errors[$field] = 'Password must contain at least one lowercase letter (a-z)';
             return false;
         }
 
-        // At least one number
+        // Check for number
         if (!preg_match('/[0-9]/', $password)) {
+            $this->errors[$field] = 'Password must contain at least one number (0-9)';
             return false;
         }
 
-        // No sequential characters
-        if (preg_match('/123|234|345|456|567|678|789|abc|bcd|cde|def/i', $password)) {
+        // Block obvious 4-char sequences (relaxed from 3-char)
+        // Allows: 123, 234, 345 (too short to be truly weak)
+        // Blocks: 1234, 2345, 3456 (obvious patterns)
+        if (preg_match('/1234|2345|3456|4567|5678|6789|abcd|bcde|cdef/i', $password)) {
+            $this->errors[$field] = 'Password cannot contain obvious sequences like 1234, 5678, or abcd';
             return false;
         }
 
-        // No repeated characters (3 or more)
+        // Block repeated characters (3 or more)
         if (preg_match('/(.)\1{2,}/', $password)) {
+            $this->errors[$field] = 'Password cannot have 3 or more repeated characters in a row';
             return false;
         }
 

@@ -113,9 +113,13 @@
             <p class="text-gray-700 leading-relaxed mb-3"><?= __('pages.terms.contact_body') ?></p>
             <p class="text-gray-700">
                 <strong><?= __('common.email') ?>:</strong>
-                <a href="mailto:<?= settings('contact_email', 'hello@xpatly.com') ?>" class="text-primary-600 hover:underline">
-                    <?= settings('contact_email', 'hello@xpatly.com') ?>
+                <a href="mailto:<?= settings('contact_email', 'info@xpatly.eu') ?>" class="text-primary-600 hover:underline">
+                    <?= settings('contact_email', 'info@xpatly.eu') ?>
                 </a>
+            </p>
+            <p class="text-gray-700 mt-2">
+                <strong><?= __('pages.contact.support_title') ?? 'Support' ?>:</strong>
+                <a href="mailto:support@xpatly.eu" class="text-primary-600 hover:underline">support@xpatly.eu</a>
             </p>
         </div>
 

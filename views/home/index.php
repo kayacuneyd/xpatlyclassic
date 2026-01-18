@@ -5,12 +5,23 @@ require __DIR__ . '/../layouts/header.php';
 ?>
 
 <!-- Hero Section -->
-<section class="relative overflow-hidden" style="min-height: 600px; background-image: url('/hero-bg.webp'); background-size: cover; background-position: center; margin: 3rem 3rem 0 3rem; border-radius: 1.5rem;">
+<section class="relative overflow-hidden min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] m-0 sm:m-6 lg:m-12 rounded-none sm:rounded-3xl">
+    <!-- Background Image -->
+    <picture>
+        <source srcset="/hero-bg.webp" type="image/webp">
+        <img src="/hero-bg.jpg"
+             alt="Find your perfect home in Estonia"
+             class="absolute inset-0 w-full h-full object-cover rounded-none sm:rounded-3xl -z-10"
+             width="1920"
+             height="1080"
+             fetchpriority="high">
+    </picture>
+
     <!-- Background Overlay -->
-    <div class="absolute inset-0 z-0" style="background: linear-gradient(to right, rgba(17, 24, 39, 0.8) 0%, rgba(17, 24, 39, 0.6) 50%, rgba(17, 24, 39, 0.4) 100%); border-radius: 1.5rem;"></div>
+    <div class="absolute inset-0 z-0 rounded-none sm:rounded-3xl" style="background: linear-gradient(to right, rgba(17, 24, 39, 0.8) 0%, rgba(17, 24, 39, 0.6) 50%, rgba(17, 24, 39, 0.4) 100%);"></div>
 
     <!-- Content -->
-    <div class="max-w-7xl mx-auto px-8 relative z-10" style="padding-top: 2.5rem; padding-bottom: 2.5rem; min-height: 600px; display: flex; align-items: center;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 py-8 sm:py-10 min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] flex items-center">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
 
             <!-- Left Column: Text (60%) -->
@@ -28,8 +39,7 @@ require __DIR__ . '/../layouts/header.php';
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
                     <a href="<?= url('listings') ?>"
-                        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
-                        style="background: linear-gradient(135deg, #f9a825 0%, #f57f17 100%);">
+                        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 bg-secondary-700 hover:bg-secondary-800">
                         <?= __('home.browse_listings') ?? 'Browse Listings' ?>
                         <svg class="w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -39,12 +49,21 @@ require __DIR__ . '/../layouts/header.php';
                 </div>
 
                 <!-- Stats -->
-                <div class="grid grid-cols-3 gap-8 pt-8 border-t border-white/30 mt-8">
-                    <div>
-                        <div class="text-3xl font-bold text-white">500+</div>
-                        <div class="text-sm text-gray-300 font-medium">
-                            <?= __('home.active_listings') ?? 'Active Listings' ?></div>
-                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-white/30 mt-8">
+                    <?php if (!empty($heroStats)): ?>
+                        <?php foreach ($heroStats as $stat): ?>
+                            <div>
+                                <div class="text-3xl font-bold text-white"><?= e($stat['value'] ?? '') ?></div>
+                                <div class="text-sm text-gray-300 font-medium"><?= e($stat['label'] ?? '') ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div>
+                            <div class="text-3xl font-bold text-white">500+</div>
+                            <div class="text-sm text-gray-300 font-medium">
+                                <?= __('home.active_listings') ?? 'Active Listings' ?></div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -85,25 +104,25 @@ require __DIR__ . '/../layouts/header.php';
                           }
                       }">
 
-                    <h3 class="text-gray-900 font-heading text-xl font-bold mb-5 flex items-center">
+                    <h2 class="text-gray-900 font-heading text-xl font-bold mb-5 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-primary-600" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         <?= __('home.quick_search') ?? 'Quick Search' ?>
-                    </h3>
+                    </h2>
 
                     <div class="space-y-4">
                         <!-- Deal Type & Property Type Row -->
                         <div class="grid grid-cols-2 gap-4">
-                            <select name="deal_type" x-model="dealType"
+                            <select name="deal_type" x-model="dealType" id="quick_deal_type" aria-label="Deal type"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm focus:ring-2 focus:ring-primary-500 bg-gray-50 focus:bg-white transition-colors">
                                 <option value=""><?= __('listing.deal_type') ?? 'Deal Type' ?></option>
                                 <option value="rent"><?= __('listing.rent') ?? 'Rent' ?></option>
                                 <option value="sell"><?= __('listing.sale') ?? 'Sale' ?></option>
                             </select>
-                            <select name="category"
+                            <select name="category" id="quick_category" aria-label="Category"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm focus:ring-2 focus:ring-primary-500 bg-gray-50 focus:bg-white transition-colors">
                                 <option value=""><?= __('listing.category') ?? 'Type' ?></option>
                                 <option value="apartment"><?= __('listing.apartment') ?? 'Apartment' ?></option>
@@ -112,14 +131,18 @@ require __DIR__ . '/../layouts/header.php';
                             </select>
                         </div>
 
-                        <!-- Region -->
-                        <select name="region"
+                        <!-- City -->
+                        <select name="city" id="quick_city" aria-label="City"
                             class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm focus:ring-2 focus:ring-primary-500 bg-gray-50 focus:bg-white transition-colors">
-                            <option value=""><?= __('listing.region') ?? 'All Regions' ?></option>
+                            <option value=""><?= __('search.all_cities') ?? 'All Cities' ?></option>
                             <option value="Tallinn">Tallinn</option>
                             <option value="Tartu">Tartu</option>
-                            <option value="Pärnu">Pärnu</option>
-                            <option value="Narva">Narva</option>
+                        </select>
+
+                        <!-- District / Subregion -->
+                        <select name="settlement" id="quick_settlement" aria-label="District"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm focus:ring-2 focus:ring-primary-500 bg-gray-50 focus:bg-white transition-colors" disabled>
+                            <option value=""><?= __('search.all_subregions') ?? 'All Districts' ?></option>
                         </select>
 
                         <!-- Price Range Slider (Alpine.js) -->
@@ -127,35 +150,48 @@ require __DIR__ . '/../layouts/header.php';
                             <div class="flex justify-between items-center mb-2">
                                 <label
                                     class="text-xs font-bold text-gray-700 uppercase tracking-wide"><?= __('search.price_range') ?? 'Price' ?></label>
-                                <div class="text-xs font-bold text-primary-600">
+                                <div class="text-xs font-bold"
+                                     :class="dealType === 'sell' ? 'text-orange-600' : 'text-blue-600'">
                                     <span x-text="formatPrice(priceMin)"></span> - <span
                                         x-text="formatPrice(priceMax)"></span>
                                 </div>
                             </div>
 
                             <!-- Native visible sliders stack -->
-                            <div class="flex gap-4">
-                                <input type="range" x-model="priceMin" min="0" :max="maxPriceLimit" :step="priceStep"
-                                    class="w-full accent-primary-600">
-                                <input type="range" x-model="priceMax" min="0" :max="maxPriceLimit" :step="priceStep"
-                                    class="w-full accent-primary-600">
-                            </div>
+                                <div class="flex gap-4">
+                                    <input type="range" x-model="priceMin" min="0" :max="maxPriceLimit" :step="priceStep"
+                                           :class="dealType === 'sell' ? 'accent-orange-600' : 'accent-blue-600'"
+                                           class="w-full" aria-label="Minimum price">
+                                    <input type="range" x-model="priceMax" min="0" :max="maxPriceLimit" :step="priceStep"
+                                           :class="dealType === 'sell' ? 'accent-orange-600' : 'accent-blue-600'"
+                                           class="w-full" aria-label="Maximum price">
+                                </div>
 
-                            <div class="flex items-center space-x-3 mt-3">
-                                <div class="relative flex-1">
-                                    <span
-                                        class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
-                                    <input type="number" name="price_min" x-model="priceMin"
-                                        class="w-full pl-7 pr-2 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-500 text-center">
+                                <div class="flex items-center space-x-3 mt-3">
+                                    <div class="relative flex-1">
+                                        <span
+                                            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
+                                    <input type="number" name="price_min" x-model="priceMin" aria-label="Price minimum"
+                                           min="0" :max="maxPriceLimit" :step="priceStep"
+                                           class="w-full pl-7 pr-2 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-500 text-center">
+                                    </div>
+                                    <span class="text-gray-400">-</span>
+                                    <div class="relative flex-1">
+                                        <span
+                                            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
+                                    <input type="number" name="price_max" x-model="priceMax" aria-label="Price maximum"
+                                           min="0" :max="maxPriceLimit" :step="priceStep"
+                                           class="w-full pl-7 pr-2 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-500 text-center">
+                                    </div>
                                 </div>
-                                <span class="text-gray-400">-</span>
-                                <div class="relative flex-1">
-                                    <span
-                                        class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">€</span>
-                                    <input type="number" name="price_max" x-model="priceMax"
-                                        class="w-full pl-7 pr-2 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-500 text-center">
-                                </div>
-                            </div>
+
+                            <!-- Helper Text with Limits -->
+                            <p class="text-xs mt-2 text-center"
+                               :class="dealType === 'sell' ? 'text-orange-600' : 'text-blue-600'">
+                                <span x-show="dealType === 'rent'">Rent: Max €5,000/month</span>
+                                <span x-show="dealType === 'sell'">Sale: Max €500,000</span>
+                                <span x-show="!dealType || dealType === ''">Select deal type above to set price limits</span>
+                            </p>
                         </div>
 
                         <!-- More Filters Toggle -->
@@ -188,16 +224,16 @@ require __DIR__ . '/../layouts/header.php';
                                     </div>
                                 </div>
                                 <div class="flex gap-4">
-                                    <input type="range" x-model="roomsMin" min="1" max="6"
+                                    <input type="range" x-model="roomsMin" min="1" max="6" aria-label="Minimum rooms"
                                         class="w-full accent-primary-600">
-                                    <input type="range" x-model="roomsMax" min="1" max="6"
+                                    <input type="range" x-model="roomsMax" min="1" max="6" aria-label="Maximum rooms"
                                         class="w-full accent-primary-600">
                                 </div>
                                 <div class="flex items-center space-x-3 mt-3">
-                                    <input type="number" name="rooms_min" x-model="roomsMin"
+                                    <input type="number" name="rooms_min" x-model="roomsMin" aria-label="Rooms minimum"
                                         class="w-full flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg text-center">
                                     <span class="text-gray-400">-</span>
-                                    <input type="number" name="rooms_max" x-model="roomsMax"
+                                    <input type="number" name="rooms_max" x-model="roomsMax" aria-label="Rooms maximum"
                                         class="w-full flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg text-center">
                                 </div>
                             </div>
@@ -347,19 +383,19 @@ require __DIR__ . '/../layouts/header.php';
                 style="background-color: #f9a825;">
                 <div class="relative z-10 flex flex-col items-center text-center">
                     <div
-                        class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="w-16 h-16 bg-black/10 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                        <svg class="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2"><?= __('home.role_rent_title') ?? 'I want to Rent' ?>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2"><?= __('home.role_rent_title') ?? 'I want to Rent' ?>
                     </h3>
-                    <p class="text-white/90 mb-6">
+                    <p class="text-gray-900 mb-6">
                         <?= __('home.role_rent_desc') ?? 'Find your perfect home from verified listings.' ?></p>
-                    <span class="inline-flex items-center font-semibold text-white group-hover:underline">
+                    <span class="inline-flex items-center font-semibold text-gray-900 underline">
                         <?= __('home.role_rent_btn') ?? 'Browse Homes' ?> <span class="ml-2">→</span>
                     </span>
                 </div>
@@ -399,7 +435,7 @@ require __DIR__ . '/../layouts/header.php';
                 <p class="text-gray-600"><?= __('home.featured_subtitle') ?? 'Hand-picked properties for you' ?></p>
             </div>
             <a href="<?= url('listings') ?>"
-                class="text-primary-600 font-semibold hover:text-primary-700 hidden sm:block">
+                class="text-secondary-800 font-semibold underline hover:text-secondary-900 hidden sm:block">
                 <?= __('home.view_all') ?? 'View All Listings' ?> →
             </a>
         </div>
@@ -441,8 +477,8 @@ require __DIR__ . '/../layouts/header.php';
                 }
             }">
                 <!-- Previous Button -->
-                <button @click="prev()"
-                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                <button @click="prev()" aria-label="Previous listings"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-14 h-14 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     :class="{ 'opacity-50 cursor-not-allowed': totalItems <= itemsPerPage }">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -450,8 +486,8 @@ require __DIR__ . '/../layouts/header.php';
                 </button>
 
                 <!-- Next Button -->
-                <button @click="next()"
-                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                <button @click="next()" aria-label="Next listings"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-14 h-14 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     :class="{ 'opacity-50 cursor-not-allowed': totalItems <= itemsPerPage }">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -468,8 +504,21 @@ require __DIR__ . '/../layouts/header.php';
                                     class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden block">
                                     <div class="relative aspect-[4/3] overflow-hidden">
                                         <?php if (!empty($listing['primary_image'])): ?>
-                                            <img src="/uploads/listings/<?= $listing['id'] ?>/<?= $listing['primary_image'] ?>"
+                                            <?php
+                                            // Use thumbnail for better performance (300x200px instead of 1200px)
+                                            $thumbnailName = str_replace('.jpg', '_thumb.jpg', $listing['primary_image']);
+                                            $thumbnailName = str_replace('.jpeg', '_thumb.jpg', $thumbnailName);
+                                            $thumbnailName = str_replace('.png', '_thumb.jpg', $thumbnailName);
+                                            $fullImage = '/uploads/listings/' . $listing['id'] . '/' . $listing['primary_image'];
+                                            $placeholderImage = asset('images/listing-placeholder.svg');
+                                            ?>
+                                            <img src="/uploads/listings/<?= $listing['id'] ?>/<?= $thumbnailName ?>"
+                                                data-full-src="<?= htmlspecialchars($fullImage) ?>"
+                                                data-placeholder="<?= $placeholderImage ?>"
+                                                onerror="if (!this.dataset.fallbackStage) { this.dataset.fallbackStage = 'full'; this.src = this.dataset.fullSrc; } else { this.onerror = null; this.src = this.dataset.placeholder; }"
                                                 alt="<?= htmlspecialchars($listing['title']) ?>"
+                                                width="300"
+                                                height="200"
                                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                 loading="lazy">
                                         <?php else: ?>
@@ -524,7 +573,7 @@ require __DIR__ . '/../layouts/header.php';
                                                     <?= (int) $listing['area_sqm'] ?> m²
                                                 </span>
                                             </div>
-                                            <span class="text-xl font-bold text-primary-600">€<?= number_format($listing['price']) ?></span>
+                                            <span class="text-xl font-bold text-gray-900">€<?= number_format($listing['price']) ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -537,8 +586,10 @@ require __DIR__ . '/../layouts/header.php';
                 <div class="flex justify-center gap-2 mt-8">
                     <template x-for="i in Math.ceil(totalItems / itemsPerPage)" :key="i">
                         <button @click="currentIndex = i - 1"
-                            class="w-2 h-2 rounded-full transition-all duration-200"
-                            :class="currentIndex === i - 1 ? 'bg-primary-600 w-8' : 'bg-gray-300 hover:bg-gray-400'">
+                            class="w-6 h-6 rounded-full transition-all duration-200 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            :aria-label="`Go to slide ${i}`"
+                            :class="currentIndex === i - 1 ? 'bg-primary-600 text-white' : 'bg-gray-300 hover:bg-gray-400 text-transparent'">
+                            <span class="sr-only" x-text="`Slide ${i}`"></span>
                         </button>
                     </template>
                 </div>
@@ -553,5 +604,52 @@ require __DIR__ . '/../layouts/header.php';
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const subregions = {
+        "Tallinn": [
+            "Kesklinn",
+            "Kristiine",
+            "Mustamäe",
+            "Lasnamäe",
+            "Põhja-Tallinn"
+        ],
+        "Tartu": [
+            "Kesklinn",
+            "Annelinn",
+            "Karlova",
+            "Supilinn",
+            "Ihaste"
+        ]
+    };
+
+    const citySelect = document.getElementById('quick_city');
+    const settlementSelect = document.getElementById('quick_settlement');
+
+    function populateSettlements(city) {
+        const options = subregions[city] || [];
+        settlementSelect.innerHTML = '';
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '<?= addslashes(__('search.all_subregions') ?? 'All Districts') ?>';
+        settlementSelect.appendChild(defaultOption);
+        options.forEach(function(option) {
+            const opt = document.createElement('option');
+            opt.value = option;
+            opt.textContent = option;
+            settlementSelect.appendChild(opt);
+        });
+        settlementSelect.disabled = options.length === 0;
+    }
+
+    if (citySelect && settlementSelect) {
+        populateSettlements('');
+        citySelect.addEventListener('change', function() {
+            populateSettlements(citySelect.value);
+        });
+    }
+});
+</script>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>

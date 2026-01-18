@@ -24,8 +24,17 @@ class Database
 
         try {
             if ($config['connection'] === 'sqlite') {
-                $dsn = "sqlite:" . __DIR__ . '/../' . $config['sqlite']['path'];
+                $path = $config['sqlite']['path'];
+                if (!str_starts_with($path, '/')) {
+                    $path = __DIR__ . '/../' . $path;
+                }
+                $dsn = "sqlite:" . $path;
                 self::$connection = new PDO($dsn);
+                if (function_exists('auth_log')) {
+                    $exists = is_file($path);
+                    $size = $exists ? (string) filesize($path) : '0';
+                    auth_log('DB sqlite path: ' . $path . ' | exists=' . (int) $exists . ' | size=' . $size);
+                }
 
                 // Enable WAL mode for better concurrency
                 self::$connection->exec('PRAGMA journal_mode=WAL;');

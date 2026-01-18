@@ -5,7 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Xpatly - Expat-Friendly Housing' ?></title>
-    <meta name="description" content="Find expat-friendly housing in Estonia without discrimination">
+    <meta name="description" content="<?= $metaDescription ?? 'Find expat-friendly housing in Estonia without discrimination' ?>">
+
+    <?php $ga4Id = trim((string) settings('ga4_measurement_id', '')); ?>
+    <?php if ($ga4Id !== ''): ?>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?= htmlspecialchars($ga4Id) ?>"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '<?= htmlspecialchars($ga4Id) ?>');
+        </script>
+    <?php endif; ?>
+
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://xpatly.eu<?= $_SERVER['REQUEST_URI'] ?? '/' ?>">
+
+    <!-- Multilingual Alternate Links -->
+    <link rel="alternate" hreflang="en" href="https://xpatly.eu/en<?= preg_replace('/^\/(en|et|ru)/', '', $_SERVER['REQUEST_URI'] ?? '/') ?>">
+    <link rel="alternate" hreflang="et" href="https://xpatly.eu/et<?= preg_replace('/^\/(en|et|ru)/', '', $_SERVER['REQUEST_URI'] ?? '/') ?>">
+    <link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru<?= preg_replace('/^\/(en|et|ru)/', '', $_SERVER['REQUEST_URI'] ?? '/') ?>">
+    <link rel="alternate" hreflang="x-default" href="https://xpatly.eu/en<?= preg_replace('/^\/(en|et|ru)/', '', $_SERVER['REQUEST_URI'] ?? '/') ?>">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Xpatly">
+
+    <!-- PWA Icons -->
+    <?php $siteIcon = settings('site_icon'); ?>
+    <link rel="manifest" href="/manifest.json">
+    <?php if (!empty($siteIcon)): ?>
+        <link rel="icon" href="<?= $siteIcon ?>">
+        <link rel="apple-touch-icon" href="<?= $siteIcon ?>">
+    <?php else: ?>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="/assets/images/icon-192.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/icon-192.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icon-512.png">
+    <?php endif; ?>
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="<?= $title ?? 'Xpatly - Housing in Estonia' ?>">
+    <meta property="og:description" content="<?= $metaDescription ?? 'Find your perfect home in Estonia. Housing platform for expats and locals.' ?>">
+    <meta property="og:image" content="<?= $ogImage ?? url('assets/images/og-image.jpg') ?>">
+    <meta property="og:url" content="<?= url($_SERVER['REQUEST_URI'] ?? '/') ?>">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= $title ?? 'Xpatly - Housing in Estonia' ?>">
+    <meta name="twitter:description" content="<?= $metaDescription ?? 'Find your perfect home in Estonia.' ?>">
+    <meta name="twitter:image" content="<?= $ogImage ?? url('assets/images/og-image.jpg') ?>">
 
     <!-- Google Fonts - Lexend & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,71 +69,169 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
+    <!-- DNS Prefetch for CDNs (faster initial connection) -->
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
     <!-- TailwindCSS CDN with Custom Config -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#fffde7',
-                            100: '#fff9c4',
-                            200: '#fff59d',
-                            300: '#fff176',
-                            400: '#ffee58',
-                            500: '#f9a825',
-                            600: '#f9a825',
-                            700: '#f57f17',
-                            800: '#e65100',
-                            900: '#bf360c',
+        // Suppress production warning (guard for offline/blocked CDN)
+        if (window.tailwind) {
+            tailwind.config = {
+                disableDevWarnings: true,
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: {
+                                50: '#fffde7',
+                                100: '#fff9c4',
+                                200: '#fff59d',
+                                300: '#fff176',
+                                400: '#ffee58',
+                                500: '#f9a825',
+                                600: '#f9a825',
+                                700: '#f57f17',
+                                800: '#e65100',
+                                900: '#bf360c',
+                            },
+                            secondary: {
+                                50: '#e3f2fd',
+                                100: '#bbdefb',
+                                200: '#90caf9',
+                                300: '#64b5f6',
+                                400: '#42a5f5',
+                                500: '#1976d2',
+                                600: '#1976d2',
+                                700: '#1565c0',
+                                800: '#0d47a1',
+                                900: '#0a3d91',
+                            },
+                            success: {
+                                500: '#22c55e',
+                                600: '#16a34a',
+                                700: '#15803d',
+                            },
                         },
-                        secondary: {
-                            50: '#e3f2fd',
-                            100: '#bbdefb',
-                            200: '#90caf9',
-                            300: '#64b5f6',
-                            400: '#42a5f5',
-                            500: '#1976d2',
-                            600: '#1976d2',
-                            700: '#1565c0',
-                            800: '#0d47a1',
-                            900: '#0a3d91',
+                        fontFamily: {
+                            'heading': ['Lexend', 'sans-serif'],
+                            'body': ['Inter', 'sans-serif'],
                         },
-                        success: {
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                        },
-                    },
-                    fontFamily: {
-                        'heading': ['Lexend', 'sans-serif'],
-                        'body': ['Inter', 'sans-serif'],
                     },
                 },
-            },
+            };
         }
     </script>
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/assets/css/custom.css">
 
-    <!-- Alpine.js with Collapse Plugin -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js (load only when needed) -->
+    <script>
+    (function() {
+        function needsAlpine() {
+            return document.querySelector('[x-data],[x-show],[x-cloak],[x-transition],[x-collapse]') !== null;
+        }
+        function loadScript(src) {
+            return new Promise(function(resolve, reject) {
+                var script = document.createElement('script');
+                script.src = src;
+                script.defer = true;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+        function init() {
+            if (needsAlpine()) {
+                loadScript('https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js')
+                    .then(function() {
+                        return loadScript('https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js');
+                    })
+                    .catch(function() {});
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
 
     <?php if (!empty($useMap)): ?>
         <!-- Leaflet.js -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <?php endif; ?>
+
+    <!-- CSRF Token Auto-Sync -->
+    <script>
+    // Auto-refresh CSRF tokens before form submission to prevent mismatches
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sync CSRF token from cookie to all forms
+        function syncCsrfToken() {
+            const cookieToken = getCookie('csrf_token');
+            if (cookieToken) {
+                document.querySelectorAll('input[name="_token"]').forEach(function(input) {
+                    if (input.value !== cookieToken) {
+                        input.value = cookieToken;
+                    }
+                });
+            }
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Inject honeypot field into all POST forms
+        const honeypotName = '<?= addslashes(Core\Session::getHoneypotFieldName()) ?>';
+        document.querySelectorAll('form').forEach(function(form) {
+            const method = (form.getAttribute('method') || '').toLowerCase();
+            if (method !== 'post') {
+                return;
+            }
+            if (form.querySelector(`input[name="${honeypotName}"]`)) {
+                return;
+            }
+            const hp = document.createElement('input');
+            hp.type = 'text';
+            hp.name = honeypotName;
+            hp.autocomplete = 'off';
+            hp.tabIndex = '-1';
+            hp.style.position = 'absolute';
+            hp.style.left = '-9999px';
+            hp.style.width = '1px';
+            hp.style.height = '1px';
+            form.appendChild(hp);
+        });
+
+        // Sync on page load
+        syncCsrfToken();
+
+        // Sync before every form submission
+        document.querySelectorAll('form').forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                syncCsrfToken();
+            });
+        });
+
+        // Sync periodically (every 5 seconds) to handle session regeneration
+        setInterval(syncCsrfToken, 5000);
+    });
+    </script>
 </head>
 
 <body class="bg-gray-50 font-body">
     <!-- Toast Notification System - Centered Modal Style -->
-    <?php if (Core\Flash::has()): ?>
-        <div class="fixed inset-0 z-50 flex items-start justify-center pt-20 pointer-events-none">
-            <?php foreach (Core\Flash::get() as $index => $message): ?>
+    <?php $flashMessages = Core\Flash::get(); ?>
+    <?php if (!empty($flashMessages)): ?>
+        <div class="fixed inset-0 z-50 flex items-start justify-center pt-20 pointer-events-none" style="z-index: 10000;">
+            <?php foreach ($flashMessages as $index => $message): ?>
                 <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
                     x-transition:enter="transition ease-out duration-300"
                     x-transition:enter-start="opacity-0 transform -translate-y-4"
@@ -86,13 +239,13 @@
                     x-transition:leave="transition ease-in duration-200"
                     x-transition:leave-start="opacity-100 transform translate-y-0"
                     x-transition:leave-end="opacity-0 transform -translate-y-4" class="pointer-events-auto max-w-md w-full mx-4 mb-3 <?php
-                    echo match ($message['type']) {
-                        'success' => 'bg-green-50 border-green-400 text-green-800',
-                        'error' => 'bg-red-50 border-red-400 text-red-800',
-                        'warning' => 'bg-yellow-50 border-yellow-400 text-yellow-800',
-                        default => 'bg-blue-50 border-blue-400 text-blue-800',
-                    };
-                    ?> border-l-4 rounded-lg shadow-xl p-4">
+                                                                                                                                        echo match ($message['type']) {
+                                                                                                                                            'success' => 'bg-green-50 border-green-400 text-green-800',
+                                                                                                                                            'error' => 'bg-red-50 border-red-400 text-red-800',
+                                                                                                                                            'warning' => 'bg-yellow-50 border-yellow-400 text-yellow-800',
+                                                                                                                                            default => 'bg-blue-50 border-blue-400 text-blue-800',
+                                                                                                                                        };
+                                                                                                                                        ?> border-l-4 rounded-lg shadow-xl p-4">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
                             <?php if ($message['type'] === 'success'): ?>
@@ -137,6 +290,38 @@
         </div>
     <?php endif; ?>
 
+    <!-- Console Logging for Auth Errors & Validation -->
+    <script>
+    // Log validation errors to console for debugging
+    <?php if (Core\Session::has('validation_errors')): ?>
+        console.group('%c🚫 Validation Errors', 'color: #ef4444; font-weight: bold; font-size: 14px');
+        <?php
+        $errors = json_decode(Core\Session::get('validation_errors'), true);
+        if ($errors && is_array($errors)):
+            foreach ($errors as $field => $error):
+        ?>
+        <?php $errorText = is_array($error) ? implode(', ', $error) : (string) $error; ?>
+        console.error(<?= json_encode((string) $field) ?>, <?= json_encode($errorText) ?>);
+        <?php
+            endforeach;
+        endif;
+        ?>
+        console.groupEnd();
+        <?php Core\Session::remove('validation_errors'); ?>
+    <?php endif; ?>
+
+    // Log auth errors
+    <?php if (!empty($flashMessages)): ?>
+        <?php foreach ($flashMessages as $flashMessage): ?>
+            <?php if (($flashMessage['type'] ?? '') === 'error'): ?>
+                console.error('%c⚠️ Error:', 'color: #ef4444; font-weight: bold', <?= json_encode((string) ($flashMessage['message'] ?? '')) ?>);
+            <?php elseif (($flashMessage['type'] ?? '') === 'success'): ?>
+                console.log('%c✅ Success:', 'color: #10b981; font-weight: bold', <?= json_encode((string) ($flashMessage['message'] ?? '')) ?>);
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    </script>
+
     <!-- Email Verification Warning Banner -->
     <?php if (Core\Auth::check() && !\Models\User::isEmailVerified(Core\Auth::id())): ?>
         <div class="bg-amber-500 text-amber-900 py-3 px-4" x-data="{ show: true }" x-show="show">
@@ -165,15 +350,41 @@
         </div>
     <?php endif; ?>
 
+    <!-- PWA Install Banner -->
+    <div id="pwa-install-banner" class="hidden bg-indigo-600 text-white py-3 px-4 shadow-lg" style="z-index: 9999;">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+                <p class="text-sm font-medium">
+                    <?= __('pwa.install_prompt') ?? 'Install Xpatly app for quick access and offline use!' ?>
+                </p>
+            </div>
+            <div class="flex gap-2">
+                <button id="pwa-install-btn" class="px-4 py-2 bg-white text-indigo-600 rounded-lg text-sm font-semibold hover:bg-gray-100 transition-colors">
+                    <?= __('pwa.install') ?? 'Install' ?>
+                </button>
+                <button id="pwa-dismiss-btn" class="px-4 py-2 bg-indigo-700 text-white rounded-lg text-sm font-semibold hover:bg-indigo-800 transition-colors">
+                    <?= __('pwa.later') ?? 'Later' ?>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-40" x-data="{ mobileMenuOpen: false }">
+    <nav class="bg-white shadow-md sticky top-0 z-40" x-data="{ mobileMenuOpen: false }" style="z-index: 2000;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="/" class="flex items-center">
                         <?php if (!empty(settings('site_logo'))): ?>
-                            <img src="<?= settings('site_logo') ?>" alt="<?= settings('site_name', 'Xpatly') ?>" class="h-10">
+                            <img src="<?= settings('site_logo') ?>"
+                                 alt="<?= settings('site_name', 'Xpatly') ?>"
+                                 class="h-12 sm:h-14 w-auto"
+                                 width="112"
+                                 height="56">
                         <?php else: ?>
                             <span class="text-2xl font-bold text-primary-600">
                                 <?= settings('site_name', 'Xpatly') ?>
@@ -181,7 +392,8 @@
                         <?php endif; ?>
                     </a>
                 </div>
-
+                <!-- Main Navigation - Desktop Onlysssss -->
+                <!-- Main Navigation - Desktop Only -->
                 <!-- Main Navigation - Desktop Only -->
                 <div class="hidden md:flex space-x-8">
                     <a href="<?= url('') ?>" class="text-gray-700 hover:text-primary-600"><?= __('common.home') ?></a>
@@ -200,19 +412,21 @@
                     <!-- Language Switcher -->
                     <?php
                     $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
-                    // Remove any existing locale prefix to avoid /ru/et/ style URLs
-                    $cleanPath = preg_replace('#^/(en|et|ru)#', '', $currentPath);
-                    if ($cleanPath === '') {
+                    // Hem /public/ hem de dil ön ekini kaldır
+                    $cleanPath = preg_replace('#^/(?:public/)?(?:en|et|ru)?#', '', $currentPath);
+                    if ($cleanPath === '' || $cleanPath === false) {
                         $cleanPath = '/';
                     }
                     ?>
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open"
-                            class="text-gray-700 hover:text-primary-600 px-2 sm:px-3 py-2 rounded-md hover:bg-gray-100 flex items-center space-x-1">
+                            class="text-gray-700 hover:text-primary-600 px-2 sm:px-3 py-2 rounded-md hover:bg-gray-100 flex items-center space-x-1"
+                            aria-label="Select language"
+                            :aria-expanded="open.toString()">
                             <span class="flag-icon <?php
-                            $currentLocale = Core\Translation::getLocale();
-                            echo $currentLocale === 'en' ? 'flag-icon-gb' : ($currentLocale === 'et' ? 'flag-icon-ee' : 'flag-icon-ru');
-                            ?>"></span>
+                                                    $currentLocale = Core\Translation::getLocale();
+                                                    echo $currentLocale === 'en' ? 'flag-icon-gb' : ($currentLocale === 'et' ? 'flag-icon-ee' : 'flag-icon-ru');
+                                                    ?>"></span>
                             <span class="hidden sm:inline text-sm ml-1"><?= strtoupper($currentLocale) ?></span>
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -303,6 +517,25 @@
                                     <?= __('common.favorites') ?>
                                 </a>
 
+                                <a href="<?= url('messages') ?>"
+                                    class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 relative">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    <?= __('common.messages') ?? 'Messages' ?>
+                                    <?php
+                                    $unreadMessages = \Models\Conversation::getUnreadCount(Core\Auth::id(), 'received') +
+                                        \Models\Conversation::getUnreadCount(Core\Auth::id(), 'sent');
+                                    if ($unreadMessages > 0):
+                                    ?>
+                                        <span class="ml-auto bg-blue-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                                            <?= $unreadMessages ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </a>
+
                                 <?php if (Core\Auth::isAdmin()): ?>
                                     <div class="border-t border-gray-200 my-1"></div>
                                     <a href="<?= url('admin') ?>"
@@ -337,7 +570,7 @@
                         <!-- Combined Sign In / Register Dropdown -->
                         <div x-data="{ open: false }" class="relative hidden md:block">
                             <button @click="open = !open"
-                                class="flex items-center space-x-1 bg-primary-500 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                                class="flex items-center space-x-1 bg-secondary-800 hover:bg-secondary-900 text-white px-4 py-2 rounded-lg font-medium transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -374,7 +607,8 @@
 
                     <!-- Hamburger Menu Button - Mobile Only -->
                     <button @click="mobileMenuOpen = !mobileMenuOpen"
-                        class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100">
+                        class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100"
+                        aria-label="Toggle navigation menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>

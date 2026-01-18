@@ -40,9 +40,13 @@ class AdminController
     {
         $query = $_GET['q'] ?? '';
         $filters = [
-            'status' => $_GET['status'] ?? '',
-            'expat_friendly' => $_GET['expat_friendly'] ?? ''
+            'status' => $_GET['status'] ?? ''
         ];
+
+        // Only apply expat_friendly filter when provided
+        if (isset($_GET['expat_friendly']) && $_GET['expat_friendly'] !== '') {
+            $filters['expat_friendly'] = $_GET['expat_friendly'];
+        }
 
         $listings = Listing::adminSearch($query, $filters);
 
@@ -150,13 +154,7 @@ class AdminController
             exit;
         }
 
-        $reason = $_POST['reason'] ?? '';
-
-        if (empty($reason)) {
-            Flash::error('Deletion reason is required');
-            header('Location: /admin/listings');
-            exit;
-        }
+        $reason = $_POST['reason'] ?? 'Deleted by admin';
 
         // Delete images
         \Models\ListingImage::deleteByListing($id);
@@ -278,16 +276,47 @@ class AdminController
 
         User::update($id, $newData);
 
+        // Check if new password is provided
+        $passwordChanged = false;
+        if (!empty($_POST['new_password'])) {
+            // Validate password length
+            if (strlen($_POST['new_password']) < 8) {
+                Flash::error('Password must be at least 8 characters');
+                header("Location: /admin/users/{$id}/edit");
+                exit;
+            }
+
+            // Check passwords match
+            if ($_POST['new_password'] !== $_POST['confirm_password']) {
+                Flash::error('Passwords do not match');
+                header("Location: /admin/users/{$id}/edit");
+                exit;
+            }
+
+            // Update password using User::resetPassword()
+            User::resetPassword($id, $_POST['new_password']);
+            $passwordChanged = true;
+        }
+
         // Log the action
         AdminLog::log(
             Auth::id(),
             'edit_user',
             'user',
             $id,
-            ['old' => $oldData, 'new' => $newData]
+            [
+                'old' => $oldData,
+                'new' => $newData,
+                'password_changed' => $passwordChanged
+            ]
         );
 
-        Flash::success('User updated successfully');
+        if ($passwordChanged) {
+            Flash::success('User updated and password changed successfully');
+        } else {
+            Flash::success('User updated successfully');
+        }
+
         header('Location: /admin/users');
         exit;
     }
@@ -424,10 +453,11 @@ class AdminController
         }
 
         // Update text settings
-        $textSettings = ['site_name', 'site_tagline', 'contact_email', 'contact_phone'];
+        $textSettings = ['site_name', 'site_tagline', 'contact_email', 'contact_phone', 'ga4_measurement_id'];
         foreach ($textSettings as $key) {
             if (isset($_POST[$key])) {
-                \Models\SiteSettings::set($key, $_POST[$key], 'text');
+                $value = is_string($_POST[$key]) ? trim($_POST[$key]) : $_POST[$key];
+                \Models\SiteSettings::set($key, $value, 'text');
             }
         }
 
@@ -469,6 +499,120 @@ class AdminController
         Flash::success('Settings updated successfully');
         header('Location: /admin/settings');
         exit;
+    }
+
+    public function transferOwnership(): void
+    {
+        if (!Auth::isSuperAdmin()) {
+            Flash::error('Access denied');
+            header('Location: /admin');
+            exit;
+        }
+
+        $validator = new Validator($_POST, [
+            'transfer_email' => 'required|email'
+        ]);
+
+        if (!$validator->validate()) {
+            Flash::error($validator->firstError());
+            header('Location: /admin/settings');
+            exit;
+        }
+
+        $email = strtolower(trim($_POST['transfer_email']));
+        $currentEmail = strtolower((string) (Auth::user()['email'] ?? ''));
+
+        if ($email === $currentEmail) {
+            Flash::error('Please enter a different email address for ownership transfer.');
+            header('Location: /admin/settings');
+            exit;
+        }
+
+        $targetUser = User::findByEmail($email);
+        $created = false;
+
+        if (!$targetUser) {
+            $fullName = trim((string) ($_POST['transfer_name'] ?? ''));
+            if ($fullName === '') {
+                $fullName = $this->deriveNameFromEmail($email);
+            }
+
+            $randomPassword = bin2hex(random_bytes(16));
+            $userId = User::create([
+                'full_name' => $fullName,
+                'email' => $email,
+                'phone' => '',
+                'password_hash' => Auth::hashPassword($randomPassword),
+                'role' => 'super_admin',
+                'locale' => $_SESSION['locale'] ?? 'en'
+            ]);
+
+            $targetUser = User::find((int) $userId);
+            $created = true;
+        } elseif (($targetUser['role'] ?? '') !== 'super_admin') {
+            User::update($targetUser['id'], ['role' => 'super_admin']);
+        }
+
+        if (!$targetUser) {
+            Flash::error('Unable to transfer ownership. Please try again.');
+            header('Location: /admin/settings');
+            exit;
+        }
+
+        $keepCurrent = isset($_POST['keep_current_super_admin']);
+        if (!$keepCurrent) {
+            User::update(Auth::id(), ['role' => 'moderator']);
+        }
+
+        $sendSetup = isset($_POST['send_setup_email']) || $created;
+        $mailSent = null;
+        if ($sendSetup) {
+            $token = User::createResetToken((int) $targetUser['id']);
+            $baseUrl = $_ENV['APP_URL'] ?? (isset($_SERVER['HTTP_HOST']) ? 'https://' . $_SERVER['HTTP_HOST'] : '');
+            $baseUrl = rtrim($baseUrl, '/');
+            $baseUrl = preg_replace('#/(en|et|ru)$#', '', $baseUrl);
+            $resetLink = $baseUrl . url('reset-password?token=' . $token);
+
+            $subject = 'Set up your admin password';
+            $body = '<p>Your admin access is ready. Please set a password using the link below:</p>';
+            $body .= '<p><a href="' . $resetLink . '">' . $resetLink . '</a></p>';
+            $body .= '<p>If you did not request this, you can ignore this email.</p>';
+
+            $mailSent = send_mail($targetUser['email'], $subject, $body, $_ENV['MAIL_REPLY_TO'] ?? null);
+            if (!$mailSent) {
+                Flash::warning('Ownership transferred, but the setup email could not be sent. The new admin can use "Forgot password" to set a password.');
+            }
+        }
+
+        AdminLog::log(
+            Auth::id(),
+            'transfer_ownership',
+            'user',
+            (int) $targetUser['id'],
+            [
+                'email' => $email,
+                'created' => $created,
+                'kept_current_super_admin' => $keepCurrent,
+                'setup_email_sent' => $mailSent
+            ]
+        );
+
+        Flash::success('Ownership transferred successfully.');
+        header('Location: /admin/settings');
+        exit;
+    }
+
+    private function deriveNameFromEmail(string $email): string
+    {
+        $localPart = strstr($email, '@', true);
+        if ($localPart === false || $localPart === '') {
+            return 'Client Admin';
+        }
+
+        $name = str_replace(['.', '_', '-'], ' ', $localPart);
+        $name = preg_replace('/\s+/', ' ', trim($name));
+
+        return $name === '' ? 'Client Admin' : ucwords($name);
     }
 
     public function logs(): void

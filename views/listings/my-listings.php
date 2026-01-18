@@ -3,51 +3,64 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl font-bold text-gray-900">My Listings</h1>
-        <a href="/listings/create" class="btn btn-primary">
-            ➕ Create New Listing
+        <a href="/listings/create" class="btn btn-primary inline-flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Create New Listing
         </a>
     </div>
 
-    <?php if (empty($listings)): ?>
-        <div class="bg-white rounded-lg shadow-lg p-12 text-center">
-            <p class="text-gray-500 text-lg mb-4">You don't have any listings yet</p>
-            <a href="/listings/create" class="btn btn-primary inline-block">
-                Create Your First Listing
+    <?php $statusFilter = $_GET['status'] ?? ''; ?>
+    <!-- Filter Tabs -->
+    <div class="mb-6 border-b border-gray-200">
+        <nav class="-mb-px flex flex-wrap gap-6">
+            <a href="?status=" class="border-b-2 <?= empty($statusFilter) ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
+                All (<?= $counts['all'] ?? count($listings) ?>)
             </a>
-        </div>
-    <?php else: ?>
-        <!-- Filter Tabs -->
-        <div class="mb-6 border-b border-gray-200">
-            <nav class="-mb-px flex space-x-8">
-                <a href="?status=" class="border-b-2 <?= empty($_GET['status']) ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
-                    All (<?= count($listings) ?>)
-                </a>
-                <a href="?status=active" class="border-b-2 <?= ($_GET['status'] ?? '') === 'active' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
-                    Active
-                </a>
-                <a href="?status=pending" class="border-b-2 <?= ($_GET['status'] ?? '') === 'pending' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
-                    Pending
-                </a>
-                <a href="?status=paused" class="border-b-2 <?= ($_GET['status'] ?? '') === 'paused' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
-                    Paused
-                </a>
-            </nav>
-        </div>
+            <a href="?status=active" class="border-b-2 <?= $statusFilter === 'active' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
+                Active (<?= $counts['active'] ?? 0 ?>)
+            </a>
+            <a href="?status=pending" class="border-b-2 <?= $statusFilter === 'pending' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
+                Pending (<?= $counts['pending'] ?? 0 ?>)
+            </a>
+            <a href="?status=paused" class="border-b-2 <?= $statusFilter === 'paused' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
+                Paused (<?= $counts['paused'] ?? 0 ?>)
+            </a>
+            <a href="?status=archived" class="border-b-2 <?= $statusFilter === 'archived' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
+                Archived (<?= $counts['archived'] ?? 0 ?>)
+            </a>
+            <a href="?status=draft" class="border-b-2 <?= $statusFilter === 'draft' ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700' ?> px-1 pb-4 text-sm font-medium">
+                Drafts (<?= $counts['draft'] ?? 0 ?>)
+            </a>
+        </nav>
+    </div>
 
-        <!-- Listings Table -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+    <!-- Listings Table -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Listing</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <?php if (empty($listings)): ?>
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Listing</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        <td colspan="6" class="px-6 py-10 text-center text-gray-500">
+                            <?php if (!empty($statusFilter)): ?>
+                                You have no <?= strtoupper($statusFilter) ?> listings right now.
+                            <?php else: ?>
+                                You don't have any listings yet.
+                            <?php endif; ?>
+                        </td>
                     </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <?php else: ?>
                     <?php foreach ($listings as $listing): ?>
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4">
@@ -76,7 +89,8 @@
                                     'active' => 'bg-green-100 text-green-800',
                                     'pending' => 'bg-yellow-100 text-yellow-800',
                                     'paused' => 'bg-gray-100 text-gray-800',
-                                    'archived' => 'bg-red-100 text-red-800'
+                                    'archived' => 'bg-red-100 text-red-800',
+                                    'draft' => 'bg-blue-100 text-blue-800'
                                 ];
                                 $color = $statusColors[$listing['status']] ?? 'bg-gray-100 text-gray-800';
                                 ?>
@@ -90,7 +104,11 @@
                                 <?php endif; ?>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                €<?= number_format($listing['price'], 0) ?>/mo
+                                <?php if (!empty($listing['price'])): ?>
+                                    €<?= number_format($listing['price'], 0) ?>/mo
+                                <?php else: ?>
+                                    —
+                                <?php endif; ?>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <?= $listing['views'] ?? 0 ?>
@@ -124,10 +142,10 @@
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    <?php endif; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>

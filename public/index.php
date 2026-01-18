@@ -8,19 +8,6 @@ if (php_sapi_name() === 'cli-server') {
     }
 }
 
-// Error reporting (disable in production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Start session
-session_start();
-
-// Load Composer autoloader
-require __DIR__ . '/../vendor/autoload.php';
-
-// Load helper functions
-require __DIR__ . '/../core/helpers.php';
-
 // Load environment variables
 if (file_exists(__DIR__ . '/../.env')) {
     $lines = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -32,6 +19,29 @@ if (file_exists(__DIR__ . '/../.env')) {
         $_ENV[trim($name)] = trim($value);
     }
 }
+
+// Environment
+$appEnv = $_ENV['APP_ENV'] ?? getenv('APP_ENV') ?? 'production';
+
+// Error reporting (disable display in production)
+error_reporting(E_ALL);
+if ($appEnv === 'production') {
+    ini_set('display_errors', 0);
+} else {
+    ini_set('display_errors', 1);
+}
+
+// Load Composer autoloader
+require __DIR__ . '/../vendor/autoload.php';
+
+// Load helper functions
+require __DIR__ . '/../core/helpers.php';
+
+// Basic security headers
+header('X-Frame-Options: SAMEORIGIN');
+header('X-Content-Type-Options: nosniff');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
 
 use Core\Router;
 use Core\Session;
@@ -45,6 +55,7 @@ use Controllers\MessageController;
 use Controllers\AdminController;
 use Controllers\PageController;
 use Controllers\BlogController;
+use Controllers\SitemapController;
 
 // Initialize session
 Session::start();
@@ -57,6 +68,7 @@ Translation::setLocale($router->getLocale());
 
 // Public routes
 $router->get('/', [HomeController::class, 'index']);
+$router->get('/sitemap.xml', [SitemapController::class, 'index']);
 $router->get('/listings', [SearchController::class, 'index']);
 $router->get('/listings/create', [ListingController::class, 'create']);
 $router->post('/listings/create', [ListingController::class, 'store']);
@@ -70,6 +82,7 @@ $router->get('/imprint', [PageController::class, 'imprint']);
 $router->get('/privacy', [PageController::class, 'privacy']);
 $router->get('/terms', [PageController::class, 'terms']);
 $router->get('/contact', [PageController::class, 'contact']);
+$router->get('/faq', [PageController::class, 'faq']);
 
 // Blog routes
 $router->get('/blog', [BlogController::class, 'index']);
@@ -79,10 +92,12 @@ $router->post('/blog/{slug}/comment', [BlogController::class, 'addComment']);
 // Auth routes
 $router->get('/register', [AuthController::class, 'showRegister']);
 $router->post('/register', [AuthController::class, 'register']);
+$router->get('/verify-info', [AuthController::class, 'showVerifyInfo']);
 $router->get('/login', [AuthController::class, 'showLogin']);
 $router->post('/login', [AuthController::class, 'login']);
 $router->post('/logout', [AuthController::class, 'logout']);
 $router->get('/verify-email', [AuthController::class, 'verifyEmail']);
+$router->get('/me', [AuthController::class, 'me']);
 $router->get('/forgot-password', [AuthController::class, 'showForgotPassword']);
 $router->post('/forgot-password', [AuthController::class, 'forgotPassword']);
 $router->get('/reset-password', [AuthController::class, 'showResetPassword']);
@@ -92,8 +107,11 @@ $router->post('/reset-password', [AuthController::class, 'resetPassword']);
 $router->get('/dashboard', [UserController::class, 'dashboard']);
 $router->get('/my-listings', [ListingController::class, 'myListings']);
 $router->get('/favorites', [UserController::class, 'favorites']);
+$router->post('/user/role', [UserController::class, 'updateRole']);
 $router->post('/favorites/{id}/toggle', [UserController::class, 'toggleFavorite']);
 $router->get('/messages', [MessageController::class, 'index']);
+$router->get('/messages/conversation/{id}', [MessageController::class, 'viewConversation']);
+$router->post('/messages/conversation/{id}/reply', [MessageController::class, 'reply']);
 
 // Listing management routes (edit/delete must come after create)
 $router->get('/listings/{id}/edit', [ListingController::class, 'edit']);
@@ -117,6 +135,7 @@ $router->post('/admin/reports/{id}/review', [AdminController::class, 'reviewRepo
 $router->get('/admin/logs', [AdminController::class, 'logs']);
 $router->get('/admin/settings', [AdminController::class, 'settings']);
 $router->post('/admin/settings', [AdminController::class, 'updateSettings']);
+$router->post('/admin/transfer-ownership', [AdminController::class, 'transferOwnership']);
 
 // Admin Blog routes
 $router->get('/admin/blog', [BlogController::class, 'adminIndex']);

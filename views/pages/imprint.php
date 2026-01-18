@@ -18,7 +18,12 @@
             <p class="text-gray-700 leading-relaxed space-y-2">
                 <span class="block"><?= __('pages.imprint.company_name') ?></span>
                 <span class="block"><?= __('pages.imprint.address') ?></span>
-                <span class="block"><?= __('pages.imprint.email') ?></span>
+                <span class="block">
+                    <a href="mailto:info@xpatly.eu" class="text-primary-600 hover:underline">info@xpatly.eu</a>
+                </span>
+                <span class="block">
+                    <a href="mailto:support@xpatly.eu" class="text-primary-600 hover:underline">support@xpatly.eu</a>
+                </span>
             </p>
         </div>
     </section>

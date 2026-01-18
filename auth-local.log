@@ -1,0 +1,197 @@
+[2026-01-02 21:16:14] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=0
+[2026-01-02 21:16:39] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=0
+[2026-01-02 21:16:40] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=0
+[2026-01-02 21:16:40] Login attempt: email=kayacuneyd@gmail.com | user_found=1
+[2026-01-02 21:16:40] Login failed: email=kayacuneyd@gmail.com
+[2026-01-02 21:16:40] AuthController login failed, redirecting to /login
+[2026-01-02 21:16:41] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=0
+[2026-01-02 21:18:07] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:18:08] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:18:08] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:18:36] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:18:49] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:18:51] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:18:51] Login attempt: email=kayacuneyd@gmail.com | user_found=1
+[2026-01-02 21:18:51] Login failed: email=kayacuneyd@gmail.com
+[2026-01-02 21:18:51] AuthController login failed, redirecting to /login
+[2026-01-02 21:18:51] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:21:44] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:21:45] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:21:45] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:23:02] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:23:06] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:23:07] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:23:07] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:28:41] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:28:41] Show forgot-password form
+[2026-01-02 21:28:44] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:28:45] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:28:45] Forgot-password submit received
+[2026-01-02 21:28:48] Mail send failed: SMTP Error: Could not authenticate.
+[2026-01-02 21:28:48] Forgot-password email failed: kayacuneyd@gmail.com
+[2026-01-02 21:28:48] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:33:54] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:33:54] Show forgot-password form
+[2026-01-02 21:33:58] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:33:59] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:33:59] Forgot-password submit received
+[2026-01-02 21:34:00] Mail send failed: SMTP Error: The following recipients failed: kayacuneyd@gmail.com: <support@xpatly.eu>: Sender address rejected: not owned by user alert@xpatly.eu
+
+[2026-01-02 21:34:00] Forgot-password email failed: kayacuneyd@gmail.com
+[2026-01-02 21:34:00] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:36:22] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:36:22] Show forgot-password form
+[2026-01-02 21:36:25] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:36:26] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:36:26] Forgot-password submit received
+[2026-01-02 21:36:29] Mail send failed: SMTP Error: Could not authenticate.
+[2026-01-02 21:36:29] Forgot-password email failed: kayacuneyd@gmail.com
+[2026-01-02 21:36:29] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:37:36] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:37:36] Show forgot-password form
+[2026-01-02 21:37:41] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:37:42] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:37:42] Forgot-password submit received
+[2026-01-02 21:37:43] Forgot-password email sent: kayacuneyd@gmail.com
+[2026-01-02 21:37:43] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:38:06] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:38:07] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:38:24] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:38:26] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:38:26] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:38:32] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:38:32] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:39:27] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:39:29] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:39:29] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:40:31] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:40:43] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:40:44] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 21:40:44] Login attempt: email=kayacuneyd@gmail.com | user_found=1
+[2026-01-02 21:40:44] Login failed: email=kayacuneyd@gmail.com
+[2026-01-02 21:40:44] AuthController login failed, redirecting to /login
+[2026-01-02 21:40:44] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:25:13] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:25:13] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:25:18] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:25:20] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:25:59] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:26:21] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:26:26] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:26:30] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:26:31] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:26:31] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:28:30] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:29:17] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:30:49] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:31:07] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:31:11] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:31:12] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:31:12] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:34:13] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:43:46] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:43:46] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:44:18] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:44:18] Show forgot-password form
+[2026-01-02 22:44:18] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:44:31] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:44:31] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:44:32] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:44:32] Forgot-password submit received
+[2026-01-02 22:44:32] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:44:33] Forgot-password email sent: kayacuneyd@gmail.com
+[2026-01-02 22:44:33] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:44:33] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:44:57] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:44:57] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:44:58] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:44:58] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:45:06] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:45:06] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:45:18] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:45:18] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:45:19] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:45:19] Reset-password submit received | token_present=1
+[2026-01-02 22:45:19] Reset-password validation failed: Password must be at least 12 characters with uppercase, lowercase, number, and no common patterns
+[2026-01-02 22:45:19] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:45:19] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:47:18] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:18] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:47:19] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:19] Reset-password submit received | token_present=1
+[2026-01-02 22:47:19] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:47:19] Password reset success: user_id=2 | rows=1 | hash_len=60
+[2026-01-02 22:47:19] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:19] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:47:43] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:43] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:47:44] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:44] CSRF failed: path=/en/login | has_token=1
+[2026-01-02 22:47:44] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:44] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:47:58] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:58] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:47:59] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:59] CSRF failed: path=/en/login | has_token=1
+[2026-01-02 22:47:59] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:47:59] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:51:33] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:51:33] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:51:37] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:51:37] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:51:38] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:51:38] CSRF failed: path=/en/login | has_token=1
+[2026-01-02 22:51:39] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:51:39] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:51:52] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:51:52] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:51:53] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:51:53] CSRF failed: path=/en/login | has_token=1
+[2026-01-02 22:51:53] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:51:53] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:52:12] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:52:12] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:52:29] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:52:29] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:52:31] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:52:31] CSRF failed: path=/login | has_token=1
+[2026-01-02 22:52:31] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:52:31] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:56:56] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:56:56] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:57:00] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:57:00] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:57:01] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:57:01] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:57:01] Login attempt: email=kayacuneyd@gmail.com | user_found=1
+[2026-01-02 22:57:01] Login hash info: email=kayacuneyd@gmail.com | hash_len=46 | bcrypt=0
+[2026-01-02 22:57:01] Login failed: email=kayacuneyd@gmail.com
+[2026-01-02 22:57:01] AuthController login failed, redirecting to /login
+[2026-01-02 22:57:01] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:57:01] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:57:17] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:57:17] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 22:57:19] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:57:19] CSRF failed: path=/en/login | has_token=1 | token=310d447445 | cookie=85f7834bfd | session=85f7834bfd | sid=AFaQYpZ1HIEkQKQksX8uNwQdIt-DVVBwotIEecxoxKFBAHth
+[2026-01-02 22:57:19] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 22:57:19] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 23:05:21] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:05:21] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 23:05:26] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:05:26] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 23:05:27] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:05:27] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 23:05:27] Login attempt: email=kayacuneyd@gmail.com | user_found=1
+[2026-01-02 23:05:27] Login hash info: email=kayacuneyd@gmail.com | user_id=2 | updated_at=2025-12-30 23:47:22 | hash_len=46 | bcrypt=0 | hash_prefix=y/9OrQK
+[2026-01-02 23:05:27] Login failed: email=kayacuneyd@gmail.com
+[2026-01-02 23:05:27] AuthController login failed, redirecting to /login
+[2026-01-02 23:05:27] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:05:27] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 23:07:35] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:07:35] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 23:07:45] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:07:45] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568
+[2026-01-02 23:07:47] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:07:47] CSRF failed: path=/en/forgot-password | has_token=1 | token=310d447445 | cookie=85f7834bfd | session=85f7834bfd | sid=AFaQYpZ1HIEkQKQksX8uNwQdIt-DVVBwotIEecxoxKFBAHth
+[2026-01-02 23:07:47] Session save path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/sessions | HTTPS=1
+[2026-01-02 23:07:47] DB sqlite path: /home/u173493092/domains/xpatly.eu/public_html/core/../storage/database/database.sqlite | exists=1 | size=237568

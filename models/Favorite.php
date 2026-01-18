@@ -9,7 +9,7 @@ class Favorite extends Model
     public static function getByUser(int $userId): array
     {
         $sql = "SELECT f.*, l.*, u.full_name as owner_name,
-                (SELECT filename FROM listing_images WHERE listing_id = l.id AND is_primary = 1 LIMIT 1) as primary_image
+                (SELECT filename FROM listing_images WHERE listing_id = l.id ORDER BY is_primary DESC, sort_order ASC, id ASC LIMIT 1) as primary_image
                 FROM " . self::$table . " f
                 INNER JOIN listings l ON f.listing_id = l.id
                 LEFT JOIN users u ON l.user_id = u.id

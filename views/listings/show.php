@@ -1,6 +1,11 @@
 <?php
-$useMap = true; // Enable Leaflet.js
+$useMap = false; // Load Leaflet lazily
 require __DIR__ . '/../layouts/header.php';
+
+// Ensure images is always an array
+$images = $images ?? [];
+$imageFilenames = !empty($images) ? array_column($images, 'filename') : [];
+$imageFilenamesJson = json_encode($imageFilenames, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS);
 ?>
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -8,33 +13,38 @@ require __DIR__ . '/../layouts/header.php';
         <!-- Main Content -->
         <div class="lg:col-span-2">
             <!-- Image Gallery -->
-            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden mb-8" x-data="{ currentImage: 0 }">
-                <?php if (!empty($images)): ?>
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden mb-8"
+                 x-data='{"currentImage": 0, "images": <?= $imageFilenamesJson ?>}'>
+                <?php if (!empty($images) && count($images) > 0): ?>
                     <!-- Main Image -->
                     <div class="relative h-96 bg-gray-200">
-                        <template x-for="(image, index) in <?= count($images) ?>" :key="index">
+                        <template x-for="(image, index) in images" :key="index">
                             <img x-show="currentImage === index"
-                                 src="/uploads/listings/<?= $listing['id'] ?>/<?= $images[0]['filename'] ?>"
-                                 :src="`/uploads/listings/<?= $listing['id'] ?>/<?= htmlspecialchars(json_encode(array_column($images, 'filename'))) ?>[index]`"
+                                 :src="`/uploads/listings/<?= $listing['id'] ?>/${image}`"
                                  alt="<?= htmlspecialchars($listing['title']) ?>"
-                                 class="w-full h-full object-cover">
+                                 class="w-full h-full object-cover"
+                                 width="1280" height="720">
                         </template>
 
                         <!-- Navigation Arrows -->
-                        <?php if (count($images) > 1): ?>
-                            <button @click="currentImage = currentImage > 0 ? currentImage - 1 : <?= count($images) - 1 ?>"
-                                    class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70">
-                                ←
-                            </button>
-                            <button @click="currentImage = currentImage < <?= count($images) - 1 ?> ? currentImage + 1 : 0"
-                                    class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70">
-                                →
-                            </button>
-                        <?php endif; ?>
+                        <template x-if="images.length > 1">
+                            <div>
+                                <button @click="currentImage = currentImage > 0 ? currentImage - 1 : images.length - 1"
+                                        class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 text-white w-12 h-12 rounded-full hover:bg-black/75 flex items-center justify-center"
+                                        aria-label="Previous image">
+                                    ←
+                                </button>
+                                <button @click="currentImage = currentImage < images.length - 1 ? currentImage + 1 : 0"
+                                        class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 text-white w-12 h-12 rounded-full hover:bg-black/75 flex items-center justify-center"
+                                        aria-label="Next image">
+                                    →
+                                </button>
+                            </div>
+                        </template>
 
                         <!-- Image Counter -->
                         <div class="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded">
-                            <span x-text="currentImage + 1"></span> / <?= count($images) ?>
+                            <span x-text="currentImage + 1"></span> / <span x-text="images.length"></span>
                         </div>
                     </div>
 
@@ -46,6 +56,7 @@ require __DIR__ . '/../layouts/header.php';
                                      @click="currentImage = <?= $index ?>"
                                      :class="currentImage === <?= $index ?> ? 'ring-2 ring-primary-600' : ''"
                                      class="w-20 h-20 object-cover rounded cursor-pointer hover:opacity-80"
+                                     width="80" height="80"
                                      alt="Thumbnail <?= $index + 1 ?>">
                             <?php endforeach; ?>
                         </div>
@@ -85,7 +96,7 @@ require __DIR__ . '/../layouts/header.php';
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 p-6 bg-gray-50 rounded-xl border border-gray-100">
                     <div>
                         <div class="text-sm text-gray-600">Price</div>
-                        <div class="text-xl font-bold text-primary-600">€<?= number_format($listing['price'], 0) ?>/mo</div>
+                        <div class="text-xl font-bold text-secondary-700">€<?= number_format($listing['price'], 0) ?>/mo</div>
                     </div>
                     <div>
                         <div class="text-sm text-gray-600">Area</div>
@@ -176,16 +187,38 @@ require __DIR__ . '/../layouts/header.php';
                         <div id="map" class="h-96 rounded-lg"></div>
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
-                                const map = L.map('map').setView([<?= $listing['latitude'] ?>, <?= $listing['longitude'] ?>], 15);
+                                function loadLeaflet() {
+                                    if (window.L) {
+                                        return Promise.resolve();
+                                    }
+                                    return new Promise(function(resolve, reject) {
+                                        const link = document.createElement('link');
+                                        link.rel = 'stylesheet';
+                                        link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                                        link.onload = function() {
+                                            const script = document.createElement('script');
+                                            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                                            script.onload = resolve;
+                                            script.onerror = reject;
+                                            document.head.appendChild(script);
+                                        };
+                                        link.onerror = reject;
+                                        document.head.appendChild(link);
+                                    });
+                                }
 
-                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                }).addTo(map);
+                                loadLeaflet().then(function() {
+                                    const map = L.map('map').setView([<?= $listing['latitude'] ?>, <?= $listing['longitude'] ?>], 15);
 
-                                L.marker([<?= $listing['latitude'] ?>, <?= $listing['longitude'] ?>])
-                                    .addTo(map)
-                                    .bindPopup('<?= htmlspecialchars($listing['title']) ?>')
-                                    .openPopup();
+                                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    }).addTo(map);
+
+                                    L.marker([<?= $listing['latitude'] ?>, <?= $listing['longitude'] ?>])
+                                        .addTo(map)
+                                        .bindPopup('<?= htmlspecialchars($listing['title']) ?>')
+                                        .openPopup();
+                                }).catch(() => {});
                             });
                         </script>
                     </div>
@@ -204,13 +237,20 @@ require __DIR__ . '/../layouts/header.php';
 
                     <div>
                         <label class="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2 block">Your Name (Optional)</label>
-                        <input type="text" name="sender_name" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm focus:ring-2 focus:ring-primary-500 bg-gray-50 focus:bg-white transition-colors" placeholder="John Doe">
+                        <input type="text" name="sender_name" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm focus:ring-2 focus:ring-primary-500 bg-gray-50 focus:bg-white transition-colors" placeholder="John Doe" <?= Core\Auth::check() ? 'value="' . htmlspecialchars(\Core\Auth::user()['full_name'] ?? '') . '"' : '' ?>>
                     </div>
 
+                    <?php if (Core\Auth::check()): ?>
+                        <input type="hidden" name="sender_email" value="<?= htmlspecialchars(\Core\Auth::user()['email']) ?>">
+                        <div class="text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-xl p-3">
+                            Messages will be sent from your account email: <strong><?= htmlspecialchars(\Core\Auth::user()['email']) ?></strong>
+                        </div>
+                    <?php else: ?>
                     <div>
                         <label class="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2 block">Your Email *</label>
                         <input type="email" name="sender_email" required class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-900 text-sm focus:ring-2 focus:ring-primary-500 bg-gray-50 focus:bg-white transition-colors" placeholder="your@email.com">
                     </div>
+                    <?php endif; ?>
 
                     <div>
                         <label class="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2 block">Message *</label>
@@ -263,7 +303,7 @@ require __DIR__ . '/../layouts/header.php';
                              x-cloak
                              @keydown.escape.window="showReportModal = false"
                              class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-                             style="display: none;">
+                             style="display: none; z-index: 2000;">
                             <div @click.away="showReportModal = false"
                                  x-transition
                                  class="bg-white rounded-lg max-w-md w-full p-6">

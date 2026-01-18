@@ -33,7 +33,7 @@
                         <?php if (!empty($post['featured_image'])): ?>
                             <a href="<?= url('blog/' . $post['slug']) ?>">
                                 <img src="<?= $post['featured_image'] ?>" alt="<?= htmlspecialchars($post['title']) ?>"
-                                    class="w-full h-48 object-cover" loading="lazy">
+                                    class="w-full h-48 object-cover" loading="lazy" width="600" height="360">
                             </a>
                         <?php else: ?>
                             <div
@@ -60,8 +60,10 @@
                                 <?= htmlspecialchars(substr(strip_tags($post['content']), 0, 150)) ?>...
                             </p>
                             <a href="<?= url('blog/' . $post['slug']) ?>"
-                                class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-sm mt-4">
+                                class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-sm mt-4"
+                                aria-label="<?= __('blog.read_more') ? __('blog.read_more') . ': ' . htmlspecialchars($post['title']) : 'Read more: ' . htmlspecialchars($post['title']) ?>">
                                 <?= __('blog.read_more') ?? 'Read More' ?>
+                                <span class="sr-only">: <?= htmlspecialchars($post['title']) ?></span>
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
                                     </path>

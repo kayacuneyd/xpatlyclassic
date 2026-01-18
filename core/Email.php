@@ -7,12 +7,12 @@ use Models\SiteSettings;
 
 class Email
 {
-    private static ?Resend $client = null;
+    private static $client = null;
 
     /**
      * Get Resend client instance
      */
-    private static function getClient(): ?Resend
+    private static function getClient()
     {
         if (self::$client === null) {
             $apiKey = SiteSettings::get('resend_api_key');
@@ -42,6 +42,10 @@ class Email
     public static function send(string $to, string $subject, string $html): bool
     {
         if (!self::isEnabled()) {
+            // Fallback to SMTP if configured
+            if (function_exists('send_mail')) {
+                return send_mail($to, $subject, $html);
+            }
             error_log('Email sending is disabled or API key not configured');
             return false;
         }
@@ -76,7 +80,12 @@ class Email
      */
     public static function sendVerificationEmail(string $email, string $token, string $userName): bool
     {
-        $verificationUrl = url('verify-email?token=' . $token);
+        $baseUrl = $_ENV['APP_URL'] ?? (isset($_SERVER['HTTP_HOST']) ? 'https://' . $_SERVER['HTTP_HOST'] : '');
+        $baseUrl = rtrim($baseUrl, '/');
+        $baseUrl = preg_replace('#/(en|et|ru)$#', '', $baseUrl);
+
+        $verificationUrl = $baseUrl . url('verify-email?token=' . $token);
+        $name = (string) $userName;
 
         ob_start();
         require __DIR__ . '/../emails/verify-email.php';

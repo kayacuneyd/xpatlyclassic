@@ -1,68 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Message on Xpatly</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #10b981; color: white; padding: 30px; text-align: center; }
-        .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; }
-        .message-box { background: #f3f4f6; border-left: 4px solid #10b981; padding: 20px; margin: 20px 0; }
-        .button { display: inline-block; padding: 15px 40px; background: #10b981; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .listing-card { border: 1px solid #e5e7eb; border-radius: 5px; padding: 15px; margin: 20px 0; }
-        .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 12px; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; font-weight: 600; }
+        .content { padding: 40px; }
+        .message-box { background: #f8f9fa; border-left: 4px solid #4F46E5; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .button { display: inline-block; padding: 14px 32px; background: #4F46E5; color: white !important; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px; }
+        .button:hover { background: #4338CA; }
+        .footer { background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>✉️ New Message Received!</h1>
+            <h1>New Message on Xpatly</h1>
         </div>
         <div class="content">
-            <h2>Hello <?= htmlspecialchars($ownerName) ?>,</h2>
+            <p style="margin: 0 0 20px 0; font-size: 16px;">
+                Hi <strong><?= htmlspecialchars($recipientName ?? 'there') ?></strong>,
+            </p>
 
-            <p>Great news! You've received a new inquiry about your listing.</p>
+            <p style="margin: 0 0 20px 0; font-size: 16px;">
+                You have a new message about your listing: <strong><?= htmlspecialchars($listingTitle) ?></strong>
+            </p>
 
-            <div class="listing-card">
-                <h3 style="margin-top: 0;"><?= htmlspecialchars($listingTitle) ?></h3>
-                <p style="color: #6b7280; margin: 0;">
-                    📍 <?= htmlspecialchars($listingLocation) ?><br>
-                    💰 €<?= number_format($listingPrice, 0) ?>/month
+            <div class="message-box">
+                <p style="margin: 0 0 10px 0; font-size: 14px; color: #666;">
+                    <strong>From:</strong> <?= htmlspecialchars($senderName) ?>
+                </p>
+                <p style="margin: 0 0 10px 0; font-size: 14px; color: #666;">
+                    <strong>Message:</strong>
+                </p>
+                <p style="margin: 0; font-size: 14px; white-space: pre-line;">
+                    <?php
+                    $messagePreview = strlen($message) > 200 ? substr($message, 0, 200) . '...' : $message;
+                    echo nl2br(htmlspecialchars($messagePreview));
+                    ?>
                 </p>
             </div>
 
-            <h3>Message from <?= htmlspecialchars($senderName ?: $senderEmail) ?>:</h3>
-            <div class="message-box">
-                <p style="white-space: pre-line; margin: 0;"><?= htmlspecialchars($message) ?></p>
-            </div>
-
-            <p><strong>Contact Information:</strong></p>
-            <ul>
-                <?php if ($senderName): ?>
-                    <li>Name: <?= htmlspecialchars($senderName) ?></li>
-                <?php endif; ?>
-                <li>Email: <a href="mailto:<?= htmlspecialchars($senderEmail) ?>"><?= htmlspecialchars($senderEmail) ?></a></li>
-            </ul>
-
             <div style="text-align: center; margin: 30px 0;">
-                <a href="mailto:<?= htmlspecialchars($senderEmail) ?>?subject=Re: <?= urlencode($listingTitle) ?>" class="button">
-                    Reply via Email
+                <a href="<?= url('messages/conversation/' . $conversationId) ?>" class="button">
+                    View and Reply on Xpatly
                 </a>
             </div>
 
-            <p>Or view all your messages on Xpatly:</p>
-            <p style="text-align: center;">
-                <a href="<?= $baseUrl ?>/messages" style="color: #2563eb;">View Messages</a>
+            <p style="margin: 20px 0 0 0; font-size: 14px; color: #666;">
+                Respond quickly to increase your chances of finding the perfect tenant!
             </p>
-
-            <p><strong>💡 Tip:</strong> Respond quickly to increase your chances of securing a tenant!</p>
-
-            <p>Best regards,<br>
-            The Xpatly Team</p>
         </div>
         <div class="footer">
-            <p>&copy; <?= date('Y') ?> Xpatly</p>
-            <p>Reply to this email or <a href="<?= $baseUrl ?>/messages">manage your messages</a></p>
+            <p style="margin: 0 0 10px 0;">
+                This email was sent because you have a listing on Xpatly
+            </p>
+            <p style="margin: 0;">
+                &copy; <?= date('Y') ?> Xpatly - Housing platform for expats in Estonia
+            </p>
         </div>
     </div>
 </body>

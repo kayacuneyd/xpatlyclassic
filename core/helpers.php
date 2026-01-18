@@ -177,3 +177,61 @@ if (!function_exists('settings')) {
         return Models\SiteSettings::get($key, $default);
     }
 }
+
+if (!function_exists('send_mail')) {
+    /**
+     * Send an email using PHPMailer and mail config
+     */
+    function send_mail(string $to, string $subject, string $htmlBody, ?string $replyTo = null, ?string $textBody = null): bool
+    {
+        $mailConfig = config('mail');
+        try {
+            $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = $mailConfig['host'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $mailConfig['username'];
+            $mail->Password = $mailConfig['password'];
+            $mail->SMTPSecure = strtolower($mailConfig['encryption'] ?? 'tls') === 'ssl'
+                ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS
+                : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $mailConfig['port'] ?? 587;
+
+            $mail->setFrom($mailConfig['from']['address'], $mailConfig['from']['name']);
+            $mail->addAddress($to);
+            $reply = $replyTo ?: ($mailConfig['reply_to'] ?? null);
+            if ($reply) {
+                $mail->addReplyTo($reply);
+            }
+
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body = $htmlBody;
+            $mail->AltBody = $textBody ?: strip_tags($htmlBody);
+
+            $mail->send();
+            return true;
+        } catch (\Throwable $e) {
+            error_log('Mail send failed: ' . $e->getMessage());
+            if (function_exists('auth_log')) {
+                auth_log('Mail send failed: ' . $e->getMessage());
+            }
+            return false;
+        }
+    }
+}
+
+if (!function_exists('auth_log')) {
+    /**
+     * Write auth-related debug logs to storage/logs/auth.log
+     */
+    function auth_log(string $message): void
+    {
+        $logDir = __DIR__ . '/../storage/logs';
+        if (!is_dir($logDir)) {
+            @mkdir($logDir, 0770, true);
+        }
+        $line = '[' . date('Y-m-d H:i:s') . '] ' . $message . PHP_EOL;
+        @file_put_contents($logDir . '/auth.log', $line, FILE_APPEND);
+    }
+}

@@ -9,6 +9,7 @@ class PageController
     public function privacy(): void { $this->render('privacy'); }
     public function terms(): void { $this->render('terms'); }
     public function contact(): void { $this->render('contact'); }
+    public function faq(): void { $this->render('faq'); }
     public function blog(): void { $this->render('blog'); }
 
     private function view(string $view, array $data = []): void

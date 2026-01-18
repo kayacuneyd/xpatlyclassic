@@ -7,12 +7,14 @@ use Core\Flash;
 use Models\Listing;
 use Models\Favorite;
 use Models\Message;
+use Models\User;
 
 class UserController
 {
     public function dashboard(): void
     {
         Auth::requireAuth();
+        $this->disableCache();
 
         $user = Auth::user();
 
@@ -48,6 +50,30 @@ class UserController
         ]);
     }
 
+    public function updateRole(): void
+    {
+        Auth::requireAuth();
+
+        $currentRole = Auth::user()['role'] ?? 'user';
+        if (!in_array($currentRole, ['user', 'owner'], true)) {
+            Flash::error('Role cannot be changed for this account.');
+            header('Location: ' . url('dashboard'));
+            exit;
+        }
+
+        $role = $_POST['role'] ?? '';
+        if (!in_array($role, ['user', 'owner'], true)) {
+            Flash::error('Invalid role selection.');
+            header('Location: ' . url('dashboard'));
+            exit;
+        }
+
+        User::update(Auth::id(), ['role' => $role]);
+        Flash::success('Account type updated.');
+        header('Location: ' . url('dashboard'));
+        exit;
+    }
+
     public function toggleFavorite(int $listingId): void
     {
         Auth::requireAuth();
@@ -76,5 +102,12 @@ class UserController
     {
         extract($data);
         require __DIR__ . '/../views/' . $view . '.php';
+    }
+
+    private function disableCache(): void
+    {
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: 0');
     }
 }

@@ -126,6 +126,7 @@ require __DIR__ . '/../layouts/header.php';
         </div>
 
         <form id="reviewForm" method="POST" action="">
+            <?= csrf_field() ?>
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700 mb-2"><?= __('admin.decision') ?? 'Decision' ?> *</label>
                 <select name="status" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">

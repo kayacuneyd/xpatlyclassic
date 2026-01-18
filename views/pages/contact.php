@@ -30,8 +30,12 @@
                         </svg>
                         <div>
                             <p class="font-semibold text-gray-900"><?= __('pages.contact.email_label') ?></p>
-                            <a href="mailto:hello@xpatly.com"
-                                class="text-primary-600 hover:text-primary-700">hello@xpatly.com</a>
+                            <a href="mailto:info@xpatly.eu"
+                                class="text-primary-600 hover:text-primary-700">info@xpatly.eu</a>
+                            <div class="mt-1">
+                                <a href="mailto:support@xpatly.eu"
+                                   class="text-primary-600 hover:text-primary-700">support@xpatly.eu</a>
+                            </div>
                         </div>
                     </div>
 
@@ -76,8 +80,12 @@
                     </div>
                     <div>
                         <p class="font-semibold text-gray-900"><?= __('pages.contact.email_label') ?></p>
-                        <a href="mailto:hello@xpatly.com"
-                            class="text-primary-600 hover:text-primary-700">hello@xpatly.com</a>
+                        <a href="mailto:info@xpatly.eu"
+                            class="text-primary-600 hover:text-primary-700">info@xpatly.eu</a>
+                        <div class="mt-1">
+                            <a href="mailto:support@xpatly.eu"
+                               class="text-primary-600 hover:text-primary-700">support@xpatly.eu</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,6 +105,9 @@
                 </div>
                 <h3 class="font-semibold text-gray-900 mb-2"><?= __('pages.contact.general_inquiries') ?></h3>
                 <p class="text-sm text-gray-600"><?= __('pages.contact.general_inquiries_text') ?></p>
+                <p class="text-sm text-primary-700 mt-2">
+                    <a href="mailto:info@xpatly.eu" class="hover:underline">info@xpatly.eu</a>
+                </p>
             </div>
 
             <!-- Support -->
@@ -111,6 +122,9 @@
                 </div>
                 <h3 class="font-semibold text-gray-900 mb-2"><?= __('pages.contact.support_title') ?></h3>
                 <p class="text-sm text-gray-600"><?= __('pages.contact.support_text') ?></p>
+                <p class="text-sm text-success-700 mt-2">
+                    <a href="mailto:support@xpatly.eu" class="hover:underline">support@xpatly.eu</a>
+                </p>
             </div>
 
             <!-- Partnerships -->
@@ -125,6 +139,9 @@
                 </div>
                 <h3 class="font-semibold text-gray-900 mb-2"><?= __('pages.contact.partnerships_title') ?></h3>
                 <p class="text-sm text-gray-600"><?= __('pages.contact.partnerships_text') ?></p>
+                <p class="text-sm text-purple-700 mt-2">
+                    <a href="mailto:info@xpatly.eu" class="hover:underline">info@xpatly.eu</a>
+                </p>
             </div>
         </div>
     </section>

@@ -1,0 +1,27 @@
+# robots.txt for xpatly.eu
+
+User-agent: *
+
+# Allow all pages except admin and user areas
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /my-listings
+Disallow: /favorites
+Disallow: /messages/
+Disallow: /*/admin/
+Disallow: /*/dashboard
+Disallow: /*/my-listings
+Disallow: /*/favorites
+Disallow: /*/messages/
+
+# Allow specific auth pages for indexing
+Allow: /login
+Allow: /register
+Allow: /*/login
+Allow: /*/register
+
+# Sitemap location
+Sitemap: https://xpatly.eu/sitemap.xml
+
+# Crawl-delay (optional, adjust if needed)
+Crawl-delay: 1

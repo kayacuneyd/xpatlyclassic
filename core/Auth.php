@@ -12,19 +12,39 @@ class Auth
     {
         $user = User::findByEmail($email);
 
+        if (function_exists('auth_log')) {
+            auth_log('Login attempt: email=' . $email . ' | user_found=' . (int) (bool) $user);
+        }
+
+        if ($user && function_exists('auth_log')) {
+            $hash = $user['password_hash'] ?? '';
+            $isBcrypt = str_starts_with($hash, '$2y$') || str_starts_with($hash, '$2a$') || str_starts_with($hash, '$2b$');
+            $hashPrefix = $hash ? substr($hash, 0, 7) : 'none';
+            auth_log('Login hash info: email=' . $email . ' | user_id=' . $user['id'] . ' | updated_at=' . ($user['updated_at'] ?? 'none') . ' | hash_len=' . strlen($hash) . ' | bcrypt=' . (int) $isBcrypt . ' | hash_prefix=' . $hashPrefix);
+        }
+
         if (!$user || !password_verify($password, $user['password_hash'])) {
+            if (function_exists('auth_log')) {
+                auth_log('Login failed: email=' . $email);
+            }
             return false;
         }
 
         self::login($user, $remember);
+        if (function_exists('auth_log')) {
+            auth_log('Login success: email=' . $email . ' | user_id=' . $user['id'] . ' | session_id=' . session_id());
+        }
         return true;
     }
 
     public static function login(array $user, bool $remember = false): void
     {
-        Session::regenerate();
+        // Set user data BEFORE regeneration to ensure it's preserved in the new session
         Session::set('user_id', $user['id']);
         Session::set('user_role', $user['role']);
+
+        // Regenerate session ID for security (preserves data)
+        Session::regenerate();
 
         if ($remember) {
             $token = bin2hex(random_bytes(32));
@@ -34,6 +54,9 @@ class Auth
         }
 
         self::$user = $user;
+        if (function_exists('auth_log')) {
+            auth_log('Session set: user_id=' . $user['id'] . ' | role=' . $user['role'] . ' | session_id=' . session_id());
+        }
     }
 
     public static function logout(): void
@@ -136,8 +159,15 @@ class Auth
     public static function requireAuth(): void
     {
         if (self::guest()) {
+            if (!Session::has('intended_url') && !empty($_SERVER['REQUEST_URI'])) {
+                Session::set('intended_url', $_SERVER['REQUEST_URI']);
+            }
             Flash::error('Please login to continue');
-            header('Location: /login');
+            if (function_exists('url')) {
+                header('Location: ' . url('login'));
+            } else {
+                header('Location: /login');
+            }
             exit;
         }
     }

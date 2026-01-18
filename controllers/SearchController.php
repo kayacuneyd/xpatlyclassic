@@ -35,12 +35,13 @@ class SearchController
     {
         $filters = [];
 
-        if (!empty($params['region'])) {
-            $filters['region'] = $params['region'];
-        }
-
         if (!empty($params['settlement'])) {
             $filters['settlement'] = $params['settlement'];
+        } elseif (!empty($params['city'])) {
+            $filters['settlement'] = $params['city'];
+        } elseif (!empty($params['region'])) {
+            // Backward compatibility: treat region query as settlement for city-based filters
+            $filters['settlement'] = $params['region'];
         }
 
         if (!empty($params['category'])) {
@@ -76,7 +77,16 @@ class SearchController
         }
 
         if (!empty($params['price_max'])) {
-            $filters['price_max'] = (float)$params['price_max'];
+            $priceMax = (float)$params['price_max'];
+            $dealType = $filters['deal_type'] ?? '';
+
+            if ($dealType === 'sell') {
+                $filters['price_max'] = min($priceMax, 500000);
+            } elseif ($dealType === 'rent') {
+                $filters['price_max'] = min($priceMax, 5000);
+            } else {
+                $filters['price_max'] = $priceMax;
+            }
         }
 
         if (!empty($params['area_min'])) {

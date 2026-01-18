@@ -8,13 +8,17 @@ class Uploader
     private const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png'];
     private const MAX_FILE_SIZE = 5242880; // 5MB
     private const MAX_WIDTH = 1200;
+    private const PRIMARY_MAX_WIDTH = 1920;
     private const THUMBNAIL_WIDTH = 300;
     private const THUMBNAIL_HEIGHT = 200;
     private const JPEG_QUALITY = 85;
+    private const PRIMARY_JPEG_QUALITY = 92;
+    private const WEBP_QUALITY = 85;
+    private const PRIMARY_WEBP_QUALITY = 88;
 
     private array $errors = [];
 
-    public function upload(array $file, string $directory, string $prefix = ''): ?array
+    public function upload(array $file, string $directory, string $prefix = '', array $options = []): ?array
     {
         $this->errors = [];
 
@@ -29,18 +33,18 @@ class Uploader
             mkdir($uploadPath, 0755, true);
         }
 
-        // Generate unique filename
-        $extension = $this->getExtension($file['name']);
-        $filename = $prefix . time() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
+        // Generate unique filename (always save as JPEG)
+        $filenameBase = $prefix . time() . '_' . bin2hex(random_bytes(8));
+        $filename = $filenameBase . '.jpg';
         $filepath = $uploadPath . '/' . $filename;
 
         // Process and save image
-        if (!$this->processImage($file['tmp_name'], $filepath)) {
+        if (!$this->processImage($file['tmp_name'], $filepath, $options)) {
             return null;
         }
 
-        // Generate thumbnail
-        $thumbnailFilename = $prefix . time() . '_' . bin2hex(random_bytes(8)) . '_thumb.' . $extension;
+        // Generate thumbnail (deterministic name based on original)
+        $thumbnailFilename = $filenameBase . '_thumb.jpg';
         $thumbnailPath = $uploadPath . '/' . $thumbnailFilename;
         $this->createThumbnail($filepath, $thumbnailPath);
 
@@ -56,7 +60,7 @@ class Uploader
     /**
      * Upload a single file using StorageManager for hybrid R2/local storage
      */
-    public function uploadWithStorage(array $file, string $remotePath, string $prefix = ''): ?array
+    public function uploadWithStorage(array $file, string $remotePath, string $prefix = '', array $options = []): ?array
     {
         $this->errors = [];
 
@@ -71,20 +75,23 @@ class Uploader
             mkdir($tempDir, 0755, true);
         }
 
-        // Generate unique filename
-        $extension = $this->getExtension($file['name']);
-        $filename = $prefix . time() . '_' . bin2hex(random_bytes(8)) . '.jpg'; // Always save as JPEG
+        // Generate unique filename (always save as JPEG)
+        $filenameBase = $prefix . time() . '_' . bin2hex(random_bytes(8));
+        $filename = $filenameBase . '.jpg';
         $tempFilePath = $tempDir . '/' . $filename;
 
         // Process and save image to temp
-        if (!$this->processImage($file['tmp_name'], $tempFilePath)) {
+        if (!$this->processImage($file['tmp_name'], $tempFilePath, $options)) {
             return null;
         }
 
-        // Generate thumbnail
-        $thumbnailFilename = $prefix . time() . '_' . bin2hex(random_bytes(8)) . '_thumb.jpg';
+        // Generate thumbnail (deterministic name based on original)
+        $thumbnailFilename = $filenameBase . '_thumb.jpg';
         $tempThumbPath = $tempDir . '/' . $thumbnailFilename;
         $this->createThumbnail($tempFilePath, $tempThumbPath);
+
+        // Get file size before uploading/deleting
+        $fileSize = file_exists($tempFilePath) ? filesize($tempFilePath) : 0;
 
         // Upload via StorageManager (R2 or local)
         $finalPath = StorageManager::upload($tempFilePath, $remotePath . '/' . $filename);
@@ -98,7 +105,7 @@ class Uploader
             'filename' => $filename,
             'thumbnail' => $thumbnailFilename,
             'original_name' => $file['name'],
-            'size' => filesize($tempFilePath) ?: 0,
+            'size' => $fileSize,
             'path' => $finalPath,
             'thumb_path' => $thumbPath
         ];
@@ -107,7 +114,7 @@ class Uploader
     /**
      * Upload multiple files using StorageManager
      */
-    public function uploadMultipleWithStorage(array $files, string $remotePath, string $prefix = '', int $maxFiles = 40): array
+    public function uploadMultipleWithStorage(array $files, string $remotePath, string $prefix = '', int $maxFiles = 40, array $options = []): array
     {
         $uploaded = [];
 
@@ -124,7 +131,7 @@ class Uploader
                 continue;
             }
 
-            $result = $this->uploadWithStorage($file, $remotePath, $prefix);
+            $result = $this->uploadWithStorage($file, $remotePath, $prefix, $options);
             if ($result) {
                 $uploaded[] = $result;
                 $count++;
@@ -134,7 +141,7 @@ class Uploader
         return $uploaded;
     }
 
-    public function uploadMultiple(array $files, string $directory, string $prefix = '', int $maxFiles = 40): array
+    public function uploadMultiple(array $files, string $directory, string $prefix = '', int $maxFiles = 40, array $options = []): array
     {
         $uploaded = [];
 
@@ -151,7 +158,7 @@ class Uploader
                 continue;
             }
 
-            $result = $this->upload($file, $directory, $prefix);
+            $result = $this->upload($file, $directory, $prefix, $options);
             if ($result) {
                 $uploaded[] = $result;
                 $count++;
@@ -202,7 +209,7 @@ class Uploader
         return true;
     }
 
-    private function processImage(string $source, string $destination): bool
+    private function processImage(string $source, string $destination, array $options = []): bool
     {
         $imageInfo = getimagesize($source);
         if ($imageInfo === false) {
@@ -224,10 +231,14 @@ class Uploader
             return false;
         }
 
+        $maxWidth = $options['max_width'] ?? self::MAX_WIDTH;
+        $jpegQuality = $options['jpeg_quality'] ?? self::JPEG_QUALITY;
+        $webpQuality = $options['webp_quality'] ?? self::WEBP_QUALITY;
+
         // Resize if necessary
-        if ($width > self::MAX_WIDTH) {
-            $newWidth = self::MAX_WIDTH;
-            $newHeight = (int) ($height * (self::MAX_WIDTH / $width));
+        if ($width > $maxWidth) {
+            $newWidth = $maxWidth;
+            $newHeight = (int) ($height * ($maxWidth / $width));
 
             $resized = imagecreatetruecolor($newWidth, $newHeight);
 
@@ -243,7 +254,14 @@ class Uploader
         }
 
         // Save as JPEG
-        $result = imagejpeg($image, $destination, self::JPEG_QUALITY);
+        $result = imagejpeg($image, $destination, $jpegQuality);
+
+        // Also save as WebP for better performance
+        $webpDest = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $destination);
+        if (function_exists('imagewebp')) {
+            imagewebp($image, $webpDest, $webpQuality);
+        }
+
         imagedestroy($image);
 
         if (!$result) {
@@ -299,6 +317,12 @@ class Uploader
 
         $result = imagejpeg($thumbnail, $destination, self::JPEG_QUALITY);
 
+        // Also save thumbnail as WebP
+        $webpDest = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $destination);
+        if (function_exists('imagewebp')) {
+            imagewebp($thumbnail, $webpDest, self::WEBP_QUALITY);
+        }
+
         imagedestroy($image);
         imagedestroy($thumbnail);
 
@@ -350,6 +374,15 @@ class Uploader
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function getPrimaryImageOptions(): array
+    {
+        return [
+            'max_width' => self::PRIMARY_MAX_WIDTH,
+            'jpeg_quality' => self::PRIMARY_JPEG_QUALITY,
+            'webp_quality' => self::PRIMARY_WEBP_QUALITY,
+        ];
     }
 
     public function deleteFile(string $filepath): bool

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+    <url>
+        <loc>https://xpatly.eu/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings</loc>
+        <changefreq>hourly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/about</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/about" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/about" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/about" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/contact</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/contact" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/contact" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/contact" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/faq</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/faq" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/faq" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/faq" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/blog</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/blog" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/blog" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/blog" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/privacy</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/privacy" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/privacy" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/privacy" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/terms</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/terms" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/terms" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/terms" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/imprint</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/imprint" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/imprint" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/imprint" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/login</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/register</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/create</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/create" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/create" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/create" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/1</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/1" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/1" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/1" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/2</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/2" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/2" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/2" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/3</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/3" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/3" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/3" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/4</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/4" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/4" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/4" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/5</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/5" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/5" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/5" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/6</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/6" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/6" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/6" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/7</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/7" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/7" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/7" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/8</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/8" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/8" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/8" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/9</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/9" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/9" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/9" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/11</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/11" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/11" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/11" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/12</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/12" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/12" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/12" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/13</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/13" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/13" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/13" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/14</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/14" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/14" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/14" />
+    </url>
+
+    <url>
+        <loc>https://xpatly.eu/en/listings/15</loc>
+        <lastmod>2025-12-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://xpatly.eu/en/listings/15" />
+        <xhtml:link rel="alternate" hreflang="et" href="https://xpatly.eu/et/listings/15" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://xpatly.eu/ru/listings/15" />
+    </url>
+
+</urlset>
