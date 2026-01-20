@@ -33,16 +33,6 @@ Xpatly is a discrimination-free real estate platform designed specifically for e
 
 ## 📊 Demo Data Included
 
-### Test Accounts Ready to Use
-
-| Email | Password | Role | Language | Listings |
-|-------|----------|------|----------|----------|
-| kayacuneyd@gmail.com | Admin123456! | Super Admin | EN | - |
-| owner.rent@xpatly.com | Test123456! | Property Owner | ET | 9 rentals |
-| owner.sell@xpatly.com | Test123456! | Property Owner | ET | 6 sales |
-| renter@xpatly.com | Test123456! | User | EN | - |
-| buyer@xpatly.com | Test123456! | User | RU | - |
-
 ### 15 Sample Listings Included
 
 - **3 Apartments for Rent** (Tallinn - Kesklinn, Kadriorg, Mustamäe)
